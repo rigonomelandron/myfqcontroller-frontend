@@ -1,0 +1,23 @@
+<p>login works!</p>
+
+<div class="container d-grid gap-3">
+  <div id="mensaje" class="p-message p-message-error p-2" *ngIf="!credenciales">
+    <span>Usuario y/o contraseña no valido</span>
+  </div>
+
+  <div class="p-input-icon-left">
+    <i class="pi pi-user"></i>
+    <input pInputText type="text" placeholder="Correo" [(ngModel)]="usuario_username" />
+  </div>
+  <div class="p-input-icon-left">
+    <i class="pi pi-key"></i>
+    <input pPassword type="password" placeholder="Contraseña" (keydown.enter)="login()" [(ngModel)]="usuario_password" />
+  </div>
+  <div>
+    <button pButton pRipple class="p-button-text" [loading]="logueo" (click)="login()" label="Login"></button>
+  </div>
+  <div>
+    <a routerLink="/auth/registro">Registrarse</a>
+  </div>
+</div>
+
