@@ -5,6 +5,8 @@ import {RippleModule} from 'primeng/ripple';
 import {MenuModule} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
 import {MegaMenuModule} from 'primeng/megamenu';
+import {CardModule} from 'primeng/card';
+import {ListboxModule} from 'primeng/listbox';
 
 
 
@@ -16,7 +18,9 @@ import {MegaMenuModule} from 'primeng/megamenu';
     ButtonModule,
     RippleModule,
     MenuModule,
-    MegaMenuModule
+    MegaMenuModule,
+    CardModule,
+    ListboxModule
   ]
 })
 export class PrimengModule { }

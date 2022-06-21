@@ -15,6 +15,29 @@
     color:#1d736a !important;
 }
 
+.boton{
+    border: none;
+    background-color: #fe9f41d3;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.p-card{
+    background-color:#3fcfd40d !important;
+    padding: 0.60rem;
+
+}
+
+
+.p-listbox{
+    background-color:#3fcfd419 !important;
+}
+
+.p-listbox-item{
+    color:#1d736a !important;
+}
+
 body{
     background-color: #fe9f411c;
+    width: 100%;
 }
