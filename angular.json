@@ -28,13 +28,8 @@
             ],
             "styles": [
               "node_modules/primeng/resources/themes/lara-light-teal/theme.css",
-<<<<<<< HEAD
 	            "node_modules/primeng/resources/primeng.min.css",
              	"node_modules/primeicons/primeicons.css",
-=======
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css",
->>>>>>> e0a72135a2a14678f403d5f0764558bc1cbed4df
               "src/styles.css"
             ],
             "scripts": [

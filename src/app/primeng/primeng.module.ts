@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-<<<<<<< HEAD
 import { MenuModule } from 'primeng/menu';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -21,27 +20,18 @@ import { DockModule } from 'primeng/dock';
 import { MenubarModule } from 'primeng/menubar';
 import { ChartModule } from 'primeng/chart';
 import { CalendarModule } from 'primeng/calendar';
+import { MegaMenuModule } from 'primeng/megamenu';
 
 
 
 
-=======
-import { CommonModule } from '@angular/common';
-import {ButtonModule} from 'primeng/button';
-import {RippleModule} from 'primeng/ripple';
-import {MenuModule} from 'primeng/menu';
-import {MenuItem} from 'primeng/api';
-import {MegaMenuModule} from 'primeng/megamenu';
->>>>>>> e0a72135a2a14678f403d5f0764558bc1cbed4df
 
 
 
 
 @NgModule({
   declarations: [],
-<<<<<<< HEAD
-
-  exports: [
+  imports: [
     MenuModule,
     CardModule,
     ButtonModule,
@@ -63,22 +53,11 @@ import {MegaMenuModule} from 'primeng/megamenu';
     DockModule,
     MenubarModule,
     ChartModule,
-    CalendarModule
-
-
-
-
-
-
-
-=======
-  imports: [
-    CommonModule,
-    ButtonModule,
-    RippleModule,
-    MenuModule,
+    CalendarModule,
     MegaMenuModule
->>>>>>> e0a72135a2a14678f403d5f0764558bc1cbed4df
+
   ]
+
+
 })
 export class PrimengModule { }
