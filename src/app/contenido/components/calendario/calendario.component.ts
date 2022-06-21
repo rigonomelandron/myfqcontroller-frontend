@@ -1,5 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment'
+import { DatosRespiratorios } from 'src/app/shared/interfaces/datosrespiratorios.interface';
+import { Usuario } from 'src/app/shared/interfaces/usuario.interface';
+import { DatosrespiratoriosService } from 'src/app/shared/services/datosrespiratorios.service';
+import { GlicadasService } from 'src/app/shared/services/glicadas.service';
+import { PacientesService } from 'src/app/shared/services/pacientes.service';
+import { TensionService } from 'src/app/shared/services/tension.service';
 
 @Component({
   selector: 'app-calendario',
@@ -13,12 +20,21 @@ export class CalendarioComponent implements OnInit {
   dateSelect?:any;
   dateValue: any;
 
-  constructor() {
+
+  constructor(
+    private _tensionServices: TensionService,
+    private _glicadasService: GlicadasService,
+    private _datosRespiratoriosService: DatosrespiratoriosService,
+    private _pacientesService: PacientesService
+    ) {
     this.week = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
    }
 
   ngOnInit(): void {
-    this.getDaysFromDate(11, 2020)
+    let fecha = new Date();
+    let month = fecha.getMonth();
+    let year = fecha.getFullYear();
+    this.getDaysFromDate(month + 1, year)
   }
 
  public getDaysFromDate(month:any, year:any) {
@@ -53,16 +69,34 @@ export class CalendarioComponent implements OnInit {
   }
 
   public clickDay(day:any) {
+
+   console.log("day:",day);
+
+    this.dateSelect = moment(`${this.dateSelect.format("YYYY")}-${this.dateSelect.format("MM")}-${day.value}`);
+
     const monthYear = this.dateSelect.format('YYYY-MM')
     const parse = `${monthYear}-${day.value}`
     const objectDate = moment(parse)
     this.dateValue = objectDate;
+    console.log(this.dateValue);
+
+    let datoUsuario = localStorage.getItem('usuario');
+    const date = new Date(this.dateSelect._i);
+     console.log(date);
+
+    if(datoUsuario){
+      this._datosRespiratoriosService.getDatosRespiratoriosByIdUsuario(datoUsuario, date).subscribe({
+
+        next: (data: DatosRespiratorios[]) => {
+          console.log(data);
+
+        },
+        error: (err:HttpErrorResponse) => {}
+      });
+    }
 
 
   }
 
-  public obtenerDatosFromDB(){
-       
 
-  }
 }

@@ -11,7 +11,7 @@ const routes: Routes = [
       { path: 'registro', component: RegistroComponent },
       { path: '**', component: LoginComponent }
     ]
-
+     
   }
 
 ];

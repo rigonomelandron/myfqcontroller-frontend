@@ -18,6 +18,9 @@ import { MessageModule } from "primeng/message";
 import { MessagesModule } from "primeng/messages";
 import { DockModule } from 'primeng/dock';
 import { MenubarModule } from 'primeng/menubar';
+import { ChartModule } from 'primeng/chart';
+import { CalendarModule } from 'primeng/calendar';
+
 
 
 
@@ -48,7 +51,11 @@ import { MenubarModule } from 'primeng/menubar';
     MessageModule,
     MessagesModule,
     DockModule,
-    MenubarModule
+    MenubarModule,
+    ChartModule,
+    CalendarModule
+
+
 
 
 
