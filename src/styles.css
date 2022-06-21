@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+.p-megamenu{
+    background: transparent;
+    border: 0px;
+    border-radius: 0;
+}
+.p-menuitem-icon{
+    color: #1d736a !important;
+}
+
+.p-menuitem-text{
+    color: #1d736a !important;
+}
+
+.p-button-text{
+    color:#1d736a !important;
+}
+
+body{
+    background-color: #fe9f411c;
+}
