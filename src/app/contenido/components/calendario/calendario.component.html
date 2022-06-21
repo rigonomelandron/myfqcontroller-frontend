@@ -2,12 +2,12 @@
   <div class="wrapper-calendar">
     <div class="header-calendar">
       <div>
-        <button (click)="changeMonth(-1)" class="btn-prev"><i class="bi bi-arrow-left-square" style="font-size: 2rem; color: #9A86A4;"></i></button>
+        <button (click)="changeMonth(-1)" class="btn-prev"><i class="bi bi-arrow-left-square" style="font-size: 2rem; color: #1d736a;"></i></button>
       </div>
       <h1>{{ dateSelect | date: "MMMM, yyyy" }}</h1>
       <div>
         <button (click)="changeMonth(1)" class="btn-next">
-          <i class="bi bi-arrow-right-square" style="font-size: 2rem; color: #9A86A4;"></i>
+          <i class="bi bi-arrow-right-square" style="font-size: 2rem; color: #1d736a;"></i>
         </button>
       </div>
     </div>
@@ -27,3 +27,19 @@
     </ol>
   </div>
 </div>
+<!-- <p-dialog  [(visible)]="mostrarDatos"
+  [modal]="true" [maximizable]="true" [style]="{width: '50vw', height:'100vh'}">
+    <p-table  styleClass="p-datatable-striped" responsiveLayout="scroll">
+
+
+      <ng-template pTemplate="header">
+
+
+      </ng-template>
+      <ng-template pTemplate="body">
+
+      </ng-template>
+    </p-table>
+
+
+</p-dialog> -->

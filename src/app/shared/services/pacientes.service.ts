@@ -28,7 +28,7 @@ export class PacientesService {
     return this._http.get<Paciente>('api/v2/pacientes/'+dni);
   }
   public getPacienteByUserName(username : string):Observable<Paciente>{
-    console.log("entre en el servicio");
+   
 
     return this._http.get<Paciente>('api/v1/pacientes/userName/'+username);
   }

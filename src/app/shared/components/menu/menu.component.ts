@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MegaMenuItem,MenuItem} from 'primeng/api';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,19 +11,27 @@ export class MenuComponent implements OnInit {
 
   public items: MegaMenuItem[] = [];
   public popItems: MenuItem[] = [];
+  public usuario:any;
 
 
-  constructor() {
-   }
+  constructor(private _authService: AuthService) {
+
+    this.usuario = '';
+  }
+
+
 
   ngOnInit(): void {
+    if(localStorage.getItem('usuario') != null){
+       this.usuario= localStorage.getItem('usuario');
+    }
     this.items = [
-      
+
       {
-        label: 'Nombre Usuario', icon: 'pi pi-user'
+        label: this.usuario, icon: 'pi pi-user'
       },
       {
-        label: 'Calendario', icon: 'pi pi-calendar'
+        label: 'Calendario', icon: 'pi pi-calendar', routerLink: ['/contenido/calendario']
       },
       {
         label: 'Datos Respiratorios', icon: 'pi pi-sliders-h'
@@ -58,10 +67,12 @@ export class MenuComponent implements OnInit {
         label: 'Ajustes', icon: 'pi pi-cog'
       },
       {
-        label: 'Logout', icon: 'pi pi-sign-out'
+        label: 'Logout', icon: 'pi pi-sign-out', command: () => this._authService.logOut()
       },
     ]
   }
+
+
 
 
 }

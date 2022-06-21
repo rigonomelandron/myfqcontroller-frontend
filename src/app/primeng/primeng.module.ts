@@ -31,7 +31,7 @@ import { MegaMenuModule } from 'primeng/megamenu';
 
 @NgModule({
   declarations: [],
-  imports: [
+  exports: [
     MenuModule,
     CardModule,
     ButtonModule,

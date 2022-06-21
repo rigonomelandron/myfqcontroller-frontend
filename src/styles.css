@@ -1,13 +1,11 @@
-<<<<<<< HEAD
 /* You can add global styles to this file, and also import other style files */
 
 body
  {
-  background: url(./assets/images/background.png) no-repeat center center fixed;
+  background: url(./assets/images/background4.svg) no-repeat center center fixed;
 
     background-size: cover;
  }
-=======
 .p-megamenu{
     background: transparent;
     border: 0px;
@@ -28,4 +26,4 @@ body
 body{
     background-color: #fe9f411c;
 }
->>>>>>> e0a72135a2a14678f403d5f0764558bc1cbed4df
+

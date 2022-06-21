@@ -25,4 +25,8 @@ export class DoctoresService {
   public getDoctor(id : string):Observable<Doctor>{
       return this._http.get<Doctor>('api/v2/doctores/'+id);
   }
+  public getDoctorByIdUsuario(id : string):Observable<Doctor>{
+
+      return this._http.get<Doctor>('api/v1/doctores/usuario/'+id);
+  }
 }

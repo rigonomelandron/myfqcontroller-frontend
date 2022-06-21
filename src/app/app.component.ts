@@ -8,6 +8,7 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent {
   title = 'myfqcontroller-frontend';
+ 
   constructor(private primengConfig: PrimeNGConfig) {}
 
     ngOnInit() {

@@ -25,9 +25,8 @@ export class DatosrespiratoriosService {
     return this._http.get<DatosRespiratorios[]>('api/v1/datos-respiratorios/userFecha/'+idPaciente+'/'+fecha);
   }
 
-  public getDatosRespiratoriosByIdUsuario(idUsuario:string , fecha:Date):Observable<DatosRespiratorios[]>{
-   
+  public getDatosRespiratoriosByIdUsuario(idUsuario:string , fecha:string):Observable<DatosRespiratorios[]>{
 
-    return this._http.get<DatosRespiratorios[]>(`api/v1/datos-respiratorios/idUsuario/${idUsuario}/${fecha}`);
+    return this._http.get<DatosRespiratorios[]>(`api/v1/datos-respiratorios/dniFecha/${idUsuario}/${fecha}`);
   }
 }

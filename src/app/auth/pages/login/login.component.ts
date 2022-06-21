@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
   public logout(){
     this._authService.logOut();
-   
+
   }
 
   public login() {
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         this.logueo = false;
         if (usuario) {
           this.usuario = usuario;
-           this._router.navigate(['/contenido/calendario']);
+           this._router.navigate(['/contenido/home']);
         } else {
           this.credenciales = true;
           this._router.navigate(['/auth/login']);

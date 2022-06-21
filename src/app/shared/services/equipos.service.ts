@@ -26,4 +26,7 @@ export class EquiposService {
   public getEquipo(id : number):Observable<Equipo>{
       return this._http.get<Equipo>('api/v2/equipos/'+id);
   }
+  public getEquipoByIdMedico(id : string):Observable<Equipo[]>{
+      return this._http.get<Equipo[]>('api/v1/equipos/idMedico/'+id);
+  }
 }
