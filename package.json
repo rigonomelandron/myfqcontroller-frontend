@@ -19,8 +19,11 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+<<<<<<< HEAD
     "chart.js": "^3.8.0",
     "moment": "^2.29.3",
+=======
+>>>>>>> e0a72135a2a14678f403d5f0764558bc1cbed4df
     "primeicons": "^5.0.0",
     "primeng": "^13.4.1",
     "rxjs": "~7.5.0",

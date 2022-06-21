@@ -1,0 +1,14 @@
+<header style="background-color: #fe9f41;" class="hide" >
+    <p-megaMenu  class="hide" [model]="items">
+        <button class="p-button-raised p-button-text" pButton pRipple label="Logout" icon="pi pi-sign-out"></button>
+    </p-megaMenu>
+    <hr>
+</header>
+<header style="background-color: #7de4e9e3;" >
+    <div class="hidePop">
+        <button class="m-5 float-end p-button-text" styleClass="p-button-sm " type="button" pButton pRipple icon="pi pi-bars" label="Menu" (click)="menu.toggle($event)"></button>
+    </div>
+    <p-menu #menu [popup]="true" [model]="popItems"></p-menu>
+</header>
+
+
