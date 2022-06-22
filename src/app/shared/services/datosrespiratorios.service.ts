@@ -13,9 +13,10 @@ export class DatosrespiratoriosService {
   public getDatosRespiratorios():Observable<DatosRespiratorios[]>{
     return this._http.get<DatosRespiratorios[]>('api/v1/datos-respiratorios');
   }
-  public getDatosRespiratoriosByFecha(fechaInicio:Date,fechaFin:Date):Observable<DatosRespiratorios[]>{
+  public getDatosRespiratoriosByFecha(idUsuario:string, fechaInicio:Date, fechaFin:Date):Observable<DatosRespiratorios[]>{
+    console.log("usuario");
 
-    return this._http.get<DatosRespiratorios[]>('api/v1/datos-respiratorios/fechas/'+fechaInicio+'/'+fechaFin);
+    return this._http.get<DatosRespiratorios[]>(`api/v1/datos-respiratorios/fechas/${idUsuario}/${fechaInicio}/${fechaFin}`);
   }
   public getDatosRespiratoriosByDate(fecha:Date):Observable<DatosRespiratorios[]>{
     return this._http.get<DatosRespiratorios[]>('api/v1/datos-respiratorios/fecha/'+fecha);
@@ -28,5 +29,10 @@ export class DatosrespiratoriosService {
   public getDatosRespiratoriosByIdUsuario(idUsuario:string , fecha:string):Observable<DatosRespiratorios[]>{
 
     return this._http.get<DatosRespiratorios[]>(`api/v1/datos-respiratorios/dniFecha/${idUsuario}/${fecha}`);
+  }
+
+  public addDatosRespiratorios(datosRespiratorios:DatosRespiratorios):Observable<DatosRespiratorios>{
+    return this._http.post<DatosRespiratorios>('api/v1/datos-respiratorios', datosRespiratorios);
+
   }
 }

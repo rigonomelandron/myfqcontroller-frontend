@@ -13,7 +13,7 @@ export class PacientesService {
 
 
  public registroPacientes(paciente : Paciente):Observable<Paciente>{
-    return this._http.post<Paciente>('api/v2/pacientes', paciente);
+    return this._http.post<Paciente>('api/v1/pacientes/crear', paciente);
   }
   public deletePaciente(dni : string):Observable<Paciente>{
     return this._http.delete<Paciente>('api/v2/pacientes/'+dni);
@@ -28,7 +28,7 @@ export class PacientesService {
     return this._http.get<Paciente>('api/v2/pacientes/'+dni);
   }
   public getPacienteByUserName(username : string):Observable<Paciente>{
-   
+
 
     return this._http.get<Paciente>('api/v1/pacientes/userName/'+username);
   }

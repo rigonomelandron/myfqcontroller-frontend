@@ -18,6 +18,7 @@ export class GraficoComponent implements OnInit {
   public tensiones: number[];
   public glicadas: number[];
   public fvc: number[];
+  public fev1: number[];
   public mes: string;
   public dia: number[];
   public rangeDates!: Date[];
@@ -30,6 +31,7 @@ export class GraficoComponent implements OnInit {
     this.tensiones = [];
     this.glicadas = [];
     this.fvc = [];
+    this.fev1 = [];
 
     this.mes = '';
     this.dia = [];
@@ -44,32 +46,26 @@ export class GraficoComponent implements OnInit {
     this.obtenerLabel();
 
     this.multiAxisData = {
-      labels: this.dia,
+      labels: this.fvc,
       datasets: [
         {
-          label: 'Tension',
+          label: 'Fvc',
           fill: false,
           borderColor: '#42A5F5',
 
           tension: 0.4,
-          data: this.tensiones,
+          data: this.fvc,
 
         },
         {
-          label: 'Glicadas',
+          label: 'Fev1',
           fill: false,
           borderColor: '#00bb7e',
 
           tension: 0.4,
-          data: this.glicadas,
+          data: this.fev1,
         },
-        {
-          label: 'fvc',
-          fill: false,
-          borderColor: '#FFA726',
-          tension: 0.4,
-          data: this.fvc,
-        },
+       
       ],
 
     };
@@ -103,34 +99,12 @@ export class GraficoComponent implements OnInit {
   }
   public obtenerFechas() {
 
-    
-    if (this.rangeDates && this.rangeDates[1] != null) {
-      this._tensionServices
-        .getTensionesByFecha(this.rangeDates[0], this.rangeDates[1])
-        .subscribe({
-          next: (data) => {
-            for (let tension of data) {
-              this.tensiones.push(tension.maxTension);
-            }
-          },
-          error: (err: HttpErrorResponse) => {
-            console.log(err.message);
-          },
-          complete: () => {
-            this._glicadaServices
-              .getGlicadaByFechas(this.rangeDates[0], this.rangeDates[1])
-              .subscribe({
-                next: (data) => {
-                  for (let glicada of data) {
-                    this.glicadas.push(glicada.glicada);
-                  }
-                },
-                error: (err: HttpErrorResponse) => {
-                  console.log(err.message);
-                },
-                complete: () => {
+    let usuario = localStorage.getItem('usuario');
+    if (this.rangeDates && this.rangeDates[1] != null && usuario) {
+
                   this._datosRespiratoriosServices
                     .getDatosRespiratoriosByFecha(
+                      usuario,
                       this.rangeDates[0],
                       this.rangeDates[1]
                     )
@@ -138,20 +112,21 @@ export class GraficoComponent implements OnInit {
                       next: (data) => {
                         for (let datosRespiratorios of data) {
                           this.fvc.push(datosRespiratorios.fvc);
+                          this.fev1.push(datosRespiratorios.fev1);
                         }
                       },
                       error: (err: HttpErrorResponse) => {
                         console.log(err.message);
                       },
                       complete: () => {
-                        this.obtenerLabel;
+
                         this.obtenerGrafica();
                       },
                     });
-                },
-              });
-          },
-        });
+
+
+
+
     }
   }
   public obtenerLabel() {
