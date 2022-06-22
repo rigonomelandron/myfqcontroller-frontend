@@ -71,7 +71,9 @@ export class RegistroComponent implements OnInit {
             this._pacientesService
               .registroPacientes(this.pacienteNuevo)
               .subscribe({
-                next: (data) => {},
+                next: (data) => {
+                  
+                },
                 error: (err:HttpErrorResponse) => {
                   console.log(err);
                 },
@@ -102,7 +104,7 @@ export class RegistroComponent implements OnInit {
       });
 
 
-    //this._router.navigateByUrl('/auth/login');
+    this._router.navigateByUrl('/auth/login');
   }
   obtenerRol() {
     console.log(this.miFormulario.value.rol.rol);

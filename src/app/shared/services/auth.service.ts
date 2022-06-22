@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private _http: HttpClient, private _router: Router) { }
 
   public autorizar(usuario: string, password: string):Observable<Usuario> {
-    let url =`api/v1/usuarios/userPass/${usuario}/${password}`;
+    let url =`/api/v1/usuarios/userPass/${usuario}/${password}`;
 
     return this._http.get<Usuario>(url)
       .pipe(

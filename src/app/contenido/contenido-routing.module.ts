@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ActividadComponent } from './components/actividad/actividad.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
+import { DatosRespiratoriosComponent } from './components/datos-respiratorios/datos-respiratorios.component';
 import { GraficoComponent } from './components/grafico/grafico.component';
 import { HomeComponent } from './components/home/home.component';
+import { ResumenComponent } from './components/resumen/resumen.component';
 
 const routes: Routes = [
   {
@@ -10,8 +13,10 @@ const routes: Routes = [
     children: [
       { path: 'calendario', component: CalendarioComponent },
       { path: 'grafico', component: GraficoComponent },
-      { path:'home',component: HomeComponent}
-
+      { path:'home',component: HomeComponent},
+      { path:'datos-respiratorios',component: DatosRespiratoriosComponent},
+      { path:'actividad',component: ActividadComponent},
+      { path:'resumen',component: ResumenComponent},
     ]
 
   }

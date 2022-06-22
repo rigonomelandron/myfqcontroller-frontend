@@ -87,7 +87,7 @@ export class GraficoComponent implements OnInit {
             color: '#9A86A4',
           },
           grid: {
-            color: '#9A86A4',
+            color: '#ebedef',
           },
         },
         y: {
@@ -95,7 +95,7 @@ export class GraficoComponent implements OnInit {
             color: '#9A86A4',
           },
           grid: {
-            color: '#9A86A4',
+            color: '#ebedef',
           },
         },
       },
