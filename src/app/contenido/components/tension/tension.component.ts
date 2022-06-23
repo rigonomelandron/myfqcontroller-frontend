@@ -66,11 +66,41 @@ export class TensionComponent implements OnInit {
     });
   }
 
-  public obtenerTensionByDniFecha(dni : string, fecha : string){
-    this._tensionService.getTensionByDniAndFecha(dni, fecha).subscribe({
+  public obtenerTensionByDniFecha(dni : string, fecha: string){
+    this._tensionService.getTensionByDniFecha(dni,fecha).subscribe({
+      next: (resp ) => {
+        this.tension = resp;
+        console.log("Tension Dni y Fecha",resp);
+        
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log( error);
+        
+      }
+      
+    });
+  }
+
+  public obtenerTensionByIdUsuarioFecha(idUsuario : string, fecha : string){
+    this._tensionService.getTensionByIdUsuarioFecha(idUsuario, fecha).subscribe({
       next: (resp ) => {
         this.listaTension = resp;
-        console.log("Tension Dni y Fecha",resp);
+        console.log("Tension IdUsuario y Fecha",resp);
+        
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log( error);
+        
+      }
+      
+    });
+  }
+
+  public obtenerTensionByFechas(fechaInicio : Date, fechaFin : Date){
+    this._tensionService.getTensionesByFecha(fechaInicio, fechaFin).subscribe({
+      next: (resp ) => {
+        this.listaTension = resp;
+        console.log("Tension Fechas",resp);
         
       },
       error: (error: HttpErrorResponse) => {

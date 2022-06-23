@@ -1,0 +1,24 @@
+<app-menu></app-menu>
+<main class="container" style="margin: 50px;">
+    <p-card>
+        <header>
+            <h4 style="color:#1d736a !important;">Actividad</h4>
+        </header>
+        <ng-template pTemplate="content">
+            <hr>
+            <div class="row">
+                <div class="col-8">
+                    <app-grafico></app-grafico>
+                </div>
+                <div class="col-4">
+                    <app-donut></app-donut>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer"> 
+                <p> <span>Última actividad: Ciclismo </span> <span> Tiempo: 01:24:54 </span> <span>Calorías quemadas: 452cal</span></p>
+                <p> <span>Media: 138ppm </span> <span>Máxima: 162ppm</span> </p>
+                <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple label="Añadir datos"></button>  
+        </ng-template>
+    </p-card>
+</main>

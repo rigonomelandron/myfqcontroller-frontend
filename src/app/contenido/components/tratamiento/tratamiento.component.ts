@@ -80,5 +80,20 @@ export class TratamientoComponent implements OnInit {
       
     });
   }
+
+  public obtenerTratamientoByFechas(fechaInicio : Date, fechaFin : Date){
+    this._tratamientoService.getTratamientoByFechas(fechaInicio, fechaFin).subscribe({
+      next: (resp ) => {
+        this.listaTratamientos = resp;
+        console.log("Tratamiento Fechas",resp);
+        
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log( error);
+        
+      }
+      
+    });
+  }
 }
 

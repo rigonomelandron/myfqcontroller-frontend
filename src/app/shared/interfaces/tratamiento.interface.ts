@@ -17,6 +17,6 @@ export interface Paciente {
   altura:     number;
   mutacion1:  string;
   mutacion2:  string;
-  id_usuario: string;
+  idUsuario: string;
 }
 

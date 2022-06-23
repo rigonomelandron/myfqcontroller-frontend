@@ -80,5 +80,19 @@ export class AnaliticaComponent implements OnInit {
       
     });
   }
+  public obtenerAnaliticaByFechas(fechaInicio : Date, fechaFin : Date){
+    this._analiticaService.getAnaliticasByFecha(fechaInicio, fechaFin).subscribe({
+      next: (resp ) => {
+        this.listaAnaliticas = resp;
+        console.log("Analítica Fecha",resp);
+        
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+        
+      }
+      
+    });
+  }
 }
 

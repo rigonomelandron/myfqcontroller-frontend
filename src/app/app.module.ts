@@ -9,12 +9,15 @@ import { ContenidoModule } from './contenido/contenido.module';
 
 import { PrimengModule } from './primeng/primeng.module';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-  
+
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,11 @@ import { SharedModule } from './shared/shared.module';
     ContenidoModule,
     SharedModule,
     PrimengModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

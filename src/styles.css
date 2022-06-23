@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+
+.p-megamenu{
+    background: transparent;
+    border: 0px;
+    border-radius: 0;
+}
+.p-menuitem-icon{
+    color: #1d736a !important;
+}
+
+.p-menuitem-text{
+    color: #1d736a !important;
+}
+
+.p-button-text{
+    color:#1d736a !important;
+}
+
+.boton{
+    border: none;
+    background-color: #fe9f41d3;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.p-card{
+    background-color:#ffffffae !important;
+    padding: 0.60rem;
+    
+
+}
+.p-card-content ul{
+  
+}
+
+
+.p-listbox{
+    background-color:#3fcfd40f !important;
+}
+
+.p-listbox-item{
+    color:#1d736a !important;
+}
+
+body{
+    background-color: #fe9f410a;
+    width: 100%;
+}
+.container{
+  height: 100vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}

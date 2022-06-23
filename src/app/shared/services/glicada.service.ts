@@ -45,3 +45,4 @@ export class GlicadaService {
      return this._http.get<Glicada[]>('/api/v1/glicadas/fechas/'+fechaInicio+'/'+fechaFin);
   }
 }
+
