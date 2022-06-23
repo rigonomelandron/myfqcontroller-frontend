@@ -23,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from '../shared/components/menu/menu.component';
 import { DonutComponent } from './components/donut/donut.component';
+import { GraficoBarrasComponent } from './components/grafico-barras/grafico-barras.component';
 
 
 
@@ -45,6 +46,7 @@ import { DonutComponent } from './components/donut/donut.component';
     ListadoUsuariosComponent,
     HomeComponent,
     DonutComponent,
+    GraficoBarrasComponent,
 
 
   ],
