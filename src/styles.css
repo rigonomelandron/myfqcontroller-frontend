@@ -24,6 +24,14 @@
     font-size: 15px;
 }
 
+.boton-delete{
+    border: none;
+    background-color: #fe4141d3;
+    color:#ffffff !important;
+    padding: 10px;
+    font-size: 15px;
+}
+
 .p-card{
     background-color:#ffffffae !important;
     padding: 0.60rem;
