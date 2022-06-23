@@ -28,15 +28,24 @@
       </li>
     </ol>
   </div>
+
+
 </div>
-<!-- <p-dialog  [(visible)]="mostrarDatos"
+<p-dialog  [(visible)]="mostrarDatos"
   [modal]="true" [maximizable]="true" [style]="{width: '50vw', height:'100vh'}">
     <p-table  styleClass="p-datatable-striped" responsiveLayout="scroll">
 
 
       <ng-template pTemplate="header">
 
-
+         <h1>Datos</h1>
+          <div *ngFor="let items of datos ">
+              <li *ngFor="let item of items | keyvalue" >
+                <span [ngClass]="item.key == 'paciente' || item.key == 'fecha'  || item.key == 'fechaInicio'  || item.key == 'id'? 'hide': ''">
+                  {{ item.key }}:{{ item.value }}
+                </span>
+            </li>
+            </div>
       </ng-template>
       <ng-template pTemplate="body">
 
@@ -44,4 +53,4 @@
     </p-table>
 
 
-</p-dialog> -->
+</p-dialog>
