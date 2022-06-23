@@ -1,0 +1,13 @@
+<h1>evento works!</h1>
+
+<div>
+    <code>{{listaEventos | json }}</code>
+    
+</div>
+<div>
+    <button type= "button" pButton (click)="obtenerEventoById(1)" label="Por Id">Por Id</button>
+    <button type= "button" pButton (click)="obtenerEventoByDni('012345678M')" label="Por Dni">Por Dni</button>
+    <button type= "button" pButton (click)="obtenerEventoByDniFecha('012345678M', '2021-08-23T22:00:00')" label="Por Dni">Por Dni y Fecha</button>
+</div>
+
+

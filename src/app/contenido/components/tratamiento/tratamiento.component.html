@@ -1,0 +1,12 @@
+<h1>tratamiento works!</h1>
+<div>
+    <code>{{listaTratamientos | json }}</code>
+    
+</div>
+<div>
+    <button type= "button" pButton (click)="obtenerTratamientoById(1)" label="Por Id">Por Id</button>
+    <button type= "button" pButton (click)="obtenerTratamientoByDni('012345678M')" label="Por Dni">Por Dni</button>
+    <button type= "button" pButton (click)="obtenerTratamientoByDniFecha('012345678M', '2019-11-28T23:00:00.00')" label="Por Dni">Por Dni y Fecha</button>
+</div>
+
+

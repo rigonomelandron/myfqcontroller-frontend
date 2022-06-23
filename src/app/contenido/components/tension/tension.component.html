@@ -1,0 +1,12 @@
+<h1>tension works!</h1>
+<div>
+    <code>{{listaTension | json }}</code>
+    
+</div>
+<div>
+    <button type= "button" pButton (click)="obtenerTensionById(1)" label="Por Id">Por Id</button>
+    <button type= "button" pButton (click)="obtenerTensionByDni('012345678M')" label="Por Dni">Por Dni</button>
+    <button type= "button" pButton (click)="obtenerTensionByDniFecha('012345678M', '2022-05-13')" label="Por Dni">Por Dni y Fecha</button>
+</div>
+
+

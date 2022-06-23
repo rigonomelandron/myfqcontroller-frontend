@@ -1,0 +1,12 @@
+<h1>analitica works!</h1>
+<div>
+    <code>{{listaAnaliticas | json }}</code>
+    
+</div>
+<div>
+    <button type= "button" pButton (click)="obtenerAnaliticaById(1)" label="Por Id">Por Id</button>
+    <button type= "button" pButton (click)="obtenerAnaliticaByDni('012345678M')" label="Por Dni">Por Dni</button>
+    <button type= "button" pButton (click)="obtenerAnaliticaByDniFecha('012345678M', '2022-03-11T23:00:00:00')" label="Por Dni">Por Dni y Fecha</button>
+</div>
+
+
