@@ -24,6 +24,7 @@ import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from '../shared/components/menu/menu.component';
 import { DonutComponent } from './components/donut/donut.component';
 import { GraficoBarrasComponent } from './components/grafico-barras/grafico-barras.component';
+import { AjustesComponent } from './components/ajustes/ajustes.component';
 
 
 
@@ -47,6 +48,7 @@ import { GraficoBarrasComponent } from './components/grafico-barras/grafico-barr
     HomeComponent,
     DonutComponent,
     GraficoBarrasComponent,
+    AjustesComponent,
 
 
   ],
@@ -74,7 +76,8 @@ import { GraficoBarrasComponent } from './components/grafico-barras/grafico-barr
     CalendarioComponent,
     GraficoComponent,
     ListadoUsuariosComponent,
-    DonutComponent
+    DonutComponent,
+    AjustesComponent
   ],
 })
 export class ContenidoModule { }

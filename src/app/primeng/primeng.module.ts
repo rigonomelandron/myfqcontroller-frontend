@@ -25,6 +25,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { ChartModule } from 'primeng/chart';
 import { CalendarModule } from 'primeng/calendar';
 import {TabViewModule} from 'primeng/tabview';
+import {AvatarModule} from 'primeng/avatar';
 
 
 
@@ -61,7 +62,8 @@ import {TabViewModule} from 'primeng/tabview';
     MenubarModule,
     ChartModule,
     CalendarModule,
-    TabViewModule
+    TabViewModule,
+    AvatarModule
 
   ]
 

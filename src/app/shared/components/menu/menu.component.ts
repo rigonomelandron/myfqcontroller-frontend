@@ -43,7 +43,7 @@ export class MenuComponent implements OnInit {
         label: 'Resumen', icon: 'pi pi-book',routerLink: ['/contenido/resumen']
       },
       {
-        label: 'Ajustes', icon: 'pi pi-cog'
+        label: 'Ajustes', icon: 'pi pi-cog', routerLink: ['/contenido/ajustes']
       },
     ];
 

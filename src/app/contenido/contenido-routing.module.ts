@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActividadComponent } from './components/actividad/actividad.component';
+import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { DatosRespiratoriosComponent } from './components/datos-respiratorios/datos-respiratorios.component';
 import { GraficoComponent } from './components/grafico/grafico.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path:'datos-respiratorios',component: DatosRespiratoriosComponent},
       { path:'actividad',component: ActividadComponent},
       { path:'resumen',component: ResumenComponent},
+      { path:'ajustes',component: AjustesComponent},
     ]
 
   }

@@ -1,5 +1,7 @@
-<app-menu></app-menu>
-<main class="container" style="margin: 50px;">
+<div class="mb-5">
+    <app-menu></app-menu>
+</div>
+<main class="row p-5" style="margin: 100px;">
     <p-card>
         <header>
             <h4 style="color:#1d736a !important;">Actividad</h4>
@@ -7,10 +9,11 @@
         <ng-template pTemplate="content">
             <hr>
             <div class="row">
-                <div class="col-8">
+                <div class="col-7">
                     <app-grafico-barras></app-grafico-barras>
                 </div>
-                <div class="col-4">
+                <div class="col-1"></div>
+                <div class="col-4 align-self-center">
                     <app-donut></app-donut>
                 </div>
             </div>
