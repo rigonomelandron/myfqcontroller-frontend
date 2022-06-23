@@ -1,3 +1,4 @@
+<div #aqui></div>
 <div class="card">    
     <div class=" p-5 overflow-hidden">
     <div class="field col-12 md:col-4">
@@ -9,6 +10,7 @@
         inputId="range"
         pTooltip="Debe escoger dos fechas"
         tooltipPosition="right"
+        [appendTo]="aqui"
       ></p-calendar>
       <button pButton label="Consultar" (click)="obtenerFechas()" class="mx-3"></button>
     </div>
