@@ -33,7 +33,11 @@ body
 .p-card{
     background-color:#ffffffae !important;
     padding: 0.60rem;
+    height: 40vh;
 
+}
+.p-card-content ul{
+  height: 25vh;
 }
 
 
@@ -48,4 +52,10 @@ body
 body{
     background-color: #fe9f410a;
     width: 100%;
+}
+.container{
+  height: 100vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
