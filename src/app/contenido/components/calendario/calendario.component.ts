@@ -35,6 +35,7 @@ export class CalendarioComponent implements OnInit {
   cicloAntibiotico!: CicloAntibiotico[];
   deportes!: Deporte[];
   v02max!: V02Max[];
+  datos:any[];
   mostrarDatos: boolean;
 
   constructor(
@@ -56,7 +57,8 @@ export class CalendarioComponent implements OnInit {
       'Sabado',
       'Domingo',
     ];
-    this.mostrarDatos = false;
+    this.mostrarDatos =false;
+    this.datos = [];
   }
 
   ngOnInit(): void {
@@ -85,9 +87,7 @@ export class CalendarioComponent implements OnInit {
     });
 
     this.monthSelect = arrayDays;
-    for(let day of this.monthSelect){
-      this.clickDay(day);
-    }
+
   }
 
   public changeMonth(flag: any) {
@@ -137,6 +137,10 @@ export class CalendarioComponent implements OnInit {
         .getDatosRespiratoriosByIdUsuario(dni, this.dateValue._i)
         .subscribe({
           next: (data: DatosRespiratorios[]) => {
+            this.datosRespiratorios = data;
+            for(let dato of data){
+              this.datos.push(dato);
+            }
             console.log('Respiratorios', data);
           },
           error: (err: HttpErrorResponse) => {
@@ -149,6 +153,9 @@ export class CalendarioComponent implements OnInit {
                 next: (data: Glicada[]) => {
                   this.glicadas = data;
                   console.log('Glicada', data);
+                  for (let dato of data) {
+                    this.datos.push(dato);
+                  }
                 },
                 error: (err: HttpErrorResponse) => {
                   console.log(err);
@@ -158,7 +165,11 @@ export class CalendarioComponent implements OnInit {
                     .getTensionByIdUsuarioFecha(dni, this.dateValue._i)
                     .subscribe({
                       next: (data: Tension[]) => {
+                        this.tensiones = data;
                         console.log('Tension', data);
+                        for (let dato of data) {
+                          this.datos.push(dato);
+                        }
                       },
                       error: (err: HttpErrorResponse) => {
                         console.log(err);
@@ -171,7 +182,11 @@ export class CalendarioComponent implements OnInit {
                           )
                           .subscribe({
                             next: (data: CicloAntibiotico[]) => {
+                              this.cicloAntibiotico = data;
                               console.log('ciclo', data);
+                              for (let dato of data) {
+                                this.datos.push(dato);
+                              }
                             },
                             error: (err: HttpErrorResponse) => {
                               console.log(err);
@@ -184,7 +199,11 @@ export class CalendarioComponent implements OnInit {
                                 )
                                 .subscribe({
                                   next: (data: Deporte[]) => {
+                                    this.deportes = data;
                                     console.log('deportes:', data);
+                                    for (let dato of data) {
+                                      this.datos.push(dato);
+                                    }
                                   },
                                   error: (err: HttpErrorResponse) => {
                                     console.log(err);
@@ -197,7 +216,11 @@ export class CalendarioComponent implements OnInit {
                                       )
                                       .subscribe({
                                         next: (data: V02Max[]) => {
+                                          this.v02max = data;
                                           console.log('v02max:', data);
+                                          for (let dato of data) {
+                                            this.datos.push(dato);
+                                          }
                                         },
                                         error: (err: HttpErrorResponse) => {},
                                         complete: () => {
@@ -208,10 +231,14 @@ export class CalendarioComponent implements OnInit {
                                             )
                                             .subscribe({
                                               next: (data: Antecedente[]) => {
+                                                this.antecedentes = data;
                                                 console.log(
                                                   'antecedentes:',
                                                   data
                                                 );
+                                                for (let dato of data) {
+                                                  this.datos.push(dato);
+                                                }
                                               },
                                               error: (
                                                 err: HttpErrorResponse
@@ -233,5 +260,8 @@ export class CalendarioComponent implements OnInit {
         });
     }
   }
-  public mostrarDialogo() {}
+  public mostrarDialogo() {
+
+
+  }
 }

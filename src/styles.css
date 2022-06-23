@@ -27,7 +27,11 @@
 .p-card{
     background-color:#ffffffae !important;
     padding: 0.60rem;
+    
 
+}
+.p-card-content ul{
+  
 }
 
 
@@ -42,4 +46,10 @@
 body{
     background-color: #fe9f410a;
     width: 100%;
+}
+.container{
+  height: 100vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }

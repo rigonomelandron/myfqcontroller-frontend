@@ -13,7 +13,7 @@ export class UsuariosService {
   public registroUsuarios(usuario : Usuario):Observable<Usuario>{
     return this._http.post<Usuario>('api/v2/usuarios', usuario);
   }
-  public deleteUsuario(id : number):Observable<Usuario>{
+  public deleteUsuario(id : string):Observable<Usuario>{
     return this._http.delete<Usuario>('api/v2/usuarios/'+id);
   }
   public getUsuarios():Observable<Usuario[]>{
@@ -21,6 +21,10 @@ export class UsuariosService {
   }
   public modificarUsuario(usuario : Usuario):Observable<Usuario>{
     return this._http.patch<Usuario>('api/v2/usuarios/'+usuario.usuario, usuario);
+  }
+  public getUsuarioById(id : string):Observable<Usuario>{
+
+    return this._http.get<Usuario>('api/v2/usuarios/'+id);
   }
 
 

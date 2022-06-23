@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit {
         label: 'Calendario', icon: 'pi pi-calendar', routerLink: ['/contenido/calendario']
       },
       {
-        label: 'Datos Respiratorios', icon: 'pi pi-sliders-h',routerLink: ['/contenido/datos-respiratorios']
+        label: 'Datos Respiratorios', icon: 'pi pi-sliders-h', routerLink: ['/contenido/datos-respiratorios']
       },
       {
         label: 'Actividad', icon: 'pi pi-heart-fill',routerLink: ['/contenido/actividad']

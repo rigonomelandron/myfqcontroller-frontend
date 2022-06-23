@@ -16,7 +16,7 @@ import { RolesComponent } from './components/roles/roles.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { GraficoComponent } from './components/grafico/grafico.component';
 import { PrimengModule } from '../primeng/primeng.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { ContenidoRoutingModule } from './contenido-routing.module';
 import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-usuarios.component';
 import { SharedModule } from '../shared/shared.module';
@@ -52,7 +52,8 @@ import { DonutComponent } from './components/donut/donut.component';
     CommonModule,
     PrimengModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
     //CardModule,
     //ListboxModule,
     //ButtonModule,

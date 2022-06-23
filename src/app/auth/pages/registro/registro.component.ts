@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Doctor } from 'src/app/shared/interfaces/doctor.interface';
 import { Paciente } from 'src/app/shared/interfaces/paciente.interface';
@@ -21,14 +21,7 @@ export class RegistroComponent implements OnInit {
   public pacienteNuevo?: Paciente;
   public usuarioNuevo?: Usuario;
   public medicoNuevo?: Doctor;
-  miFormulario = this._fb.group({
-    usuario: ['', [Validators.required, Validators.minLength(3)]],
-    pass: ['', [Validators.required, Validators.minLength(3)]],
-    rol: ['', [Validators.required, Validators.minLength(1)]],
-    nombre: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.minLength(3)]],
-    id: ['', [Validators.required, Validators.minLength(3)]],
-  });
+  miFormulario: FormGroup;
 
   constructor(
     private _fb: FormBuilder,
@@ -38,41 +31,54 @@ export class RegistroComponent implements OnInit {
     private _doctoresService: DoctoresService
   ) {
     this.medico = false;
-    this.paciente = true;
+    this.paciente =false;
     this.roles = [
+      { id: 0, rol: 'Escoge tu rol' },
       { id: 1, rol: 'paciente' },
       { id: 2, rol: 'medico' },
     ];
+    this.miFormulario= this._fb.group({
+      usuario: ['', [Validators.required, Validators.minLength(3)]],
+      pass: ['', [Validators.required, Validators.minLength(3)]],
+      rol: [this.roles[0], [Validators.required]],
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.minLength(3)]],
+      id: ['', [Validators.required, Validators.minLength(3)]],
+    });
+
   }
 
   ngOnInit(): void {}
   registro() {
 
+      console.log(this.miFormulario);
       this.usuarioNuevo = {
         usuario: this.miFormulario.value.usuario,
         pass: this.miFormulario.value.pass,
-        rol: this.miFormulario.value.rol
+        rol: this.miFormulario.value.rol,
       };
-      console.log(this.usuarioNuevo);
+      this.obtenerRol();
 
       this._usuariosService.registroUsuarios(this.usuarioNuevo).subscribe({
         next: (usuario) => {
           console.log(usuario);
-
-
+          console.log("this.paciente",this.paciente);
+          console.log("this.medico",this.medico);
 
           if (this.paciente) {
             this.pacienteNuevo = {
               dni: this.miFormulario.value.id,
               nombre: this.miFormulario.value.nombre,
               email: this.miFormulario.value.email,
-              id_usuario: this.miFormulario.value.usuario,
+              idUsuario: this.miFormulario.value.usuario,
             };
+
+
             this._pacientesService
               .registroPacientes(this.pacienteNuevo)
               .subscribe({
                 next: (data) => {
-                  
+                  console.log(data);
                 },
                 error: (err:HttpErrorResponse) => {
                   console.log(err);
@@ -84,7 +90,7 @@ export class RegistroComponent implements OnInit {
               numColegiado: this.miFormulario.value.id,
               nombre: this.miFormulario.value.nombre,
               email: this.miFormulario.value.email,
-              id_usuario: this.miFormulario.value.usuario
+              idUsuario: this.miFormulario.value.usuario
             }
             this._doctoresService.registroDoctores(this.medicoNuevo).subscribe({
               next: (data) => {
