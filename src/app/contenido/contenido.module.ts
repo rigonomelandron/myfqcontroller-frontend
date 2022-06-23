@@ -25,6 +25,8 @@ import { MenuComponent } from '../shared/components/menu/menu.component';
 import { DonutComponent } from './components/donut/donut.component';
 import { GraficoBarrasComponent } from './components/grafico-barras/grafico-barras.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { MenuMedicoComponent } from './components/menu-medico/menu-medico.component';
+import { HomeMedicoComponent } from './components/home-medico/home-medico.component';
 
 
 
@@ -49,6 +51,8 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     DonutComponent,
     GraficoBarrasComponent,
     AjustesComponent,
+    MenuMedicoComponent,
+    HomeMedicoComponent,
 
 
   ],
@@ -77,7 +81,9 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
     GraficoComponent,
     ListadoUsuariosComponent,
     DonutComponent,
-    AjustesComponent
+    AjustesComponent,
+    MenuMedicoComponent,
+    HomeMedicoComponent
   ],
 })
 export class ContenidoModule { }

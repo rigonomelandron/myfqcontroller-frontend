@@ -63,7 +63,8 @@ import {AvatarModule} from 'primeng/avatar';
     ChartModule,
     CalendarModule,
     TabViewModule,
-    AvatarModule
+    AvatarModule,
+    TableModule
 
   ]
 

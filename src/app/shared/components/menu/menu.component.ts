@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit {
     this.items = [
 
       {
-        label: this.usuario, icon: 'pi pi-user', routerLink: ['/home']
+        label: this.usuario, icon: 'pi pi-user', routerLink: ['/home-medico']
       },
       {
         label: 'Calendario', icon: 'pi pi-calendar', routerLink: ['/contenido/calendario']
