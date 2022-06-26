@@ -1,5 +1,5 @@
 export interface DatosRespiratorios {
-  id: number;
+  id?: number;
   fecha: Date;
   paciente: Paciente;
   fvc: number;
@@ -12,10 +12,10 @@ export interface Paciente {
   dni: string;
   nombre: string;
   email: string;
-  genero: string;
-  peso: number;
-  altura: number;
-  mutacion1: string;
-  mutacion2: string;
-  id_usuario: string;
+  genero?: string;
+  peso?: number;
+  altura?: number;
+  mutacion1?: string;
+  mutacion2?: string;
+  idUsuario: string;
 }

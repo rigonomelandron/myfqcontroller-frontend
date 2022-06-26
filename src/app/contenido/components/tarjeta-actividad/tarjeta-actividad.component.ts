@@ -14,7 +14,8 @@ export class TarjetaActividadComponent implements OnInit {
       'Calorías: 452cal',
       'Máxima: 162ppm',
       'Media: 138ppm',
-      'Tiempo: 01:24:54'
+      'Tiempo: 01:24:54',
+      ''
 
     ]
    }

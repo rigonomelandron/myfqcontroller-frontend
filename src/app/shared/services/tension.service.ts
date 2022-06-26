@@ -31,5 +31,8 @@ export class TensionService {
   public getTensionByIdUsuarioFecha(idUsuario: string, fecha: string): Observable<Tension[]> {
     return this._http.get<Tension[]>(`api/v1/tension/dniFecha/${idUsuario}/${fecha}`);
   }
+  public getTensionesByDni(idUsuario: string): Observable<Tension[]> {
+    return this._http.get<Tension[]>(`api/v1/tension/dni/${idUsuario}`);
+  }
 
 }

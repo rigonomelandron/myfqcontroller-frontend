@@ -28,22 +28,22 @@ export class MenuComponent implements OnInit {
     this.items = [
 
       {
-        label: this.usuario, icon: 'pi pi-user'
+        label: this.usuario, icon: 'pi pi-user', routerLink: ['/home']
       },
       {
         label: 'Calendario', icon: 'pi pi-calendar', routerLink: ['/contenido/calendario']
       },
       {
-        label: 'Datos Respiratorios', icon: 'pi pi-sliders-h'
+        label: 'Datos Respiratorios', icon: 'pi pi-sliders-h', routerLink: ['/contenido/datos-respiratorios']
       },
       {
-        label: 'Actividad', icon: 'pi pi-heart-fill'
+        label: 'Actividad', icon: 'pi pi-heart-fill',routerLink: ['/contenido/actividad']
       },
       {
-        label: 'Resumen', icon: 'pi pi-book'
+        label: 'Resumen', icon: 'pi pi-book',routerLink: ['/contenido/resumen']
       },
       {
-        label: 'Ajustes', icon: 'pi pi-cog'
+        label: 'Ajustes', icon: 'pi pi-cog', routerLink: ['/contenido/ajustes']
       },
     ];
 

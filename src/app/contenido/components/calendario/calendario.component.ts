@@ -5,6 +5,7 @@ import { Antecedente } from 'src/app/shared/interfaces/antecedente.interface';
 import { CicloAntibiotico } from 'src/app/shared/interfaces/cicloantibiotico.interface';
 import { DatosRespiratorios } from 'src/app/shared/interfaces/datosrespiratorios.interface';
 import { Deporte } from 'src/app/shared/interfaces/deporte.interface';
+import { Evento } from 'src/app/shared/interfaces/evento.interface';
 import { Glicada } from 'src/app/shared/interfaces/glicada.interface';
 import { Tension } from 'src/app/shared/interfaces/tension.interface';
 import { Usuario } from 'src/app/shared/interfaces/usuario.interface';
@@ -13,6 +14,7 @@ import { AntecedentesService } from 'src/app/shared/services/antecedentes.servic
 import { CiclosAntibioticosService } from 'src/app/shared/services/ciclos-antibioticos.service';
 import { DatosrespiratoriosService } from 'src/app/shared/services/datosrespiratorios.service';
 import { DeportesService } from 'src/app/shared/services/deportes.service';
+import { EventoService } from 'src/app/shared/services/evento.service';
 import { GlicadasService } from 'src/app/shared/services/glicadas.service';
 import { PacientesService } from 'src/app/shared/services/pacientes.service';
 import { TensionService } from 'src/app/shared/services/tension.service';
@@ -35,7 +37,11 @@ export class CalendarioComponent implements OnInit {
   cicloAntibiotico!: CicloAntibiotico[];
   deportes!: Deporte[];
   v02max!: V02Max[];
+  datos: any[];
   mostrarDatos: boolean;
+  public dias: any[];
+  public meses: Date[];
+  public contador: number;
 
   constructor(
     private _tensionServices: TensionService,
@@ -45,7 +51,8 @@ export class CalendarioComponent implements OnInit {
     private _deportesService: DeportesService,
     private _antecedentesService: AntecedentesService,
     private _v02maxService: V02maxService,
-    private _pacientesService: PacientesService
+    private _pacientesService: PacientesService,
+    private _eventosService: EventoService
   ) {
     this.week = [
       'Lunes',
@@ -57,6 +64,10 @@ export class CalendarioComponent implements OnInit {
       'Domingo',
     ];
     this.mostrarDatos = false;
+    this.datos = [];
+    this.dias = [];
+    this.meses = [];
+    this.contador = 0;
   }
 
   ngOnInit(): void {
@@ -64,16 +75,24 @@ export class CalendarioComponent implements OnInit {
     let month = fecha.getMonth();
     let year = fecha.getFullYear();
     this.getDaysFromDate(month + 1, year);
+
+    let datoUsuario = localStorage.getItem('usuario');
+    if (datoUsuario) {
+      this._pacientesService.getPacienteByUserName(datoUsuario).subscribe({
+        next: (data: any) => {
+          this.marcarFechas(data.dni);
+        },
+        error: (error: HttpErrorResponse) => { },
+      });
+    }
   }
 
   public getDaysFromDate(month: any, year: any) {
     const startDate = moment.utc(`${year}/${month}/01`);
     const endDate = startDate.clone().endOf('month');
     this.dateSelect = startDate;
-
     const diffDays = endDate.diff(startDate, 'days', true);
     const numberDays = Math.round(diffDays);
-
     const arrayDays = Object.keys([...Array(numberDays)]).map((a: any) => {
       a = parseInt(a) + 1;
       const dayObject = moment(`${year}-${month}-${a}`);
@@ -85,9 +104,7 @@ export class CalendarioComponent implements OnInit {
     });
 
     this.monthSelect = arrayDays;
-    for(let day of this.monthSelect){
-      this.clickDay(day);
-    }
+
   }
 
   public changeMonth(flag: any) {
@@ -101,11 +118,10 @@ export class CalendarioComponent implements OnInit {
   }
 
   public clickDay(day: any) {
-    console.log('day:', day);
     this.mostrarDatos = true;
+    this.datos = [];
     this.dateSelect = moment(
-      `${this.dateSelect.format('YYYY')}-${this.dateSelect.format('MM')}-${
-        day.value
+      `${this.dateSelect.format('YYYY')}-${this.dateSelect.format('MM')}-${day.value
       }`
     );
 
@@ -113,22 +129,18 @@ export class CalendarioComponent implements OnInit {
     const parse = `${monthYear}-${day.value}`;
     const objectDate = moment(parse);
     this.dateValue = objectDate;
-    console.log(this.dateValue);
     let datoUsuario = localStorage.getItem('usuario');
-
     if (datoUsuario) {
       this._pacientesService.getPacienteByUserName(datoUsuario).subscribe({
         next: (data: any) => {
           this.obtenerDatos(data.dni);
         },
-        error: (error: HttpErrorResponse) => {},
+        error: (error: HttpErrorResponse) => { },
       });
     }
   }
 
   public obtenerDatos(dni: string) {
-    console.log('dni', dni);
-    console.log(this.dateValue._i);
 
     let datoUsuario = localStorage.getItem('usuario');
     if (datoUsuario) {
@@ -137,7 +149,10 @@ export class CalendarioComponent implements OnInit {
         .getDatosRespiratoriosByIdUsuario(dni, this.dateValue._i)
         .subscribe({
           next: (data: DatosRespiratorios[]) => {
-            console.log('Respiratorios', data);
+            this.datosRespiratorios = data;
+            for (let dato of data) {
+              this.datos.push(dato);
+            }
           },
           error: (err: HttpErrorResponse) => {
             console.log(err);
@@ -147,8 +162,11 @@ export class CalendarioComponent implements OnInit {
               .getGlicadasByIdUsuarioFecha(dni, this.dateValue._i)
               .subscribe({
                 next: (data: Glicada[]) => {
-                  this.glicadas = data;
-                  console.log('Glicada', data);
+                  if(data.length > 0){
+                  for (let dato of data) {
+                    this.datos.push(dato);
+                  }
+                }
                 },
                 error: (err: HttpErrorResponse) => {
                   console.log(err);
@@ -158,7 +176,11 @@ export class CalendarioComponent implements OnInit {
                     .getTensionByIdUsuarioFecha(dni, this.dateValue._i)
                     .subscribe({
                       next: (data: Tension[]) => {
-                        console.log('Tension', data);
+                        if (data.length > 0) {
+                        for (let dato of data) {
+                          this.datos.push(dato);
+                        }
+                      }
                       },
                       error: (err: HttpErrorResponse) => {
                         console.log(err);
@@ -171,7 +193,11 @@ export class CalendarioComponent implements OnInit {
                           )
                           .subscribe({
                             next: (data: CicloAntibiotico[]) => {
-                              console.log('ciclo', data);
+                              if (data.length > 0) {
+                              for (let dato of data) {
+                                this.datos.push(dato);
+                              }
+                            }
                             },
                             error: (err: HttpErrorResponse) => {
                               console.log(err);
@@ -184,7 +210,11 @@ export class CalendarioComponent implements OnInit {
                                 )
                                 .subscribe({
                                   next: (data: Deporte[]) => {
-                                    console.log('deportes:', data);
+                                    if (data.length > 0) {
+                                    for (let dato of data) {
+                                      this.datos.push(dato);
+                                    }
+                                  }
                                   },
                                   error: (err: HttpErrorResponse) => {
                                     console.log(err);
@@ -197,9 +227,12 @@ export class CalendarioComponent implements OnInit {
                                       )
                                       .subscribe({
                                         next: (data: V02Max[]) => {
-                                          console.log('v02max:', data);
+                                          this.v02max = data;
+                                          for (let dato of data) {
+                                            this.datos.push(dato);
+                                          }
                                         },
-                                        error: (err: HttpErrorResponse) => {},
+                                        error: (err: HttpErrorResponse) => { },
                                         complete: () => {
                                           this._antecedentesService
                                             .getAntecedentesByIdUsuarioFecha(
@@ -208,10 +241,11 @@ export class CalendarioComponent implements OnInit {
                                             )
                                             .subscribe({
                                               next: (data: Antecedente[]) => {
-                                                console.log(
-                                                  'antecedentes:',
-                                                  data
-                                                );
+                                                if (data.length > 0) {
+                                                for (let dato of data) {
+                                                  this.datos.push(dato);
+                                                }
+                                              }
                                               },
                                               error: (
                                                 err: HttpErrorResponse
@@ -233,5 +267,94 @@ export class CalendarioComponent implements OnInit {
         });
     }
   }
-  public mostrarDialogo() {}
+  public mostrarDialogo() {
+
+
+  }
+
+  public marcarFechas(dni:string) {
+
+    let usuario = localStorage.getItem('usuario');
+    if (usuario) {
+      //Obtener fechas respiratorios
+      this._datosRespiratoriosService.getDatosRespiratoriosIdUsuario(usuario).subscribe({
+        next: (data: DatosRespiratorios[]) => {
+         this.ObtenerFechas(data);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        },
+      });
+      //obtener fechas deportes
+      this._deportesService.getDeportesByIdUsuario(dni).subscribe({
+        next: (data: Deporte[]) => {
+          this.ObtenerFechas(data);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      });
+      //obtener fechas glicadas
+      this._glicadasService.getGlicadasByDni(dni).subscribe({
+        next: (data: Glicada[]) => {
+          this.ObtenerFechas(data);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+
+      });
+      //obtener fechas tensiones
+      this._tensionServices.getTensionesByDni(dni).subscribe({
+        next: (data: Tension[]) => {
+          this.ObtenerFechas(data);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      });
+      //obtener fechas eventos
+      this._eventosService.getEventoByDni(dni).subscribe({
+        next: (data: Evento[]) => {
+          this.ObtenerFechas(data);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+
+
+      });
+       //obtener fechas v02max
+        this._v02maxService.getV02MaxByDni(dni).subscribe({
+          next: (data: V02Max[]) => {
+            this.ObtenerFechas(data);
+          },
+          error: (err: HttpErrorResponse) => {
+            console.log(err);
+          }
+        });
+    }
+  }
+
+  //Meter fechas en el Array
+  public ObtenerFechas(data:any) {
+    this.meses = data.map((data: { fecha: Date; }) => data.fecha);
+    this.meses.forEach((res) => {
+      let jsdate = new Date(res);
+      this.dias.push(this.convertirFechas(jsdate.getFullYear(), jsdate.getMonth() + 1, jsdate.getDate()));
+
+    }
+    );
+
+  }
+  //Convertir fechas a formato indexado
+  public convertirFechas(year: any, month: any, a: any) {
+    const dayObject = moment(`${year}-${month}-${a}`);
+    return {
+      name: dayObject.format('dddd'),
+      value: a,
+      indexWeek: dayObject.isoWeekday(),
+    };
+  }
+
 }

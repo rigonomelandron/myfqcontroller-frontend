@@ -10,14 +10,12 @@
       <div class="d-grid gap-3">
         <input
           pInputText
-          class="input100"
           type="text"
           formControlName="usuario"
           placeholder="Ingrese usuario"
         />
         <input
           pPassword
-          class="input100"
           type="password"
           formControlName="pass"
           placeholder="Ingrese su contraseña"
@@ -28,7 +26,6 @@
           id="rol"
           [options]="roles"
           optionLabel="rol"
-          (ngModelChange)="obtenerRol()"
         ></p-dropdown>
         <input
           pInputText
@@ -60,5 +57,7 @@
     <span class="txt1 p-b-17"> ¿ya tienes cuenta? </span>
 
     <a routerLink="/auth/login" class="txt2"> Ingresa aquí </a>
+
   </ng-template>
+
 </p-dialog>

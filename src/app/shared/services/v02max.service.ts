@@ -14,5 +14,9 @@ export class V02maxService {
     return this._http.get<V02Max[]>(`api/v1/v02max/dniFecha/${idUsuario}/${fecha}`);
 
   }
+  public getV02MaxByDni(dni: string): Observable<V02Max[]> {
+    return this._http.get<V02Max[]>(`api/v1/v02max/dni/${dni}`);
+
+  }
 
 }

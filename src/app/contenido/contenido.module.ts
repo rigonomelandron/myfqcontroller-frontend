@@ -16,12 +16,17 @@ import { RolesComponent } from './components/roles/roles.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { GraficoComponent } from './components/grafico/grafico.component';
 import { PrimengModule } from '../primeng/primeng.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { ContenidoRoutingModule } from './contenido-routing.module';
 import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-usuarios.component';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from '../shared/components/menu/menu.component';
+import { DonutComponent } from './components/donut/donut.component';
+import { GraficoBarrasComponent } from './components/grafico-barras/grafico-barras.component';
+import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { MenuMedicoComponent } from './components/menu-medico/menu-medico.component';
+import { HomeMedicoComponent } from './components/home-medico/home-medico.component';
 
 
 
@@ -43,6 +48,11 @@ import { MenuComponent } from '../shared/components/menu/menu.component';
     GraficoComponent,
     ListadoUsuariosComponent,
     HomeComponent,
+    DonutComponent,
+    GraficoBarrasComponent,
+    AjustesComponent,
+    MenuMedicoComponent,
+    HomeMedicoComponent,
 
 
   ],
@@ -50,7 +60,8 @@ import { MenuComponent } from '../shared/components/menu/menu.component';
     CommonModule,
     PrimengModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
     //CardModule,
     //ListboxModule,
     //ButtonModule,
@@ -69,6 +80,11 @@ import { MenuComponent } from '../shared/components/menu/menu.component';
     CalendarioComponent,
     GraficoComponent,
     ListadoUsuariosComponent,
+    DonutComponent,
+    AjustesComponent,
+    MenuMedicoComponent,
+    HomeMedicoComponent,
+    UsuariosComponent
   ],
 })
 export class ContenidoModule { }

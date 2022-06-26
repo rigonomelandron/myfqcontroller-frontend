@@ -1,11 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-body
- {
-  background: url(./assets/images/background4.svg) no-repeat center center fixed;
-
-    background-size: cover;
- }
 .p-megamenu{
     background: transparent;
     border: 0px;
@@ -30,10 +24,22 @@ body
     font-size: 15px;
 }
 
+.boton-delete{
+    border: none;
+    background-color: #fe4141d3;
+    color:#ffffff !important;
+    padding: 10px;
+    font-size: 15px;
+}
+
 .p-card{
     background-color:#ffffffae !important;
     padding: 0.60rem;
+    
 
+}
+.p-card-content ul{
+  
 }
 
 
@@ -49,3 +55,15 @@ body{
     background-color: #fe9f410a;
     width: 100%;
 }
+
+.menu {
+    backdrop-filter: blur(12px);
+}
+
+.container{
+  height: 100vh;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
