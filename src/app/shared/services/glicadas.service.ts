@@ -32,7 +32,8 @@ export class GlicadasService {
   public getGlicadasByIdUsuarioFecha(idUsuario:string,fecha:string):Observable<Glicada[]>{
 
     return this._http.get<Glicada[]>(`api/v1/glicadas/dniFecha/${idUsuario}/${fecha}`);
-
-
+  }
+  public getGlicadasByDni(idUsuario:string):Observable<Glicada[]>{
+    return this._http.get<Glicada[]>(`api/v1/glicadas/dni/${idUsuario}`);
   }
 }

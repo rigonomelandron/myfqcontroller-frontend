@@ -1,8 +1,11 @@
-export interface Antecedente {
+export interface Tratamiento {
   id?: number;
   paciente: Paciente;
+  descripcion: string;
   fecha: Date;
-  diagnostico: string;
+  archivo: string;
+  oral: boolean;
+  inhalado: boolean;
 }
 
 export interface Paciente {

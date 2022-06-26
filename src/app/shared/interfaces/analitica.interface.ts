@@ -1,8 +1,9 @@
-export interface Antecedente {
+export interface Analitica {
   id?: number;
-  paciente: Paciente;
   fecha: Date;
-  diagnostico: string;
+  paciente: Paciente;
+  tipo: string;
+  archivo: string;
 }
 
 export interface Paciente {
@@ -16,3 +17,4 @@ export interface Paciente {
   mutacion2?: string;
   idUsuario: string;
 }
+

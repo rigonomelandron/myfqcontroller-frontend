@@ -14,5 +14,8 @@ export class AntecedentesService {
     return this._http.get<Antecedente[]>(`api/v1/antecedentes/dniFecha/${idUsuario}/${fecha}`);
 
   }
+  public addAntecedente(antecedente: Antecedente): Observable<Antecedente> {
+    return this._http.post<Antecedente>('/api/v1/antecedente', antecedente);
+  }
 
 }

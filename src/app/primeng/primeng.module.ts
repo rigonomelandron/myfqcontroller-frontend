@@ -24,6 +24,11 @@ import { DockModule } from 'primeng/dock';
 import { MenubarModule } from 'primeng/menubar';
 import { ChartModule } from 'primeng/chart';
 import { CalendarModule } from 'primeng/calendar';
+import { TabViewModule } from 'primeng/tabview';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SliderModule } from 'primeng/slider';
+import { BadgeModule } from 'primeng/badge';
 
 
 
@@ -60,6 +65,11 @@ import { CalendarModule } from 'primeng/calendar';
     MenubarModule,
     ChartModule,
     CalendarModule,
+    TabViewModule,
+    SelectButtonModule,
+    InputTextareaModule,
+    SliderModule,
+    BadgeModule
 
   ]
 

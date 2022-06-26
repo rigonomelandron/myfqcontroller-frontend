@@ -82,5 +82,28 @@ h2 {
   border: 0;
 }
 .hide{
-  visibility: hidden;
+  display: none;
+}
+.marca{
+  background-color: red ;
+  width: 20px;
+  height: 20px;
+}
+.elemento{
+  height: 100%;
+}
+.cabecera{
+  height:20%;
+}
+.cuerpo{
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+li{
+  height:5rem;
+}
+.dialogo{
+  background-color: #1d736a;
 }

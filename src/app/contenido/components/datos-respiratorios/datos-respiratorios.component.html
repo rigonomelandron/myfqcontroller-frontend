@@ -1,39 +1,51 @@
 <app-menu></app-menu>
-<p-card>
-    <header>
-        <h4 style="color:#1d736a !important;">Datos Respiratorios</h4>
-    </header>
-    <div style="height: 100vh" class="row">
-        <div class="col-7">
-          <app-grafico></app-grafico>
-        </div>
-        <div class="col"></div>
-        <div class="col-4">
-            <ul class="list-group">
-                <li style="background-color:#fe9f4125; color:#1d736a;" class="list-group-item">FVC: 3.52L</li>
-                <li style="background-color:#fe9f4125; color:#1d736a;" class="list-group-item">FEV1: 3.06L</li>
-                <li style="background-color:#fe9f4125; color:#1d736a;" class="list-group-item">Sat Basal: 98%</li>
-                <li style="background-color:#fe9f4125; color:#1d736a;" class="list-group-item">Capacidad Aeróbica: 45</li>
-                <li style="background-color:#fe9f4125; color:#1d736a;" class="list-group-item">Último antibiótico: 22-04-21 (Septrim)</li>
-              </ul>
 
-            <button class="boton float-end mt-2" styleClass="p-button-sm " type="button" pButton pRipple label="Añadir datos" (click)="mostrarDialogo()"></button>
+<main class="container" >
+  <p-card>
+    <header>
+      <h4 style="color:#1d736a !important;">Datos Respiratorios</h4>
+    </header>
+    <ng-template pTemplate="content">
+      <hr>
+      <div class="row">
+        <div class="col-3">
+          <hr>
+          <div style="height: 75px;"></div>
+          <ul>
+            <li class="list-group-item">FVC: 3.52L</li>
+            <li class="list-group-item">FEV1: 3.06L</li>
+            <li class="list-group-item">Sat Basal: 98%</li>
+            <li class="list-group-item">Capacidad Aeróbica: 45</li>
+            <li class="list-group-item">Último antibiótico: 22-04-21 (Septrim)</li>
+          </ul>
         </div>
-    </div>
-</p-card>
-<p-dialog [visible]="mostrarFormulario" [closable]="false" [maximizable]="true" class="p-fluid" header="Registro"  [style]="{width: '30vw', height:'50vh'}" >
+        <div class="col-9">
+          <app-grafico></app-grafico>
+
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple label="Añadir datos" (click)="mostrarDialogo()"></button>
+    </ng-template>
+  </p-card>
+</main>
+<p-dialog [visible]="mostrarFormulario" [closable]="false" [maximizable]="true"  header="Registro"  [style]="{width: '30vw', height:'50vh'}" >
   <ng-template pTemplate="body">
     <form autocomplete="off"  (ngSubmit)="addRegistro()" [formGroup]="formRespiratorio">
       <div class="d-grid gap-3">
+
         <div class="field col-12 md:col-4">
-          <label for="basic">Basic</label>
           <p-calendar inputId="basic" formControlName="fecha" appendTo="body" placeholder="Fecha"></p-calendar>
         </div>
         <input  pInputText type="text" formControlName="fvc" placeholder="Fvc" />
         <input pInputText type="text" formControlName="fev1" placeholder="Fev1" />
         <input pInputText type="text" formControlName="saturacion" placeholder="Saturacion Basal" />
         <input pInputText type="text" formControlName="aerobica" placeholder="Capacidad Aerobica" />
-        <button pButton type="submit" label="Añadir" class="boton"></button>
+        <div d-flex >
+        <button pButton type="submit" label="Añadir" pRipple  class="boton mx-3"></button>
+        <button pButton type="button" label="Cerrar" pRipple  class="p-button-text" (click)="cerrarDialogo()"></button>
+       </div>
       </div>
     </form>
   </ng-template>

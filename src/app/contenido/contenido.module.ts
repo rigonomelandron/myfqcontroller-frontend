@@ -22,6 +22,9 @@ import { ListadoUsuariosComponent } from './components/listado-usuarios/listado-
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from '../shared/components/menu/menu.component';
+import { DonutComponent } from './components/donut/donut.component';
+import { GraficoBarrasComponent } from './components/grafico-barras/grafico-barras.component';
+
 
 
 
@@ -43,6 +46,9 @@ import { MenuComponent } from '../shared/components/menu/menu.component';
     GraficoComponent,
     ListadoUsuariosComponent,
     HomeComponent,
+    DonutComponent,
+    GraficoBarrasComponent,
+
 
 
   ],
@@ -70,6 +76,10 @@ import { MenuComponent } from '../shared/components/menu/menu.component';
     CalendarioComponent,
     GraficoComponent,
     ListadoUsuariosComponent,
+    DonutComponent,
+    UsuariosComponent
+
+
   ],
 })
 export class ContenidoModule { }

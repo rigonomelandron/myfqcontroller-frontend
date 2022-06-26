@@ -73,7 +73,6 @@ export class RegistroComponent implements OnInit {
               idUsuario: this.miFormulario.value.usuario,
             };
 
-
             this._pacientesService
               .registroPacientes(this.pacienteNuevo)
               .subscribe({

@@ -33,7 +33,7 @@ body
 .p-card{
     background-color:#ffffffae !important;
     padding: 0.60rem;
-    height: 40vh;
+
 
 }
 .p-card-content ul{
@@ -59,3 +59,4 @@ body{
   justify-content: center;
   align-items: center;
 }
+
