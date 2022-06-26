@@ -1,8 +1,9 @@
-export interface Antecedente {
+export interface Evento {
   id?: number;
-  paciente: Paciente;
   fecha: Date;
-  diagnostico: string;
+  paciente: Paciente;
+  descripcion: string;
+  importancia: number;
 }
 
 export interface Paciente {

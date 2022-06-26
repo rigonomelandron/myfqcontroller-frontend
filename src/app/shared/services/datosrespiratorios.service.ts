@@ -35,4 +35,7 @@ export class DatosrespiratoriosService {
     return this._http.post<DatosRespiratorios>('api/v1/datos-respiratorios', datosRespiratorios);
 
   }
+  public getDatosRespiratoriosIdUsuario(id:string):Observable<DatosRespiratorios[]>{
+    return this._http.get<DatosRespiratorios[]>('api/v1/datos-respiratorios/usuarioId/'+id);
+  }
 }

@@ -20,7 +20,7 @@
                       <li class="list-group-item">Último antibiótico: 22-04-21 (Septrim)</li>
                   </ul>
                   <div class="text-center">
-                      <button class="boton center-block mt-2"  styleClass="p-button-sm " type="button" pButton pRipple label="Añadir datos"></button>
+                     <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple label="Añadir datos" (click)="mostrarDialogo()"></button>
                   </div>
               </div>
               <div class="col-9">
@@ -30,3 +30,26 @@
       </ng-template>
   </p-card>
 </main>
+<p-dialog [visible]="mostrarFormulario" [closable]="false" [maximizable]="true"  header="Registro"  [style]="{width: '30vw', height:'50vh'}" >
+  <ng-template pTemplate="body">
+    <form autocomplete="off"  (ngSubmit)="addRegistro()" [formGroup]="formRespiratorio">
+      <div class="d-grid gap-3">
+
+        <div class="field col-12 md:col-4">
+          <p-calendar inputId="basic" formControlName="fecha" appendTo="body" placeholder="Fecha"></p-calendar>
+        </div>
+        <input  pInputText type="text" formControlName="fvc" placeholder="Fvc" />
+        <input pInputText type="text" formControlName="fev1" placeholder="Fev1" />
+        <input pInputText type="text" formControlName="saturacion" placeholder="Saturacion Basal" />
+        <input pInputText type="text" formControlName="aerobica" placeholder="Capacidad Aerobica" />
+        <div d-flex >
+        <button pButton type="submit" label="Añadir" pRipple  class="boton mx-3"></button>
+        <button pButton type="button" label="Cerrar" pRipple  class="p-button-text" (click)="cerrarDialogo()"></button>
+       </div>
+      </div>
+    </form>
+  </ng-template>
+
+</p-dialog>
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>

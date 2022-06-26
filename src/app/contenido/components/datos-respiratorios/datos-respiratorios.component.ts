@@ -73,12 +73,7 @@ export class DatosRespiratoriosComponent implements OnInit {
 
             next: (response) => {
               console.log(response);
-              this._mensajeService.add({
-                severity: 'success',
-                summary: 'Añadido',
-                detail: `Registro Añadido correctamente `,
-                life: 2000
-
+              this._mensajeService.add({severity: 'success',summary: 'Añadido',detail: `Registro Añadido correctamente `,life: 2000
               });
             this.cerrarDialogo();
             },

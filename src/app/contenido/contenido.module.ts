@@ -83,7 +83,8 @@ import { HomeMedicoComponent } from './components/home-medico/home-medico.compon
     DonutComponent,
     AjustesComponent,
     MenuMedicoComponent,
-    HomeMedicoComponent
+    HomeMedicoComponent,
+    UsuariosComponent
   ],
 })
 export class ContenidoModule { }

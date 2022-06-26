@@ -26,6 +26,11 @@ export class UsuariosService {
 
     return this._http.get<Usuario>('api/v2/usuarios/'+id);
   }
+  public uploadFoto(id : string, file : File):Observable<Usuario>{
+     console.log(file);
+
+    return this._http.post<Usuario>('api/v2/usuarios/'+ id, file);
+  }
 
 
 

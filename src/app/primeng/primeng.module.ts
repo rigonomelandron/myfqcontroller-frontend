@@ -26,6 +26,10 @@ import { ChartModule } from 'primeng/chart';
 import { CalendarModule } from 'primeng/calendar';
 import {TabViewModule} from 'primeng/tabview';
 import {AvatarModule} from 'primeng/avatar';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SliderModule } from 'primeng/slider';
+import { BadgeModule } from 'primeng/badge';
 
 
 
@@ -64,7 +68,15 @@ import {AvatarModule} from 'primeng/avatar';
     CalendarModule,
     TabViewModule,
     AvatarModule,
-    TableModule
+    TableModule,
+    SelectButtonModule,
+    InputTextareaModule,
+    SliderModule,
+    BadgeModule,
+    SelectButtonModule,
+    InputTextareaModule,
+    SliderModule,
+    BadgeModule
 
   ]
 

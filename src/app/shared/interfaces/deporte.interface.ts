@@ -4,6 +4,7 @@ export interface Deporte {
   paciente: Paciente;
   tipo: string;
   calorias: number;
+  ppmMedia:number;
   ppmMaxima: number;
   tiempo: number;
 }
