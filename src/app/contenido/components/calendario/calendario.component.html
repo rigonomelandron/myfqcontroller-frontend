@@ -49,11 +49,13 @@
 
     <table class="table">
       <div *ngFor="let items of datos" class="my-3">
+      
           <tr>
-            <ng-container *ngFor="let item of items | keyvalue">
-              <th *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="">{{item.key}}</th>
-            </ng-container>
+              <ng-container *ngFor="let item of items | keyvalue">
+                <th *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="">{{item.key}}</th>
+              </ng-container>
           </tr>
+        
           <tr>
             <ng-container *ngFor="let item of items | keyvalue">
           <td *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" >{{item.value}}</td>

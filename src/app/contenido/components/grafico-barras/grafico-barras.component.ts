@@ -82,9 +82,9 @@ export class GraficoBarrasComponent implements OnInit {
 
       labels: this.dates,
       datasets: [{
-        label: 'PPM Media',
+        label: 'Media Pulsaciones',
         backgroundColor: [
-          '#EC407A',
+          '#2FEDA2',
 
         ],
         yAxisID: 'y',
@@ -93,8 +93,8 @@ export class GraficoBarrasComponent implements OnInit {
       },
 
        {
-          label: 'Calorias',
-          backgroundColor: '#78909C',
+          label: 'Calorías',
+          backgroundColor: '#F0330E',
           yAxisID: 'y1',
           data: this.calorias
         }

@@ -32,7 +32,7 @@
         </p-tabPanel>
         <p-tabPanel header="Analíticas">
          <ul>
-          <li *ngFor="let analitica of this.analiticas">{{analitica.fecha.toString().substring(0,10)}} : {{analitica.tipo}}</li>
+          <li *ngFor="let analitica of this.analiticas">{{analitica.fecha.toString().substring(0,10)}} : {{analitica.tipo}} <span style="">-<a href="/ruta"> Ver infome</a> </span> </li>
          </ul>
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Añadir datos" (click)="mostrarFormAnalitica()"></button>

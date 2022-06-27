@@ -40,7 +40,7 @@ export class ActividadComponent implements OnInit {
     });
     this.tipoOptions = [
       {value: 'carrera', label: 'Carrera'},
-      {value: 'ciclismo', label: 'ciclismo'},
+      {value: 'ciclismo', label: 'Ciclismo'},
       {value: 'natacion', label: 'Natación'},
       {value: 'fuerza', label: 'Entrenamiento fuerza'},
       {value: 'caminata', label: 'Caminata/Senderismo'},
