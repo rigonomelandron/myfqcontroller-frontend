@@ -10,6 +10,7 @@ export interface Paciente {
   dni: string;
   nombre: string;
   email: string;
+  fechaNacimiento?: Date;
   genero?: string;
   peso?: number;
   altura?: number;

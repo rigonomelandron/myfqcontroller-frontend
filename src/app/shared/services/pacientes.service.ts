@@ -22,7 +22,7 @@ export class PacientesService {
     return this._http.get<Paciente[]>('api/v2/pacientes');
   }
   public modificarPaciente(paciente : Paciente):Observable<Paciente>{
-    return this._http.patch<Paciente>('api/v2/pacientes/'+paciente.dni, paciente);
+    return this._http.patch<Paciente>(`api/v1/pacientes/modificar`, paciente);
   }
   public getPaciente(dni : string):Observable<Paciente>{
     return this._http.get<Paciente>('api/v2/pacientes/'+dni);

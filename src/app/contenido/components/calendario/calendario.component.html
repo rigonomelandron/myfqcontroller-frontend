@@ -47,7 +47,28 @@
 
   <div class="table-responsive ">
 
-    <table class="table">
+    <ng-container *ngFor="let items of datos" class="my-3">
+      <p-table responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <ng-container *ngFor="let item of items | keyvalue">
+              <th *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="">
+                {{item.key}}</th>
+            </ng-container>
+          </tr>
+           <tr>
+            <ng-container *ngFor="let item of items | keyvalue">
+              <td *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'">
+                {{item.value}}</td>
+            </ng-container>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </ng-container>
+
+
+   <!--  <table class="table">
       <div *ngFor="let items of datos" class="my-3">
           <tr>
             <ng-container *ngFor="let item of items | keyvalue">
@@ -60,7 +81,7 @@
            </ng-container>
           </tr>
       </div>
-    </table>
+    </table> -->
   </div>
 
 </p-dialog>

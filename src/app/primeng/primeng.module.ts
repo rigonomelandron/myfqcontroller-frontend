@@ -31,6 +31,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SliderModule } from 'primeng/slider';
 import { BadgeModule } from 'primeng/badge';
 import { KnobModule } from 'primeng/knob';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 
 
@@ -78,7 +80,9 @@ import { KnobModule } from 'primeng/knob';
     InputTextareaModule,
     SliderModule,
     BadgeModule,
-    KnobModule
+    KnobModule,
+    ConfirmDialogModule,
+    ConfirmPopupModule
 
   ]
 

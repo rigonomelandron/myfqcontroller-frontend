@@ -11,7 +11,9 @@ export class UsuariosService {
   constructor(private _http : HttpClient) { }
 
   public registroUsuarios(usuario : Usuario):Observable<Usuario>{
-    return this._http.post<Usuario>('api/v2/usuarios', usuario);
+    console.log("registro usuario",usuario);
+    
+    return this._http.post<Usuario>('api/v1/usuario/crear', usuario);
   }
   public deleteUsuario(id : string):Observable<Usuario>{
     return this._http.delete<Usuario>('api/v2/usuarios/'+id);
