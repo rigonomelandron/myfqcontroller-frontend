@@ -18,10 +18,60 @@
                 </div>
             </div>
         </ng-template>
-        <ng-template pTemplate="footer"> 
+        <ng-template pTemplate="footer">
                 <p> <span>Última actividad: Ciclismo </span> <span> Tiempo: 01:24:54 </span> <span>Calorías quemadas: 452cal</span></p>
                 <p> <span>Media: 138ppm </span> <span>Máxima: 162ppm</span> </p>
-                <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple label="Añadir datos"></button>  
+                <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple label="Añadir datos" (click)="abrirDialogo()"></button>
         </ng-template>
     </p-card>
 </main>
+<p-dialog [visible]=" mostrarFormActividad" [closable]="false" [maximizable]="true" header="Registro Actividad"
+  [style]="{width: '30vw', height:'auto'}">
+  <ng-template pTemplate="body">
+    <form autocomplete="off" (ngSubmit)="addRegistroActividades()" [formGroup]="formActividad">
+      <div class="d-grid gap-3">
+
+        <div class="field col-12 md:col-4">
+          <p-calendar inputId="basic" formControlName="fecha" appendTo="body" placeholder="Fecha"></p-calendar>
+        </div>
+        <p-selectButton [options]="tipoOptions" formControlName="tipo" optionLabel="label" optionValue="value">
+        </p-selectButton>
+
+      <div class="row p-fluid">
+        <div class="col-4">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">calorias</span>
+            <input type="text" pInputText formControlName="calorias">
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon" >ppmMed</span>
+            <input type="text" pInputText formControlName="ppmMedia">
+
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon" >ppmMax</span>
+            <input type="text" pInputText formControlName="ppmMaxima">
+          </div>
+        </div>
+      </div>
+      <label>Tiempo/min:</label>
+       <p-knob formControlName="tiempo" [size]="200" ></p-knob>
+        <div d-flex>
+          <button pButton type="submit" label="Añadir" pRipple class="boton mx-3"></button>
+          <button pButton type="button" label="Cerrar" pRipple class="p-button-text"
+            (click)="cerrarDialogo()"></button>
+        </div>
+      </div>
+
+    </form>
+  </ng-template>
+  <!--Formulario eventos-->
+</p-dialog>
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>

@@ -16,4 +16,7 @@ export class DeportesService {
   public getDeportesByIdUsuario(idUsuario: string): Observable<Deporte[]> {
     return this._http.get<Deporte[]>(`api/v1/deportes/dni/${idUsuario}`);
   }
+  public addActividadBydni( actividad: Deporte): Observable<Deporte> {
+    return this._http.post<Deporte>('api/v1/deportes', actividad);
+  }
 }

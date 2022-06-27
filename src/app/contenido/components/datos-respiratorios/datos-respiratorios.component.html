@@ -30,7 +30,7 @@
       </ng-template>
   </p-card>
 </main>
-<p-dialog [visible]="mostrarFormulario" [closable]="false" [maximizable]="true"  header="Registro"  [style]="{width: '30vw', height:'50vh'}" >
+<p-dialog [visible]="mostrarFormulario" [closable]="false" [maximizable]="true"  header="Registro"  [style]="{width: '30vw', height:'auto'}" >
   <ng-template pTemplate="body">
     <form autocomplete="off"  (ngSubmit)="addRegistro()" [formGroup]="formRespiratorio">
       <div class="d-grid gap-3">

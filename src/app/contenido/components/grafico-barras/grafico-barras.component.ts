@@ -49,6 +49,7 @@ export class GraficoBarrasComponent implements OnInit {
         next: (paciente) => {
           this._deportesServices.getDeportesByIdUsuario(paciente.dni).subscribe({
             next: (actividades) => {
+              actividades.sort((d1, d2) => new Date(d1.fecha).getTime() - new Date(d2.fecha).getTime());
 
               this.meses = actividades.map((actividades: { fecha: Date; }) => actividades.fecha);
               this.calorias = actividades.map((actividades: { calorias: number; }) => actividades.calorias);
@@ -115,7 +116,8 @@ export class GraficoBarrasComponent implements OnInit {
       scales: {
         x: {
           ticks: {
-            color: '#495057'
+            color: '#495057',
+            
           },
           grid: {
             color: '#ebedef'

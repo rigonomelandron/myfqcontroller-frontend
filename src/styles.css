@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+body{
+  background-image: url(assets/images/background1.svg) ;
+background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  overflow: hidden;
+}
 .p-megamenu{
     background: transparent;
     border: 0px;
@@ -35,11 +43,11 @@
 .p-card{
     background-color:#ffffffae !important;
     padding: 0.60rem;
-    
+
 
 }
 .p-card-content ul{
-  
+
 }
 
 

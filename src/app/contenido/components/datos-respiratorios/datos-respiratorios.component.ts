@@ -72,7 +72,6 @@ export class DatosRespiratoriosComponent implements OnInit {
           this._datosRespiratoriosService.addDatosRespiratorios(this.registro).subscribe({
 
             next: (response) => {
-              console.log(response);
               this._mensajeService.add({severity: 'success',summary: 'Añadido',detail: `Registro Añadido correctamente `,life: 2000
               });
             this.cerrarDialogo();
