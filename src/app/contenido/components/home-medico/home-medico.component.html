@@ -1,19 +1,34 @@
 <app-menu-medico></app-menu-medico>
-<p-table [value]="pacientes">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Vin</th>
-            <th>Year</th>
-            <th>Brand</th>
-            <th>Color</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-paciente>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </ng-template>
-</p-table>
+
+<main class="row p-5" style="margin: 100px;">
+    <p-card>
+        <ng-template pTemplate="content">
+            <p-table [value]="pacientes">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Nombre Paciente</th>
+                        <th>DNI</th>
+                        <th>Email</th>
+                        <th>Género</th>
+                        <th>Acciones</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-paciente>
+                    <tr>
+                        <td>{{paciente.nombre}}</td>
+                        <td>{{paciente.dni}}</td>
+                        <td>{{paciente.email}}</td>
+                        <td>{{paciente.genero}}</td>
+                        <td>
+                            <span class="p-buttonset">
+                                <button pButton pRipple type="button" label="Ver paciente" class="p-button-rounded"></button>
+                                <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"></button>
+                            </span>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+    </p-card>
+</main>
+
