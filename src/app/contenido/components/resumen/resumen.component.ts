@@ -57,7 +57,7 @@ export class ResumenComponent implements OnInit {
     this.formEventos = this._formBuilder.group({
       fecha: ['', [Validators.required, Validators.minLength(3)]],
       descripcion: ['', [Validators.required, Validators.minLength(3)]],
-      importancia: ['0', [Validators.required, Validators.minLength(3)]],
+      importancia: ['0', [Validators.required]],
     });
     this.formHistoria = this._formBuilder.group({
       fecha: ['', [Validators.required, Validators.minLength(3)]],
