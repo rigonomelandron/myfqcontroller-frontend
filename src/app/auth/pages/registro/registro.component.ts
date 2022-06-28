@@ -60,11 +60,9 @@ export class RegistroComponent implements OnInit {
       this.obtenerRol();
 
       this._usuariosService.registroUsuarios(this.usuarioNuevo).subscribe({
-        next: (usuario) => {
-          console.log(usuario);
-          console.log("this.paciente",this.paciente);
-          console.log("this.medico",this.medico);
-
+        next: (usuario) => { 
+          console.log("hola usuario", usuario);
+                 
           if (this.paciente) {
             this.pacienteNuevo = {
               dni: this.miFormulario.value.id,

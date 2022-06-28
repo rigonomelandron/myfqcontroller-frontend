@@ -23,10 +23,12 @@ export class EquiposService {
   public modificarEquipo(equipo : Equipo):Observable<Equipo>{
       return this._http.patch<Equipo>('api/v2/equipos/'+equipo.id, equipo);
   }
-  public getEquipo(id : number):Observable<Equipo>{
-      return this._http.get<Equipo>('api/v2/equipos/'+id);
-  }
+
   public getEquipoByIdMedico(id : string):Observable<Equipo[]>{
       return this._http.get<Equipo[]>('api/v1/equipos/idMedico/'+id);
+  }
+  public getEquipoByIdPaciente(id : string):Observable<Equipo>{
+
+      return this._http.get<Equipo>('api/v1/equipos/idPaciente/'+id);
   }
 }

@@ -74,4 +74,13 @@ body{
   justify-content: center;
   align-items: center;
 }
+.texto-principal{
+  font-family: 'Yellowtail', cursive;
+  font-size: 10rem;
+  color:rgb(9, 117, 190);
+  margin:2rem;
+}
+
+
+
 

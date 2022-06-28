@@ -48,12 +48,32 @@
   <div>
 
     <ng-container *ngFor="let items of datos" class="my-3">
-        <table p-datatable>
-      
-          <tr p-datatable-header>
-              <ng-container p-datatble-thead *ngFor="let item of items | keyvalue">
-                <th p-datatable-column *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="">{{item.key}}</th>
-              </ng-container>
+      <p-table responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <ng-container *ngFor="let item of items | keyvalue">
+              <th *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="text-center">
+                {{item.key}}</th>
+            </ng-container>
+          </tr>
+           <tr>
+            <ng-container *ngFor="let item of items | keyvalue">
+              <td *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="text-center">
+                {{item.value}}</td>
+            </ng-container>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </ng-container>
+
+
+   <!--  <table class="table">
+      <div *ngFor="let items of datos" class="my-3">
+          <tr>
+            <ng-container *ngFor="let item of items | keyvalue">
+              <th *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="">{{item.key}}</th>
+            </ng-container>
           </tr>
         
           <tr p-datatable-tbody>
@@ -61,8 +81,13 @@
           <td p-datatable-column *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" >{{item.value}}</td>
            </ng-container>
           </tr>
+<<<<<<< HEAD
         </table>
       </ng-container>
+=======
+      </div>
+    </table> -->
+>>>>>>> f224b37874a5ee119b350ec1d708c2effb596826
   </div>
 
 </p-dialog>
