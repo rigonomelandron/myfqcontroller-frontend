@@ -45,24 +45,24 @@
 <p-dialog header="Datos recogidos" [(visible)]="mostrarDatos" [modal]="true" [maximizable]="true" [style]="{width: '50vw', height:'100vh'}" >
 
 
-  <div class="table-responsive ">
+  <div>
 
-    <table class="table">
-      <div *ngFor="let items of datos" class="my-3">
+    <ng-container *ngFor="let items of datos" class="my-3">
+        <table p-datatable>
       
-          <tr>
-              <ng-container *ngFor="let item of items | keyvalue">
-                <th *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="">{{item.key}}</th>
+          <tr p-datatable-header>
+              <ng-container p-datatble-thead *ngFor="let item of items | keyvalue">
+                <th p-datatable-column *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="">{{item.key}}</th>
               </ng-container>
           </tr>
         
-          <tr>
+          <tr p-datatable-tbody>
             <ng-container *ngFor="let item of items | keyvalue">
-          <td *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" >{{item.value}}</td>
+          <td p-datatable-column *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" >{{item.value}}</td>
            </ng-container>
           </tr>
-      </div>
-    </table>
+        </table>
+      </ng-container>
   </div>
 
 </p-dialog>
