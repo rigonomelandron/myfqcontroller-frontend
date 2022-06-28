@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { DatosRespiratorios } from '../interfaces/datosrespiratorios.interface';
 
@@ -37,5 +38,11 @@ export class DatosrespiratoriosService {
   }
   public getDatosRespiratoriosIdUsuario(id:string):Observable<DatosRespiratorios[]>{
     return this._http.get<DatosRespiratorios[]>('api/v1/datos-respiratorios/usuarioId/'+id);
+  }
+  public getDatosRespiratoriosByDni(id:string):Observable<DatosRespiratorios[]>{
+     console.log("datosRespiratorios");
+     console.log("id",id);
+
+    return this._http.get<DatosRespiratorios[]>('api/v1/datos-respiratorios/dni/'+id);
   }
 }

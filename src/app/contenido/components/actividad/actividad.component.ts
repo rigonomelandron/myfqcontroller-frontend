@@ -65,7 +65,6 @@ export class ActividadComponent implements OnInit {
     }
     this._deportesService.addActividadBydni(actividad).subscribe({
       next: (data) => {
-        console.log(data);
 
         this._mensajeService.add({
           severity: 'success', summary: 'Añadido', detail: `Actividad Añadida correctamente `, life: 2000
@@ -73,14 +72,15 @@ export class ActividadComponent implements OnInit {
 
       },
       error: (err:HttpErrorResponse) => {
-        console.log(err);
 
         this._mensajeService.add({ severity: 'error', summary: 'Error', detail: err.message, life: 2000 });
 
       },
       complete: () => {
         this.cerrarDialogo();
-
+        this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this._router.onSameUrlNavigation = 'reload';
+        this._router.navigate(['/contenido/actividad']);
       }
 
 
@@ -94,9 +94,6 @@ export class ActividadComponent implements OnInit {
   public cerrarDialogo(){
     this.mostrarFormActividad = false;
   }
-
-
-
 
   ngOnInit(): void {
     this.obtenerPaciente();
