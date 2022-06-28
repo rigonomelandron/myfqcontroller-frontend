@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Deporte } from 'src/app/shared/interfaces/deporte.interface';
+import { DeportesService } from 'src/app/shared/services/deportes.service';
 
 @Component({
   selector: 'app-tarjeta-actividad',
@@ -8,19 +10,41 @@ import { Component, OnInit } from '@angular/core';
 export class TarjetaActividadComponent implements OnInit {
 
   public datos: string[];
+  public datoDeporte!: Deporte;
 
-  constructor() {
+  constructor(private _datosDeportesService : DeportesService) {
     this.datos = [
-      'Calorías: 452cal',
-      'Máxima: 162ppm',
-      'Media: 138ppm',
-      'Tiempo: 01:24:54',
-      ''
 
     ]
    }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+    this.obtenerDeporte();
   }
+public obtenerDeporte(){
+  this._datosDeportesService.getDeportes().subscribe({
+
+    next: (datos: Deporte[]) => {
+      console.log(datos);
+      this.datoDeporte = datos[datos.length - 1];
+      this.datos=[
+
+        'Calorías: ' + this.datoDeporte.calorias +'cal',
+        'Máxima: ' + this.datoDeporte.ppmMaxima + 'ppm Max',
+        'Media: ' + this.datoDeporte.ppmMedia +'ppm Med',
+        'Tiempo: ' + this.datoDeporte.tiempo + 'min',
+        ' '
+
+      ]
+      console.log(this.datos);
+      
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  }
+
+  )
+}
 
 }

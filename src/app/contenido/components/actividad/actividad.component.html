@@ -19,8 +19,8 @@
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
-                <p> <span>Última actividad: Ciclismo </span> <span> Tiempo: 01:24:54 </span> <span>Calorías quemadas: 452cal</span></p>
-                <p> <span>Media: 138ppm </span> <span>Máxima: 162ppm</span> </p>
+                <p> <span>Última actividad: {{this.datos[4]}} </span> <span> Tiempo: {{this.datos[3]}} </span> <span>Calorías quemadas: {{this.datos[0]}}</span></p>
+                <p> <span>Media: {{this.datos[2]}} </span> <span>Máxima: {{this.datos[1]}}</span> </p>
                 <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple label="Añadir datos" (click)="abrirDialogo()"></button>
         </ng-template>
     </p-card>

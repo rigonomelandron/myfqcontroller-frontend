@@ -32,7 +32,7 @@
         </p-tabPanel>
         <p-tabPanel header="Analíticas">
          <ul>
-          <li *ngFor="let analitica of this.analiticas">{{analitica.fecha.toString().substring(0,10)}} : {{analitica.tipo}} <span style="">-<a href="/ruta"> Ver infome</a> </span> </li>
+          <li *ngFor="let analitica of this.analiticas">{{analitica.fecha.toString().substring(0,10)}} : {{analitica.tipo}} <span style="">-<a target="_blank" href="{{analitica.archivo}}"> Ver infome</a> </span> </li>
          </ul>
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Añadir datos" (click)="mostrarFormAnalitica()"></button>
@@ -116,7 +116,7 @@
   </ng-template>
 
 </p-dialog>
-
+<!-- Formulario Analíticas -->
 <p-dialog [visible]="mostrarFormAnaliticas" [closable]="false" [maximizable]="true" header="Registro Analitica"
   [style]="{width: '30vw', height:'auto'}">
   <ng-template pTemplate="body">
@@ -126,7 +126,7 @@
           <p-calendar inputId="basic" formControlName="fecha" appendTo="body" placeholder="Fecha"></p-calendar>
         </div>
         <input pInputText type="text" formControlName="tipo" placeholder="Tipo" />
-        <input pInputText type="file" formControlName="archivo" placeholder="Ruta Archivo" />
+        <input pInputText accept=".pdf" type="file" formControlName="archivo" placeholder="Ruta Archivo" />
         <div d-flex>
           <button pButton type="submit" label="Añadir" pRipple class="boton mx-3"></button>
           <button pButton type="button" label="Cerrar" pRipple class="p-button-text"

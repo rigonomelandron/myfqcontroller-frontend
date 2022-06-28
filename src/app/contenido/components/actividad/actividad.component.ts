@@ -7,6 +7,7 @@ import { PacientesService } from 'src/app/shared/services/pacientes.service';
 import { ConfirmationService, MessageService, PrimeIcons } from "primeng/api";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Deporte } from 'src/app/shared/interfaces/deporte.interface';
 
 @Component({
   selector: 'app-actividad',
@@ -20,6 +21,8 @@ export class ActividadComponent implements OnInit {
   public tipoOptions:any[];
   public caloria: number;
   public paciente!:Paciente;
+  public datos: string[];
+  public datoDeporte!: Deporte;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -27,7 +30,8 @@ export class ActividadComponent implements OnInit {
     private _pacienteServices: PacientesService,
     private _mensajeService: MessageService,
     private _router: Router,
-    public _location: Location
+    public _location: Location,
+    private _datosDeportesService : DeportesService
 
     ) {
     this.formActividad = this._formBuilder.group({
@@ -45,9 +49,12 @@ export class ActividadComponent implements OnInit {
       {value: 'fuerza', label: 'Entrenamiento fuerza'},
       {value: 'caminata', label: 'Caminata/Senderismo'},
       {value: 'otro', label: 'otro'},
-
-
     ];
+
+    this.datos = [
+
+    ]
+
     this.caloria=0;
   }
 
@@ -111,6 +118,34 @@ export class ActividadComponent implements OnInit {
       });
     }
 
+    this.obtenerDeporte();
+
+  }
+
+  public obtenerDeporte(){
+    this._datosDeportesService.getDeportes().subscribe({
+  
+      next: (datos: Deporte[]) => {
+        console.log(datos);
+        this.datoDeporte = datos[datos.length - 1];
+        this.datos=[
+  
+            this.datoDeporte.calorias +'cal',
+            this.datoDeporte.ppmMaxima + 'ppm Max',
+            this.datoDeporte.ppmMedia +'ppm Med',
+            this.datoDeporte.tiempo + 'min',
+            this.datoDeporte.tipo
+  
+        ]
+        console.log(this.datos);
+        
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    }
+  
+    )
   }
 
 }

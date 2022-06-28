@@ -20,6 +20,8 @@ export class DatosRespiratoriosComponent implements OnInit {
   public registro!: DatosRespiratorios;
   public paciente?: Paciente;
   public mostrarFormulario: boolean;
+  public datos: string[];
+  public datoRespiratorio!: DatosRespiratorios;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -40,10 +42,12 @@ export class DatosRespiratoriosComponent implements OnInit {
     });
     this.mostrarFormulario = false;
 
+    this.datos = []
+
   }
 
   ngOnInit(): void {
-
+    this.obtenerDatosRespiratorios();
   }
 
   public addRegistro() {
@@ -92,6 +96,29 @@ export class DatosRespiratoriosComponent implements OnInit {
   }
   public cerrarDialogo(){
     this.mostrarFormulario= false;
+  }
+
+  public obtenerDatosRespiratorios(){
+    this._datosRespiratoriosService.getDatosRespiratorios().subscribe({
+  
+      next: (datos: DatosRespiratorios[]) => {
+        console.log(datos);
+        this.datoRespiratorio = datos[datos.length - 1];
+        this.datos=[
+  
+          'FVC: ' + this.datoRespiratorio.fvc +'L',
+          'FEV1: ' + this.datoRespiratorio.fev1 + 'L',
+          'Saturación: ' + this.datoRespiratorio.saturacionBasal +'%',
+          'Antibiótico: 22-04-21 (Septrim)'
+  
+        ]
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    }
+  
+    )
   }
 
 }
