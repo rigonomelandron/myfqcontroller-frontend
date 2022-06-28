@@ -75,10 +75,11 @@ body{
   align-items: center;
 }
 .texto-principal{
-  font-family: 'Yellowtail', cursive;
-  font-size: 10rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 6rem;
   color:rgb(9, 117, 190);
   margin:2rem;
+  margin-left: 6rem;
 }
 
 
