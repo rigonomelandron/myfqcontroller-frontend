@@ -34,10 +34,10 @@ export class DatosRespiratoriosComponent implements OnInit {
 
     this.formRespiratorio = this._formBuilder.group({
       fecha: ['', [Validators.required, Validators.minLength(3)]],
-      fvc: ['', [Validators.required]],
-      fev1: ['', [Validators.required]],
-      saturacion: ['', [Validators.required,]],
-      aerobica: ['', [Validators.required,]],
+      fvc: ['', [Validators.required, Validators.minLength(3)]],
+      fev1: ['', [Validators.required, Validators.minLength(3)]],
+      saturacion: ['', [Validators.required,Validators.minLength(2)]],
+      aerobica: ['', [Validators.required, Validators.minLength(1)]],
 
     });
     this.mostrarFormulario = false;

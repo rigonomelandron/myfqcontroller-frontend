@@ -14,7 +14,8 @@ export class TarjetaResumenComponent implements OnInit {
       'GPT: 32 U/I | GOT: 28 U/I',
       'Hemoglobina: 11.4 g/dl',
       'Proteínas Totales: 7.7 g/dl',
-      'Hb Glicada: 6.4 g/dl'
+      'Hb Glicada: 6.4 g/dl',
+      ''
     ]
    }
   ngOnInit(): void {

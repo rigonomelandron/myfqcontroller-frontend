@@ -37,10 +37,10 @@ export class ActividadComponent implements OnInit {
     this.formActividad = this._formBuilder.group({
       fecha: ['', [Validators.required, Validators.minLength(3)]],
       tipo: ['', [Validators.required, Validators.minLength(3)]],
-      calorias: ['', [Validators.required]],
-      ppmMedia: ['', [Validators.required]],
-      ppmMaxima: ['', [Validators.required]],
-      tiempo: ['', [Validators.required]]
+      calorias: ['', [Validators.required, Validators.minLength(1)]],
+      ppmMedia: ['', [Validators.required, Validators.minLength(2)]],
+      ppmMaxima: ['', [Validators.required, Validators.minLength(2)]],
+      tiempo: ['', [Validators.required, Validators.minLength(1)]]
     });
     this.tipoOptions = [
       {value: 'carrera', label: 'Carrera'},

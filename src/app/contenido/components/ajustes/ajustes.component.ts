@@ -145,8 +145,8 @@ export class AjustesComponent implements OnInit {
   }
   confirmarEliminar() {
     this._confirmationService.confirm({
-      message: 'Do you want to delete this record?',
-      header: 'Delete Confirmation',
+      message: '¿Estás seguro de que quieres dar de baja el usuario? Se borrarán todos los datos.',
+      header: 'Dar de baja',
       icon: 'pi pi-info-circle',
       accept: () => {
         this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' }];
