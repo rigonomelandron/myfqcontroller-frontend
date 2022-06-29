@@ -23,7 +23,7 @@
               <span class="p-buttonset">
                 <button pButton pRipple type="button" routerLink="/contenido/calendario-medico" (click)="calendario(paciente)" label="Ver paciente" class="p-button-rounded"></button>
                 <button pButton pRipple type="button" icon="pi pi-times"
-                  class="p-button-rounded p-button-danger" (click)="eliminarPaciente(paciente)"></button>
+                  class="p-button-rounded p-button-danger" (click)="confirmarEliminar(paciente)"></button>
               </span>
             </td>
           </tr>
@@ -32,3 +32,4 @@
     </ng-template>
   </p-card>
 </main>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

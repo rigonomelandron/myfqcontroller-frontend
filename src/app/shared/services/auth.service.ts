@@ -18,8 +18,13 @@ export class AuthService {
       .pipe(
         tap((usuario) => {
           if (usuario) {
+           
+
             this._usuarioActivo = usuario;
+
             localStorage.setItem("usuario", this._usuarioActivo.usuario);
+
+
           }
         })
 
@@ -30,7 +35,8 @@ get usuarioActivo(){
 }
 public logOut(){
   this._usuarioActivo = undefined;
-  localStorage.removeItem('usuario');
+
+  localStorage.clear();
   this._router.navigate(['/auth/login']);
 }
 public verificarToken():Observable<boolean>{

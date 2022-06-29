@@ -1,5 +1,5 @@
 export interface CicloAntibiotico {
-  id: number;
+  id?: number;
   paciente: Paciente;
   antibiotico: string;
   esIntravenoso: boolean;

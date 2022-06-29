@@ -1,4 +1,4 @@
-import { HttpErrorResponse} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Paciente } from 'src/app/shared/interfaces/paciente.interface';
@@ -16,10 +16,10 @@ import { Location } from '@angular/common';
 })
 export class ActividadComponent implements OnInit {
   public mostrarFormActividad: boolean = false;
-  public formActividad:FormGroup
-  public tipoOptions:any[];
+  public formActividad: FormGroup
+  public tipoOptions: any[];
   public caloria: number;
-  public paciente!:Paciente;
+  public paciente!: Paciente;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -29,7 +29,7 @@ export class ActividadComponent implements OnInit {
     private _router: Router,
     public _location: Location
 
-    ) {
+  ) {
     this.formActividad = this._formBuilder.group({
       fecha: ['', [Validators.required, Validators.minLength(3)]],
       tipo: ['', [Validators.required, Validators.minLength(3)]],
@@ -39,25 +39,25 @@ export class ActividadComponent implements OnInit {
       tiempo: ['', [Validators.required]]
     });
     this.tipoOptions = [
-      {value: 'carrera', label: 'Carrera'},
-      {value: 'ciclismo', label: 'ciclismo'},
-      {value: 'natacion', label: 'Natación'},
-      {value: 'fuerza', label: 'Entrenamiento fuerza'},
-      {value: 'caminata', label: 'Caminata/Senderismo'},
-      {value: 'otro', label: 'otro'},
+      { value: 'carrera', label: 'Carrera' },
+      { value: 'ciclismo', label: 'ciclismo' },
+      { value: 'natacion', label: 'Natación' },
+      { value: 'fuerza', label: 'Entrenamiento fuerza' },
+      { value: 'caminata', label: 'Caminata/Senderismo' },
+      { value: 'otro', label: 'otro' },
 
 
     ];
-    this.caloria=0;
+    this.caloria = 0;
   }
 
-  public addRegistroActividades(){
+  public addRegistroActividades() {
 
-    let actividad={
+    let actividad = {
       fecha: this.formActividad.value.fecha,
-      paciente:this.paciente,
+      paciente: this.paciente,
       tipo: this.formActividad.value.tipo,
-      calorias:this.formActividad.value.calorias,
+      calorias: this.formActividad.value.calorias,
       ppmMedia: this.formActividad.value.ppmMedia,
       ppmMaxima: this.formActividad.value.ppmMaxima,
       tiempo: this.formActividad.value.tiempo
@@ -71,7 +71,7 @@ export class ActividadComponent implements OnInit {
         });
 
       },
-      error: (err:HttpErrorResponse) => {
+      error: (err: HttpErrorResponse) => {
 
         this._mensajeService.add({ severity: 'error', summary: 'Error', detail: err.message, life: 2000 });
 
@@ -81,6 +81,7 @@ export class ActividadComponent implements OnInit {
         this._router.routeReuseStrategy.shouldReuseRoute = () => false;
         this._router.onSameUrlNavigation = 'reload';
         this._router.navigate(['/contenido/actividad']);
+
       }
 
 
@@ -88,10 +89,10 @@ export class ActividadComponent implements OnInit {
 
 
   }
-  public abrirDialogo(){
+  public abrirDialogo() {
     this.mostrarFormActividad = true;
   }
-  public cerrarDialogo(){
+  public cerrarDialogo() {
     this.mostrarFormActividad = false;
   }
 

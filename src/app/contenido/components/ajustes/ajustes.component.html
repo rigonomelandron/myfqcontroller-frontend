@@ -20,9 +20,14 @@
                     <p style="font-size:15px; margin-left: 5rem;font-weight:400" *ngIf="this.paciente"><span style="font-weight: 600;">DNI: </span>{{this.paciente.dni}}</p>
                     <p style="font-size:15px; margin-left: 5rem;font-weight:400" *ngIf="this.paciente"><span><span style="font-weight: 600;">Género: </span> {{this.paciente.genero}}</span><span style="margin-left:10px;"><span style="font-weight: 600;">Peso: </span>{{this.paciente.peso}}</span><span style="margin-left:10px;"><span style="font-weight: 600;">Altura: </span>{{this.paciente.altura}}</span></p>
                     <p style="font-size:15px; margin-left: 5rem;font-weight:400" *ngIf="this.paciente"><span style="font-weight: 600;">Email: </span>{{this.paciente.email}}</p>
+                    <div *ngIf="!doctor">
+                      <p-dropdown [options]="medicos" [(ngModel)]="medico" appendTo="body" optionLabel="nombre" class="mx-2" (onChange)="obtenerEquipo(medico)">
+                      </p-dropdown>
+
+                    </div>
                     <button class="boton mt-2" style="margin-left: 5rem;" styleClass="p-button-outlined" type="button" pButton pRipple label="Modificar" (click)="abrirDialogo()"></button>
                     <button class="boton-delete mt-2" style="margin-left: 1rem;" styleClass="p-button-outlined-danger" type="button" pButton pRipple label="Dar de baja usuario" (click)="confirmarEliminar()"></button>
-                    <button class="boton mt-2" style="margin-left: 5rem;" styleClass="p-button-outlined" type="button" pButton pRipple label="Médico" (click)="obtenerEquipo()"></button>
+
                 </div>
 
             </div>
@@ -56,6 +61,6 @@
       </ng-template>
 
     </p-dialog>
-    
+
 </main>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
