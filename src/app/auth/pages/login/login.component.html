@@ -30,6 +30,7 @@
           [(ngModel)]="usuario_password"
         />
       </div>
+      <p>No tienes cuenta? <a routerLink="/auth/registro">Crea una</a></p>
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
@@ -51,7 +52,6 @@
         (click)="logout()"
         label="LogOut"
       ></button>
- <a routerLink="/auth/registro">Registrarse</a>
   </ng-template>
 
 </p-dialog>
