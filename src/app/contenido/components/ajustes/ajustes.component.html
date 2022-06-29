@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-2">
                     <p-avatar icon="pi pi-user" styleClass="mr-2" size="xlarge"></p-avatar>
-                    <p style="font-size:10px; margin-top: 0.2rem;">G552X / F508D</p>
+                    <p style="font-size:10px; margin-top: 0.2rem;">{{this.paciente.mutacion1}} / {{this.paciente.mutacion2}}</p>
                 </div>
                 <div class="col-10">
                     <h4 class="text-start" *ngIf="this.paciente">{{this.paciente.nombre}}</h4>
