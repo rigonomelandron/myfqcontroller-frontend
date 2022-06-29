@@ -34,24 +34,24 @@
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      class="p-button-text"
+      [loading]="logueo"
+      (click)="login()"
+      label="Login"
+    ></button>
 
-      <button
-        pButton
-        pRipple
-        class="p-button-text"
-        [loading]="logueo"
-        (click)="login()"
-        label="Login"
-      ></button>
 
+    <button
+      pButton
+      pRipple
+      class="p-button-text"
+      (click)="logout()"
+      label="LogOut"
+    ></button>
 
-      <button
-        pButton
-        pRipple
-        class="p-button-text"
-        (click)="logout()"
-        label="LogOut"
-      ></button>
   </ng-template>
 
 </p-dialog>
