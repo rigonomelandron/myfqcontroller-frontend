@@ -13,7 +13,7 @@ export class MenuMedicoComponent implements OnInit {
   public popItems: MenuItem[] = [];
   public usuario:any;
 
-  
+
 
 
   constructor(private _authService: AuthService) {
@@ -32,9 +32,9 @@ export class MenuMedicoComponent implements OnInit {
       {
         label: this.usuario, icon: 'pi pi-user', routerLink: ['/home-medico']
       },
-      
+
       {
-        label: 'Ajustes', icon: 'pi pi-cog', routerLink: ['/contenido/ajustes']
+        label: 'Ajustes', icon: 'pi pi-cog', routerLink: ['/contenido/ajustes-medico']
       },
     ];
 

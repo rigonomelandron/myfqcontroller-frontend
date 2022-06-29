@@ -1,6 +1,7 @@
 <header style="background-color: #fe9f4172;" class="hide menu fixed-top" >
     <p-megaMenu  class="hide" [model]="items">
-        
+        <img id="logo" *ngIf="user?.foto" src="http://localhost:8080/api/v1/uploads/img/{{user.foto}}"  class="rounded-circle " />
+        <p-avatar id="logo" image="assets/images/avatar.png" size="large" shape="circle" *ngIf="!user?.foto"></p-avatar>
     </p-megaMenu>
 </header>
 

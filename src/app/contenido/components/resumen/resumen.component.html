@@ -37,6 +37,14 @@
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Añadir datos" (click)="mostrarFormAnalitica()"></button>
         </p-tabPanel>
+        <p-tabPanel header="Ciclos Antibioticos">
+          <ul>
+            <li *ngFor="let ciclo of this.ciclos">{{ciclo.fechaInicio.toString().substring(0,10)}}/{{ciclo.fechaFin.toString().substring(0,10)}} : {{ciclo.antibiotico}}
+            </li>
+          </ul>
+          <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple label="Añadir datos"
+            (click)="mostrarFormCiclos()"></button>
+        </p-tabPanel>
       </p-tabView>
     </p-card>
   </div>
@@ -116,7 +124,7 @@
   </ng-template>
 
 </p-dialog>
-
+<!--Formulario Analiticas-->
 <p-dialog [visible]="mostrarFormAnaliticas" [closable]="false" [maximizable]="true" header="Registro Analitica"
   [style]="{width: '30vw', height:'auto'}">
   <ng-template pTemplate="body">
@@ -131,6 +139,29 @@
           <button pButton type="submit" label="Añadir" pRipple class="boton mx-3"></button>
           <button pButton type="button" label="Cerrar" pRipple class="p-button-text"
             (click)="cerrarDialogoAnaliticas()"></button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+ <!--Formulario Ciclos antibioticos-->
+</p-dialog>
+<p-dialog [visible]="mostrarCiclos" [closable]="false" [maximizable]="true" header="Ciclos Antibióticos"
+  [style]="{width: '30vw', height:'auto'}">
+  <ng-template pTemplate="body">
+    <form autocomplete="off" (ngSubmit)="addRegistroCiclo()" [formGroup]="formCiclos">
+      <div class="d-grid gap-3">
+        <input pInputText type="text" formControlName="antibiotico" placeholder="Antibiótico" />
+        <label for="intravenoso">Es Intravenoso:</label>
+        <p-selectButton [options]="intravenosoOptions" formControlName="intravenoso" optionLabel="name" optionValue="value"></p-selectButton>
+
+        <div class="field col-12 md:col-4">
+          <p-calendar class="mx-3" inputId="basic" formControlName="fechaInicio" appendTo="body" placeholder="FechaInicio"></p-calendar>
+          <p-calendar inputId="basic" formControlName="fechaFin" appendTo="body" placeholder="FechaFin"></p-calendar>
+        </div>
+        <div d-flex>
+          <button pButton type="submit" label="Añadir" pRipple class="boton mx-3"></button>
+          <button pButton type="button" label="Cerrar" pRipple class="p-button-text"
+            (click)="cerrarDialogoCiclos()"></button>
         </div>
       </div>
     </form>

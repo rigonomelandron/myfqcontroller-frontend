@@ -13,12 +13,12 @@ import { PacientesService } from 'src/app/shared/services/pacientes.service';
 import { UsuariosService } from 'src/app/shared/services/usuarios.service';
 
 @Component({
-  selector: 'app-ajustes',
-  templateUrl: './ajustes.component.html',
-  styleUrls: ['./ajustes.component.css'],
+  selector: 'app-ajustes-medico',
+  templateUrl: './ajustes-medico.component.html',
+  styleUrls: ['./ajustes-medico.component.css'],
   providers: [ConfirmationService]
 })
-export class AjustesComponent implements OnInit {
+export class AjustesMedicoComponent implements OnInit {
   public mostrarFormulario: boolean = false;
   public formPaciente: FormGroup;
   public generoOptions: any[];
@@ -30,7 +30,7 @@ export class AjustesComponent implements OnInit {
   msgs: Message[] = [];
   public medico: string;
   public fotoSeleccionada!: File;
-  public usuario!:Usuario;
+  public usuario!: Usuario;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -243,7 +243,7 @@ export class AjustesComponent implements OnInit {
     console.log("hola desde upload");
 
     this.fotoSeleccionada = event.target.files[0];
-  console.log("foto", this.fotoSeleccionada);
+    console.log("foto", this.fotoSeleccionada);
 
     if (this.fotoSeleccionada && this.fotoSeleccionada.type.indexOf('image') < 0) {
       console.log("no es imagen");
@@ -273,19 +273,20 @@ export class AjustesComponent implements OnInit {
   }
 
 
-public obtenerUsuario(){
+  public obtenerUsuario() {
     let usuario = localStorage.getItem('usuario');
     if (usuario) {
       this._usuariosServices.getUsuarioById(usuario).subscribe({
         next: (data: Usuario) => {
-          this.usuario= data;
+          this.usuario = data;
           console.log(this.usuario.foto);
 
         },
-        error: (err:HttpErrorResponse) => {
+        error: (err: HttpErrorResponse) => {
           console.log(err);
         }
       });
+    }
   }
-}
+
 }

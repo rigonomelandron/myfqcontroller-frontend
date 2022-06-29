@@ -13,6 +13,8 @@ import { EventoService } from 'src/app/shared/services/evento.service';
 import { PacientesService } from 'src/app/shared/services/pacientes.service';
 import { TratamientoService } from 'src/app/shared/services/tratamiento.service';
 import { ConfirmationService, MessageService, PrimeIcons } from "primeng/api";
+import { CiclosAntibioticosService } from 'src/app/shared/services/ciclos-antibioticos.service';
+import { CicloAntibiotico } from 'src/app/shared/interfaces/cicloantibiotico.interface';
 
 @Component({
   selector: 'app-resumen',
@@ -29,12 +31,16 @@ export class ResumenComponent implements OnInit {
   public mostrarFormHistorias:boolean=false;
   public formAnalitica: FormGroup;
   public mostrarFormAnaliticas:boolean=false;
+  public formCiclos: FormGroup;
+  public mostrarCiclos: boolean=false;
   public oralOption: any[];
+  public intravenosoOptions:any[];
   public paciente: Paciente;
   public tratamientos!: Tratamiento[];
   public eventos!: Evento[];
   public antecedentes!:Antecedente[];
   public analiticas!: Analitica[];
+  public ciclos!: CicloAntibiotico[];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -44,6 +50,7 @@ export class ResumenComponent implements OnInit {
     private _antecedenteServices: AntecedentesService,
     private _analiticaServices: AnaliticaService,
     private _mensajeService: MessageService,
+    private _ciclosAntibioticosService: CiclosAntibioticosService,
     private _confirmarService: ConfirmationService
     ) {
 
@@ -70,11 +77,22 @@ export class ResumenComponent implements OnInit {
       tipo: ['', [Validators.required, Validators.minLength(3)]],
       archivo: [''],
     });
+    this.formCiclos = this._formBuilder.group({
+      antibiotico: ['', [Validators.required, Validators.minLength(3)]],
+      intravenoso: ['', [Validators.required]],
+      fechaInicio: ['', [Validators.required, Validators.minLength(3)]],
+      fechaFin: ['', [Validators.required, Validators.minLength(3)]],
+    });
+
     this.oralOption = [
       {name: 'Oral', value: 'oral'},
       {name: 'Inhalado', value: 'inhalado'},
 
     ];
+    this.intravenosoOptions = [
+      {name: 'SI', value: 'si'},
+      {name: 'NO', value: "no"},
+    ]
     this.mostrarFormTratamientos = false;
     this.paciente = {} as Paciente;
 
@@ -101,6 +119,10 @@ export class ResumenComponent implements OnInit {
     this.formAnalitica.reset();
     this.mostrarFormAnaliticas = true;
   }
+  public mostrarFormCiclos() {
+    this.formCiclos.reset();
+    this.mostrarCiclos = true;
+  }
   public cerrarDialogoTratamientos() {
     this.mostrarFormTratamientos = false;
   }
@@ -112,6 +134,9 @@ export class ResumenComponent implements OnInit {
   }
   public cerrarDialogoAnaliticas(){
     this.mostrarFormAnaliticas = false;
+  }
+  public cerrarDialogoCiclos(){
+    this.mostrarCiclos = false;
   }
   public addRegistroEventos() {
     if (this.formEventos.valid && this.paciente) {
@@ -218,6 +243,46 @@ export class ResumenComponent implements OnInit {
     });
   }
   }
+  public addRegistroCiclo(){
+    console.log("hola");
+   console.log(this.formCiclos.value.intravenoso);
+
+
+    if(this.formCiclos.valid && this.paciente){
+    let ciclo = {
+      paciente: this.paciente,
+      antibiotico: this.formCiclos.value.antibiotico,
+      esIntravenoso: this.formCiclos.value.intravenoso == 'si'? true: false,
+      fechaInicio: this.formCiclos.value.fechaInicio,
+      fechaFin: this.formCiclos.value.fechaFin
+    }
+    console.log("ciclo",ciclo);
+
+      this._ciclosAntibioticosService.addCicloAntibioticos(ciclo).subscribe({
+      next: (data) => {
+        this._mensajeService.add({
+          severity: 'success', summary: 'Añadido', detail: `Ciclo Añadido correctamente `, life: 2000
+        });
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+
+        this._mensajeService.add({ severity: 'error', summary: 'Error', detail: err.message, life: 2000 });
+      },
+      complete: () => {
+        this.mostrarCiclos = false;
+        this.getCiclos();
+      }
+    });
+  }
+  }
+  public getCiclos(){
+    this._ciclosAntibioticosService.getCicloAntibioticosByDni(this.paciente.dni).subscribe({
+      next: (data) => {
+        this.ciclos = data.sort((d1, d2) => new Date(d2.fechaInicio).getTime() - new Date(d1.fechaInicio).getTime());;
+      }
+    });
+  }
 
   public getTratamientos(){
     this._tratamientoServices.getTratamientoByDni(this.paciente.dni).subscribe({
@@ -264,6 +329,7 @@ export class ResumenComponent implements OnInit {
         this.getEventos();
         this.getHistorias();
         this.getAnaliticas();
+        this.getCiclos();
 
       }
     });

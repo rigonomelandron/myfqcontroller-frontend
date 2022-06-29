@@ -178,7 +178,7 @@ export class CalendarioMedicoComponent implements OnInit {
                     .getTensionByIdUsuarioFecha(dni, this.dateValue._i)
                     .subscribe({
                       next: (data: Tension[]) => {
-                       
+
 
                         if (data.length > 0) {
                           for (let dato of data) {
@@ -349,29 +349,28 @@ export class CalendarioMedicoComponent implements OnInit {
         }
       });
     }
+    //Obtener Ciclos Antibioticos
+    this._ciclosAntibioticosService.getCicloAntibioticosByDni(dni).subscribe({
+      next: (data: CicloAntibiotico[]) => {
+        console.log("ciclos", data);
+        this.ObtenerFechas(data);
+
+      }
+    });
   }
 
   //Meter fechas en el Array
   public ObtenerFechas(data: any) {
-   /*  this.meses = data.map((data: { fecha: Date; }) => data.fecha);
 
-    this.meses.forEach((res) => {
-
-
-
-      let jsdate = new Date(res);
-      console.log("jsdate", jsdate.getDate());
-
-      this.dias.push(this.convertirFechas(jsdate.getFullYear(), jsdate.getMonth() + 1, jsdate.getDate()));
-
-
-
-    }
-    ); */
     for (let dato of data) {
-      console.log("dato", dato.fecha.substring(0, 10));
-      let fecha = dato.fecha.substring(0, 10);
-      console.log("fecha", fecha);
+
+      let fecha = '';
+      if (dato.fecha) {
+        fecha = dato.fecha.substring(0, 10);
+      } else {
+        fecha = dato.fechaInicio.substring(0, 10);
+      }
+
 
       let jsdate = new Date(fecha);
       console.log("jsdate", jsdate.getDate());

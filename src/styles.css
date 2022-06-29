@@ -80,6 +80,22 @@ body{
   color:rgb(9, 117, 190);
   margin:2rem;
 }
+.p-megamenu-horizontal {
+  padding-left: 5rem;
+}
+
+#logo {
+  position: absolute;
+  left: 1.5rem;
+  top: 0.5rem;
+  width:3rem;
+  height: 3rem;
+  border-radius: 50%;
+
+    
+    object-position: center;
+
+}
 
 
 

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MegaMenuItem,MenuItem} from 'primeng/api';
+import { Avatar } from 'primeng/avatar';
+import { Usuario } from '../../interfaces/usuario.interface';
 import { AuthService } from '../../services/auth.service';
+import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
   selector: 'app-menu',
@@ -12,11 +15,14 @@ export class MenuComponent implements OnInit {
   public items: MegaMenuItem[] = [];
   public popItems: MenuItem[] = [];
   public usuario:any;
+  public user!: Usuario;
 
 
-  constructor(private _authService: AuthService) {
+  constructor(private _authService: AuthService, private _usuarioServices: UsuariosService) {
 
     this.usuario = '';
+
+
   }
 
 
@@ -28,7 +34,7 @@ export class MenuComponent implements OnInit {
     this.items = [
 
       {
-        label: this.usuario, icon: 'pi pi-user', routerLink: ['/home']
+        label: this.usuario,  routerLink: ['/home']
       },
       {
         label: 'Calendario', icon: 'pi pi-calendar', routerLink: ['/contenido/calendario']
@@ -74,9 +80,23 @@ export class MenuComponent implements OnInit {
         label: 'Logout', icon: 'pi pi-sign-out', command: () => this._authService.logOut()
       },
     ]
+    this.obtenerUsuario();
   }
 
+public obtenerUsuario(){
+  this.usuario = localStorage.getItem('usuario');
+  this._usuarioServices.getUsuarioById(this.usuario).subscribe({
+    next: (data) => {
+      console.log( 'usuario',data);
+      this.user = data;
+      console.log(this.user.foto);
 
+
+    }
+
+  });
+
+}
 
 
 }

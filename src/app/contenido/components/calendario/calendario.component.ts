@@ -193,6 +193,8 @@ export class CalendarioComponent implements OnInit {
                           )
                           .subscribe({
                             next: (data: CicloAntibiotico[]) => {
+                              console.log("ciclos", data);
+
                               if (data.length > 0) {
                               for (let dato of data) {
                                 this.datos.push(dato);
@@ -334,12 +336,26 @@ export class CalendarioComponent implements OnInit {
           }
         });
     }
+    //Obtener Ciclos Antibioticos
+    this._ciclosAntibioticosService.getCicloAntibioticosByDni(dni).subscribe({
+      next: (data: CicloAntibiotico[]) => {
+        console.log("ciclos", data);
+        this.ObtenerFechas(data);
+
+      }
+    });
   }
 
   //Meter fechas en el Array
   public ObtenerFechas(data:any) {
     for (let dato of data) {
-      let fecha = dato.fecha.substring(0, 10);
+      let fecha= '';
+      if(dato.fecha){
+         fecha = dato.fecha.substring(0, 10);
+      }else{
+         fecha = dato.fechaInicio.substring(0, 10);
+      }
+
       let jsdate = new Date(fecha);
       this.convertirFechas(jsdate.getFullYear(), jsdate.getMonth() + 1, jsdate.getDate());
     }
