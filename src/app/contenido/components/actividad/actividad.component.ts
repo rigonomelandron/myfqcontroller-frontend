@@ -51,6 +51,8 @@ export class ActividadComponent implements OnInit {
       {value: 'otro', label: 'otro'},
     ];
 
+  
+
     this.datos = [
 
     ]
@@ -75,7 +77,7 @@ export class ActividadComponent implements OnInit {
         console.log(data);
 
         this._mensajeService.add({
-          severity: 'success', summary: 'Añadido', detail: `Actividad Añadida correctamente `, life: 2000
+          severity: 'success', summary: 'Añadido', detail: `Actividad añadida correctamente `, life: 2000
         });
 
       },

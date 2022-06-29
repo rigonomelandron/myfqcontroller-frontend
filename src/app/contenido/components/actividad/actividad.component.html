@@ -37,20 +37,21 @@
         <p-selectButton [options]="tipoOptions" formControlName="tipo" optionLabel="label" optionValue="value">
         </p-selectButton>
 
-      <div class="row p-fluid">
-        <div class="col-4">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon">calorias</span>
-            <input type="text" pInputText formControlName="calorias">
+        <div class="row p-fluid">
+          <div class="col-4">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">calorias</span>
+              <input type="text" pInputText formControlName="calorias">
+              <small class="p-error">Debes introducir el número de calorias</small>
+            </div>
           </div>
-        </div>
-
-        <div class="col-4">
-          <div class="p-inputgroup">
-            <span class="p-inputgroup-addon" >ppmMed</span>
-            <input type="text" pInputText formControlName="ppmMedia">
-
-          </div>
+          
+          
+          <div class="col-4">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon" >ppmMed</span>
+              <input type="text" pInputText formControlName="ppmMedia">
+            </div>
         </div>
 
         <div class="col-4">
@@ -69,7 +70,7 @@
         </div>
       </div>
 
-    </form>
+    </form>    
   </ng-template>
   <!--Formulario eventos-->
 </p-dialog>
