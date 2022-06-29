@@ -74,7 +74,6 @@ export class ActividadComponent implements OnInit {
     }
     this._deportesService.addActividadBydni(actividad).subscribe({
       next: (data) => {
-
         this._mensajeService.add({
           severity: 'success', summary: 'Añadido', detail: `Actividad añadida correctamente `, life: 2000
         });
