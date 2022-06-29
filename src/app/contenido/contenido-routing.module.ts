@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActividadComponent } from './components/actividad/actividad.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { CalendarioMedicoComponent } from './components/calendario-medico/calendario-medico.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { DatosRespiratoriosComponent } from './components/datos-respiratorios/datos-respiratorios.component';
 import { GraficoComponent } from './components/grafico/grafico.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path:'home',component: HomeComponent},
       { path:'home-medico',component: HomeMedicoComponent},
       { path: 'calendario', component: CalendarioComponent },
+      { path: 'calendario-medico', component: CalendarioMedicoComponent },
       { path: 'grafico', component: GraficoComponent },
       { path:'datos-respiratorios',component: DatosRespiratoriosComponent},
       { path:'actividad',component: ActividadComponent},

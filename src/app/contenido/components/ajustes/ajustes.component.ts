@@ -145,15 +145,15 @@ export class AjustesComponent implements OnInit {
   }
   confirmarEliminar() {
     this._confirmationService.confirm({
-      message: '¿Estás seguro de que quieres dar de baja el usuario? Se borrarán todos los datos.',
-      header: 'Dar de baja',
+      message: '¿Quieres eliminar este usuario?',
+      header: 'Confirmación de borrado',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' }];
+        this.msgs = [{ severity: 'info', summary: 'Confirmar', detail: 'Usuario Borrado' }];
         this.eliminarUsuario();
       },
       reject: () => {
-        this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
+        this.msgs = [{ severity: 'info', summary: 'Rehusar', detail: 'Volver' }];
       }
     });
   }
@@ -191,6 +191,7 @@ export class AjustesComponent implements OnInit {
     });
 
   }
+  public obtenerEquipo(){}
 
 
 }

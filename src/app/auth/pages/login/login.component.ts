@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         this.logueo = false;
         if (usuario) {
           this.usuario = usuario;
-          if (usuario.rol.rol == 'medico'){
+          if (usuario.rol.rol == 'medico') {
             this._router.navigate(['/contenido/home-medico']);
           } else {
             this._router.navigate(['/contenido/home']);

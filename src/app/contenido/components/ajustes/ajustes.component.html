@@ -22,6 +22,7 @@
                     <p style="font-size:15px; margin-left: 5rem;font-weight:400" *ngIf="this.paciente"><span style="font-weight: 600;">Email: </span>{{this.paciente.email}}</p>
                     <button class="boton mt-2" style="margin-left: 5rem;" styleClass="p-button-outlined" type="button" pButton pRipple label="Modificar" (click)="abrirDialogo()"></button>
                     <button class="boton-delete mt-2" style="margin-left: 1rem;" styleClass="p-button-outlined-danger" type="button" pButton pRipple label="Dar de baja usuario" (click)="confirmarEliminar()"></button>
+                    <button class="boton mt-2" style="margin-left: 5rem;" styleClass="p-button-outlined" type="button" pButton pRipple label="Médico" (click)="obtenerEquipo()"></button>
                 </div>
 
             </div>
@@ -55,5 +56,6 @@
       </ng-template>
 
     </p-dialog>
+    
 </main>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

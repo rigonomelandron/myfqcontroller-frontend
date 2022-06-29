@@ -7,6 +7,7 @@ import { DatosRespiratorios} from 'src/app/shared/interfaces/datosrespiratorios.
 import { UsuariosService } from 'src/app/shared/services/usuarios.service';
 import { PacientesService } from 'src/app/shared/services/pacientes.service';
 import { Paciente } from 'src/app/shared/interfaces/paciente.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-datos-respiratorios',
@@ -29,7 +30,8 @@ export class DatosRespiratoriosComponent implements OnInit {
     private _mensajeService: MessageService,
     private _confirmarService: ConfirmationService,
     private _usuarioService: UsuariosService,
-    private _pacienteService: PacientesService
+    private _pacienteService: PacientesService,
+    private _router: Router,
   ) {
 
     this.formRespiratorio = this._formBuilder.group({
@@ -83,6 +85,10 @@ export class DatosRespiratoriosComponent implements OnInit {
             error: (error: HttpErrorResponse) => {
               this._mensajeService.add({ severity: 'error', summary: 'Error', detail: error.message, life: 2000 });
 
+            },complete: () => {
+              this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+              this._router.onSameUrlNavigation = 'reload';
+              this._router.navigate(['/contenido/datos-respiratorios']);
             }
           });
         }

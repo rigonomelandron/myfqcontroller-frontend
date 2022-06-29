@@ -27,6 +27,7 @@ import { GraficoBarrasComponent } from './components/grafico-barras/grafico-barr
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { MenuMedicoComponent } from './components/menu-medico/menu-medico.component';
 import { HomeMedicoComponent } from './components/home-medico/home-medico.component';
+import { CalendarioMedicoComponent } from './components/calendario-medico/calendario-medico.component';
 
 
 
@@ -53,6 +54,7 @@ import { HomeMedicoComponent } from './components/home-medico/home-medico.compon
     AjustesComponent,
     MenuMedicoComponent,
     HomeMedicoComponent,
+    CalendarioMedicoComponent,
 
 
   ],

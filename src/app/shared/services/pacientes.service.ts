@@ -25,7 +25,7 @@ export class PacientesService {
     return this._http.patch<Paciente>(`api/v1/pacientes/modificar`, paciente);
   }
   public getPaciente(dni : string):Observable<Paciente>{
-    return this._http.get<Paciente>('api/v2/pacientes/'+dni);
+    return this._http.get<Paciente>('api/v1/pacientes/dni/'+dni);
   }
   public getPacienteByUserName(username : string):Observable<Paciente>{
 
