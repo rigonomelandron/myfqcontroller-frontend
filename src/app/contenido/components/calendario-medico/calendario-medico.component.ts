@@ -140,6 +140,9 @@ export class CalendarioMedicoComponent implements OnInit {
   }
 
   public obtenerDatos(dni: string) {
+  console.log("dni", dni);
+  console.log("dateValue", this.dateValue._i);
+
 
     let datoUsuario = localStorage.getItem('usuario');
     if (datoUsuario) {
@@ -155,101 +158,116 @@ export class CalendarioMedicoComponent implements OnInit {
           },
           error: (err: HttpErrorResponse) => {
             console.log(err);
-          }
-        });
-      this._glicadasService
-        .getGlicadasByIdUsuarioFecha(dni, this.dateValue._i)
-        .subscribe({
-          next: (data: Glicada[]) => {
-            if (data.length > 0) {
-              for (let dato of data) {
-                this.datos.push(dato);
-              }
-            }
           },
-          error: (err: HttpErrorResponse) => {
-            console.log(err);
-          }
-        });
-      this._tensionServices
-        .getTensionByIdUsuarioFecha(dni, this.dateValue._i)
-        .subscribe({
-          next: (data: Tension[]) => {
-            if (data.length > 0) {
-              for (let dato of data) {
-                this.datos.push(dato);
-              }
-            }
+          complete: () => {
+            this._glicadasService
+              .getGlicadasByIdUsuarioFecha(dni, this.dateValue._i)
+              .subscribe({
+                next: (data: Glicada[]) => {
+                  if (data.length > 0) {
+                    for (let dato of data) {
+                      this.datos.push(dato);
+                    }
+                  }
+                },
+                error: (err: HttpErrorResponse) => {
+                  console.log(err);
+                },
+                complete: () => {
+                  this._tensionServices
+                    .getTensionByIdUsuarioFecha(dni, this.dateValue._i)
+                    .subscribe({
+                      next: (data: Tension[]) => {
+                       
+
+                        if (data.length > 0) {
+                          for (let dato of data) {
+                            this.datos.push(dato);
+                          }
+                        }
+                      },
+                      error: (err: HttpErrorResponse) => {
+                        console.log(err);
+                      },
+                      complete: () => {
+                        this._ciclosAntibioticosService
+                          .getCicloAntibioticosByIdUsuarioFecha(
+                            dni,
+                            this.dateValue._i
+                          )
+                          .subscribe({
+                            next: (data: CicloAntibiotico[]) => {
+                              if (data.length > 0) {
+                                for (let dato of data) {
+                                  this.datos.push(dato);
+                                }
+                              }
+                            },
+                            error: (err: HttpErrorResponse) => {
+                              console.log(err);
+                            },
+                            complete: () => {
+                              this._deportesService
+                                .getDeportesByIdUsuarioFecha(
+                                  dni,
+                                  this.dateValue._i
+                                )
+                                .subscribe({
+                                  next: (data: Deporte[]) => {
+                                    if (data.length > 0) {
+                                      for (let dato of data) {
+                                        this.datos.push(dato);
+                                      }
+                                    }
+                                  },
+                                  error: (err: HttpErrorResponse) => {
+                                    console.log(err);
+                                  },
+                                  complete: () => {
+                                    this._v02maxService
+                                      .getV02MaxByIdUsuarioFecha(
+                                        dni,
+                                        this.dateValue._i
+                                      )
+                                      .subscribe({
+                                        next: (data: V02Max[]) => {
+                                          this.v02max = data;
+                                          for (let dato of data) {
+                                            this.datos.push(dato);
+                                          }
+                                        },
+                                        error: (err: HttpErrorResponse) => { },
+                                        complete: () => {
+                                          this._antecedentesService
+                                            .getAntecedentesByIdUsuarioFecha(
+                                              dni,
+                                              this.dateValue._i
+                                            )
+                                            .subscribe({
+                                              next: (data: Antecedente[]) => {
+                                                if (data.length > 0) {
+                                                  for (let dato of data) {
+                                                    this.datos.push(dato);
+                                                  }
+                                                }
+                                              },
+                                              error: (
+                                                err: HttpErrorResponse
+                                              ) => {
+                                                console.log(err);
+                                              },
+                                            });
+                                        },
+                                      });
+                                  },
+                                });
+                            },
+                          });
+                      },
+                    });
+                },
+              });
           },
-          error: (err: HttpErrorResponse) => {
-            console.log(err);
-          }
-        });
-      this._ciclosAntibioticosService
-        .getCicloAntibioticosByIdUsuarioFecha(
-          dni,
-          this.dateValue._i
-        )
-        .subscribe({
-          next: (data: CicloAntibiotico[]) => {
-            if (data.length > 0) {
-              for (let dato of data) {
-                this.datos.push(dato);
-              }
-            }
-          },
-          error: (err: HttpErrorResponse) => {
-            console.log(err);
-          }
-        });
-      this._deportesService
-        .getDeportesByIdUsuarioFecha(
-          dni,
-          this.dateValue._i
-        )
-        .subscribe({
-          next: (data: Deporte[]) => {
-            if (data.length > 0) {
-              for (let dato of data) {
-                this.datos.push(dato);
-              }
-            }
-          },
-          error: (err: HttpErrorResponse) => {
-            console.log(err);
-          }
-        });
-      this._v02maxService
-        .getV02MaxByIdUsuarioFecha(
-          dni,
-          this.dateValue._i
-        )
-        .subscribe({
-          next: (data: V02Max[]) => {
-            this.v02max = data;
-            for (let dato of data) {
-              this.datos.push(dato);
-            }
-          },
-          error: (err: HttpErrorResponse) => { }
-        });
-      this._antecedentesService.getAntecedentesByIdUsuarioFecha(
-        dni,
-        this.dateValue._i
-      )
-        .subscribe({
-          next: (data: Antecedente[]) => {
-            if (data.length > 0) {
-              for (let dato of data) {
-                this.datos.push(dato);
-              }
-            }
-          },
-          error: (
-            err: HttpErrorResponse
-          ) => {
-            console.log(err);
-          }
         });
 
     }
@@ -353,7 +371,10 @@ export class CalendarioMedicoComponent implements OnInit {
     for (let dato of data) {
       console.log("dato", dato.fecha.substring(0, 10));
       let fecha = dato.fecha.substring(0, 10);
+      console.log("fecha", fecha);
+
       let jsdate = new Date(fecha);
+      console.log("jsdate", jsdate.getDate());
 
      this.convertirFechas(jsdate.getFullYear(), jsdate.getMonth() + 1, jsdate.getDate());
     }

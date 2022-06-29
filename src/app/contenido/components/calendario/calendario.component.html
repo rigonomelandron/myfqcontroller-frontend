@@ -25,10 +25,12 @@
         <div class="d-flex flex-column elemento">
 
           <div class="d-flex flex-row cabecera">
-            <div *ngFor="let dia of this.dias">
-              <p *ngIf="dia.nombre == day.nombre && dia.value == day.value && dia.indexWeek == day.indexWeek"><i
-                  class="bi bi-asterisk"></i></p>
-            </div>
+            <ng-container *ngFor="let dia of this.dias">
+
+              <p *ngIf="(( dia | date : 'MMM, yyyy') == (dateSelect | date: 'MMM, yyyy')) && dia._i.substring(7,10) == day.value">
+                <i class="bi bi-asterisk"></i><span>{{dia._i.substring(7,10)}}</span><span>{{dia | date : 'MMM, yyyy'}}</span></p>
+
+            </ng-container>
           </div>
 
           <div class="cuerpo">
