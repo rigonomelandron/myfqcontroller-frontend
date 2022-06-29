@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, Message } from 'primeng/api';
+import { Equipo } from 'src/app/shared/interfaces/equipo.interface';
 import { Paciente } from 'src/app/shared/interfaces/paciente.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { DoctoresService } from 'src/app/shared/services/doctores.service';
@@ -23,7 +24,10 @@ export class AjustesComponent implements OnInit {
   public mutacion2:any[];
   public paciente! : Paciente;
   public doctor!: string;
+  public medicos: any[];
   msgs: Message[] = [];
+  public medico: string;
+
   constructor(
     private _formBuilder:FormBuilder,
     private _pacientesServices: PacientesService,
@@ -92,11 +96,14 @@ export class AjustesComponent implements OnInit {
       { nombre: '712-1G>T', value: '712-1G>T' },
       { nombre: 'W1282X', value: 'W1282X' },
     ]
+    this.medicos=[{nombre:'Escoja médico',value:''}];
+    this.medico='';
 
   }
 
   ngOnInit(): void {
     this.obtenerPaciente();
+    this.obtenerMedicos();
   }
   public addPaciente(){
 
@@ -148,6 +155,8 @@ export class AjustesComponent implements OnInit {
       message: '¿Quieres eliminar este usuario?',
       header: 'Confirmación de borrado',
       icon: 'pi pi-info-circle',
+      acceptLabel:'Si',
+      rejectLabel:'No',
       accept: () => {
         this.msgs = [{ severity: 'info', summary: 'Confirmar', detail: 'Usuario Borrado' }];
         this.eliminarUsuario();
@@ -191,7 +200,38 @@ export class AjustesComponent implements OnInit {
     });
 
   }
-  public obtenerEquipo(){}
+  public obtenerMedicos(){
+    this._doctoresService.getDoctores().subscribe({
+      next: (data) => {
+
+        for(let dato of data){
+          this.medicos.push({nombre:dato.nombre, value:dato.numColegiado});
+        }
+        console.log("medicos",this.medicos);
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+  public obtenerEquipo(medico:any){
+    console.log("medico",medico);
+    let equipo: Equipo = {
+      idMedico:medico.value,
+      idPaciente:this.paciente.dni
+    }
+    this._equipoService.registroEquipos(equipo).subscribe({
+      next: (data) => {
+        console.log("equipo",data);
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+
+  }
 
 
 }

@@ -1,5 +1,5 @@
 export interface Equipo {
-  id: number;
+  id?: number;
   idPaciente: string;
   idMedico: string;
 }
