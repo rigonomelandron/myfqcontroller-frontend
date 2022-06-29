@@ -18,8 +18,8 @@ export class AnaliticaService {
     return this._http.get<Analitica>(`api/v1/analiticas/id/${id}`);
   }
 
-  public getAnaliticaByDni(dni: string): Observable<Analitica> {
-    return this._http.get<Analitica>(`api/v1/analiticas/dni/${dni}`);
+  public getAnaliticaByDni(dni: string): Observable<Analitica[]> {
+    return this._http.get<Analitica[]>(`api/v1/analiticas/dni/${dni}`);
   }
 
   public getAnaliticaByDniAndFecha(dni: string, fecha: string): Observable<Analitica[]> {

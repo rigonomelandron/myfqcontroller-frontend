@@ -17,8 +17,10 @@ export class TratamientoService {
     return this._http.get<Tratamiento>(`api/v1/tratamientos/id/${id}`);
   }
 
-  public getTratamientoByDni(dni: string): Observable<Tratamiento> {
-    return this._http.get<Tratamiento>(`api/v1/tratamientos/dni/${dni}`);
+  public getTratamientoByDni(dni: string): Observable<Tratamiento[]> {
+    console.log("dni: " + dni);
+
+    return this._http.get<Tratamiento[]>(`api/v1/tratamientos/dni/${dni}`);
   }
 
   public getTratamientoByDniAndFecha(dni: string, fecha: string): Observable<Tratamiento[]> {

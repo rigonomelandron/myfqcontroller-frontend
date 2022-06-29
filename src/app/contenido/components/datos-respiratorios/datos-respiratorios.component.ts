@@ -7,6 +7,7 @@ import { DatosRespiratorios} from 'src/app/shared/interfaces/datosrespiratorios.
 import { UsuariosService } from 'src/app/shared/services/usuarios.service';
 import { PacientesService } from 'src/app/shared/services/pacientes.service';
 import { Paciente } from 'src/app/shared/interfaces/paciente.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-datos-respiratorios',
@@ -20,6 +21,8 @@ export class DatosRespiratoriosComponent implements OnInit {
   public registro!: DatosRespiratorios;
   public paciente?: Paciente;
   public mostrarFormulario: boolean;
+  public datos: string[];
+  public datoRespiratorio!: DatosRespiratorios;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -27,23 +30,26 @@ export class DatosRespiratoriosComponent implements OnInit {
     private _mensajeService: MessageService,
     private _confirmarService: ConfirmationService,
     private _usuarioService: UsuariosService,
-    private _pacienteService: PacientesService
+    private _pacienteService: PacientesService,
+    private _router: Router,
   ) {
 
     this.formRespiratorio = this._formBuilder.group({
       fecha: ['', [Validators.required, Validators.minLength(3)]],
-      fvc: ['', [Validators.required]],
-      fev1: ['', [Validators.required]],
-      saturacion: ['', [Validators.required,]],
-      aerobica: ['', [Validators.required,]],
+      fvc: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[0-9].[0-9]*')]],
+      fev1: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[0-9].[0-9]*')]],
+      saturacion: ['', [Validators.required,Validators.minLength(2), Validators.pattern('[0-9]*')]],
+      aerobica: ['', [Validators.required, Validators.minLength(1), Validators.pattern('[0-9]*')]],
 
     });
     this.mostrarFormulario = false;
 
+    this.datos = []
+
   }
 
   ngOnInit(): void {
-
+    this.obtenerDatosRespiratorios();
   }
 
   public addRegistro() {
@@ -72,7 +78,6 @@ export class DatosRespiratoriosComponent implements OnInit {
           this._datosRespiratoriosService.addDatosRespiratorios(this.registro).subscribe({
 
             next: (response) => {
-              console.log(response);
               this._mensajeService.add({severity: 'success',summary: 'Añadido',detail: `Registro Añadido correctamente `,life: 2000
               });
             this.cerrarDialogo();
@@ -80,6 +85,10 @@ export class DatosRespiratoriosComponent implements OnInit {
             error: (error: HttpErrorResponse) => {
               this._mensajeService.add({ severity: 'error', summary: 'Error', detail: error.message, life: 2000 });
 
+            },complete: () => {
+              this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+              this._router.onSameUrlNavigation = 'reload';
+              this._router.navigate(['/contenido/datos-respiratorios']);
             }
           });
         }
@@ -93,6 +102,29 @@ export class DatosRespiratoriosComponent implements OnInit {
   }
   public cerrarDialogo(){
     this.mostrarFormulario= false;
+  }
+
+  public obtenerDatosRespiratorios(){
+    this._datosRespiratoriosService.getDatosRespiratorios().subscribe({
+  
+      next: (datos: DatosRespiratorios[]) => {
+        console.log(datos);
+        this.datoRespiratorio = datos[datos.length - 1];
+        this.datos=[
+  
+          'FVC: ' + this.datoRespiratorio.fvc +'L',
+          'FEV1: ' + this.datoRespiratorio.fev1 + 'L',
+          'Saturación: ' + this.datoRespiratorio.saturacionBasal +'%',
+          'Antibiótico: 22-04-21 (Septrim)'
+  
+        ]
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    }
+  
+    )
   }
 
 }

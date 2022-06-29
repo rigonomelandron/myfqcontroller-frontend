@@ -32,10 +32,6 @@ export class MenuMedicoComponent implements OnInit {
       {
         label: this.usuario, icon: 'pi pi-user', routerLink: ['/home-medico']
       },
-      
-      {
-        label: 'Ajustes', icon: 'pi pi-cog', routerLink: ['/contenido/ajustes']
-      },
     ];
 
   }

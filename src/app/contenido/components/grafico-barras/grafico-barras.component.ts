@@ -49,7 +49,7 @@ export class GraficoBarrasComponent implements OnInit {
         next: (paciente) => {
           this._deportesServices.getDeportesByIdUsuario(paciente.dni).subscribe({
             next: (actividades) => {
-
+              actividades.sort((d1, d2) => new Date(d1.fecha).getTime() - new Date(d2.fecha).getTime());
               this.meses = actividades.map((actividades: { fecha: Date; }) => actividades.fecha);
               this.calorias = actividades.map((actividades: { calorias: number; }) => actividades.calorias);
               this.ppmMedia = actividades.map((actividades: { ppmMedia: number; }) => actividades.ppmMedia);
@@ -81,9 +81,9 @@ export class GraficoBarrasComponent implements OnInit {
 
       labels: this.dates,
       datasets: [{
-        label: 'PPM Media',
+        label: 'Media Pulsaciones',
         backgroundColor: [
-          '#EC407A',
+          '#2FEDA2',
 
         ],
         yAxisID: 'y',
@@ -92,8 +92,8 @@ export class GraficoBarrasComponent implements OnInit {
       },
 
        {
-          label: 'Calorias',
-          backgroundColor: '#78909C',
+          label: 'Calorías',
+          backgroundColor: '#F0330E',
           yAxisID: 'y1',
           data: this.calorias
         }
@@ -115,7 +115,8 @@ export class GraficoBarrasComponent implements OnInit {
       scales: {
         x: {
           ticks: {
-            color: '#495057'
+            color: '#495057',
+
           },
           grid: {
             color: '#ebedef'

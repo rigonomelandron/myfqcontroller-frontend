@@ -29,4 +29,7 @@ export class DoctoresService {
 
       return this._http.get<Doctor>('api/v1/doctores/usuario/'+id);
   }
+  public getDoctorByNumColegiado(id : string):Observable<Doctor>{
+      return this._http.get<Doctor>('api/v1/doctores/colegiado/'+id);
+  }
 }

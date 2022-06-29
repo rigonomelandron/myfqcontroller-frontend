@@ -338,18 +338,18 @@ export class CalendarioComponent implements OnInit {
 
   //Meter fechas en el Array
   public ObtenerFechas(data:any) {
-    this.meses = data.map((data: { fecha: Date; }) => data.fecha);
-    this.meses.forEach((res) => {
-      let jsdate = new Date(res);
-      this.dias.push(this.convertirFechas(jsdate.getFullYear(), jsdate.getMonth() + 1, jsdate.getDate()));
-
+    for (let dato of data) {
+      let fecha = dato.fecha.substring(0, 10);
+      let jsdate = new Date(fecha);
+      this.convertirFechas(jsdate.getFullYear(), jsdate.getMonth() + 1, jsdate.getDate());
     }
-    );
 
   }
   //Convertir fechas a formato indexado
   public convertirFechas(year: any, month: any, a: any) {
     const dayObject = moment(`${year}-${month}-${a}`);
+    this.dias.push(dayObject);
+
     return {
       name: dayObject.format('dddd'),
       value: a,

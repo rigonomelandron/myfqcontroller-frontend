@@ -101,7 +101,7 @@ export class DonutComponent implements OnInit {
         next: (paciente) => {
           this._deportesServices.getDeportesByIdUsuario(paciente.dni).subscribe({
             next: (actividades) => {
-            
+
 
               for (let actividad of actividades) {
                 this.contadorDeportes(actividad.tipo);
@@ -128,7 +128,7 @@ export class DonutComponent implements OnInit {
   public contadorDeportes(deporte: string) {
     if (deporte == "carrera") {
       this.contadorCarrera++;
-    } else if (deporte == "Ciclismo") {
+    } else if (deporte == "ciclismo") {
       this.contadorCiclismo++;
     } else if (deporte == "fuerza") {
       this.contadorFuerza++;

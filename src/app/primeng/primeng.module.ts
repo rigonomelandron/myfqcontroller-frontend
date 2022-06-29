@@ -30,6 +30,9 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SliderModule } from 'primeng/slider';
 import { BadgeModule } from 'primeng/badge';
+import { KnobModule } from 'primeng/knob';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 
 
@@ -76,7 +79,10 @@ import { BadgeModule } from 'primeng/badge';
     SelectButtonModule,
     InputTextareaModule,
     SliderModule,
-    BadgeModule
+    BadgeModule,
+    KnobModule,
+    ConfirmDialogModule,
+    ConfirmPopupModule
 
   ]
 

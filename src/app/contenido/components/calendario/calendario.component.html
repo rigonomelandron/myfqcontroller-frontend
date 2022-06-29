@@ -25,10 +25,12 @@
         <div class="d-flex flex-column elemento">
 
           <div class="d-flex flex-row cabecera">
-            <div *ngFor="let dia of this.dias">
-              <p *ngIf="dia.nombre == day.nombre && dia.value == day.value && dia.indexWeek == day.indexWeek"><i
-                  class="bi bi-asterisk"></i></p>
-            </div>
+            <ng-container *ngFor="let dia of this.dias">
+
+              <p *ngIf="(( dia | date : 'MMM, yyyy') == (dateSelect | date: 'MMM, yyyy')) && dia._i.substring(7,10) == day.value">
+                <i class="bi bi-asterisk"></i><span>{{dia._i.substring(7,10)}}</span><span>{{dia | date : 'MMM, yyyy'}}</span></p>
+
+            </ng-container>
           </div>
 
           <div class="cuerpo">
@@ -45,22 +47,44 @@
 <p-dialog header="Datos recogidos" [(visible)]="mostrarDatos" [modal]="true" [maximizable]="true" [style]="{width: '50vw', height:'100vh'}" >
 
 
-  <div class="table-responsive ">
+  <div>
 
-    <table class="table">
+    <ng-container *ngFor="let items of datos" class="my-3">
+      <p-table responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <ng-container *ngFor="let item of items | keyvalue">
+              <th *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="text-center">
+                {{item.key}}</th>
+            </ng-container>
+          </tr>
+           <tr>
+            <ng-container *ngFor="let item of items | keyvalue">
+              <td *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="text-center">
+                {{item.value}}</td>
+            </ng-container>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </ng-container>
+
+
+   <!--  <table class="table">
       <div *ngFor="let items of datos" class="my-3">
           <tr>
             <ng-container *ngFor="let item of items | keyvalue">
               <th *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="">{{item.key}}</th>
             </ng-container>
           </tr>
-          <tr>
+        
+          <tr p-datatable-tbody>
             <ng-container *ngFor="let item of items | keyvalue">
-          <td *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" >{{item.value}}</td>
+          <td p-datatable-column *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" >{{item.value}}</td>
            </ng-container>
           </tr>
       </div>
-    </table>
+    </table> -->
   </div>
 
 </p-dialog>

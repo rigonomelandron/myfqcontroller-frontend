@@ -10,30 +10,30 @@
     <p-card>
       <p-tabView>
         <p-tabPanel header="Tratamiento">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ut voluptatem ab accusamus nostrum alias
-            maiores earum distinctio minus dolore! Perspiciatis voluptate fuga ab exercitationem, sunt consequatur quos
-            necessitatibus ratione?</p>
+          <ul>
+            <li *ngFor="let tratamiento of this.tratamientos"> {{tratamiento.fecha.toString().substring(0,10)}} : {{tratamiento.descripcion}}</li>
+          </ul>
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Añadir nueva medicación" (click)="mostrarFormTratamiento()"></button>
         </p-tabPanel>
         <p-tabPanel header="Eventos">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ut voluptatem ab accusamus nostrum alias
-            maiores earum distinctio minus dolore! Perspiciatis voluptate fuga ab exercitationem, sunt consequatur quos
-            necessitatibus ratione?</p>
+          <ul>
+            <li *ngFor="let evento of this.eventos">{{evento.fecha.toString().substring(0,10)}} : {{evento.descripcion}}</li>
+          </ul>
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Nuevo evento" (click)="mostrarFormEvento()"></button>
         </p-tabPanel>
         <p-tabPanel header="Historia">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ut voluptatem ab accusamus nostrum alias
-            maiores earum distinctio minus dolore! Perspiciatis voluptate fuga ab exercitationem, sunt consequatur quos
-            necessitatibus ratione?</p>
+         <ul>
+          <li *ngFor="let antecedente of this.antecedentes">{{antecedente.fecha.toString().substring(0,10)}} : {{antecedente.diagnostico}}</li>
+         </ul>
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Añadir datos" (click)="mostrarFormHistoria()"></button>
         </p-tabPanel>
         <p-tabPanel header="Analíticas">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ut voluptatem ab accusamus nostrum alias
-            maiores earum distinctio minus dolore! Perspiciatis voluptate fuga ab exercitationem, sunt consequatur quos
-            necessitatibus ratione?</p>
+         <ul>
+          <li *ngFor="let analitica of this.analiticas">{{analitica.fecha.toString().substring(0,10)}} : {{analitica.tipo}} <span style="">-<a target="_blank" href="{{analitica.archivo}}"> Ver infome</a> </span> </li>
+         </ul>
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Añadir datos" (click)="mostrarFormAnalitica()"></button>
         </p-tabPanel>
@@ -44,7 +44,7 @@
 </main>
 <!--Formulario tratamientos-->
 <p-dialog [visible]=" mostrarFormTratamientos" [closable]="false" [maximizable]="true" header="Registro tratamiento"
-  [style]="{width: '30vw', height:'70vh'}">
+  [style]="{width: '30vw', height:'auto'}">
   <ng-template pTemplate="body">
     <form autocomplete="off" (ngSubmit)="addRegistroTratamientos()" [formGroup]="formTratamientos">
       <div class="d-grid gap-3">
@@ -67,7 +67,7 @@
 </p-dialog>
 
 <p-dialog [visible]=" mostrarFormEventos" [closable]="false" [maximizable]="true" header="Registro Evento"
-  [style]="{width: '30vw', height:'55vh'}">
+  [style]="{width: '30vw', height:'auto'}">
   <ng-template pTemplate="body">
     <form autocomplete="off" (ngSubmit)="addRegistroEventos()" [formGroup]="formEventos">
       <div class="d-grid gap-3">
@@ -96,7 +96,7 @@
 <!--Formulario historial/antecendentes-->
 </p-dialog>
 <p-dialog [visible]="mostrarFormHistorias" [closable]="false" [maximizable]="true" header="Registro Antecedente"
-  [style]="{width: '30vw', height:'55vh'}">
+  [style]="{width: '30vw', height:'auto'}">
   <ng-template pTemplate="body">
     <form autocomplete="off" (ngSubmit)="addRegistroHistoria()" [formGroup]="formHistoria">
       <div class="d-grid gap-3">
@@ -116,9 +116,9 @@
   </ng-template>
 
 </p-dialog>
-
+<!-- Formulario Analíticas -->
 <p-dialog [visible]="mostrarFormAnaliticas" [closable]="false" [maximizable]="true" header="Registro Analitica"
-  [style]="{width: '30vw', height:'55vh'}">
+  [style]="{width: '30vw', height:'auto'}">
   <ng-template pTemplate="body">
     <form autocomplete="off" (ngSubmit)="addRegistroAnalitica()" [formGroup]="formAnalitica">
       <div class="d-grid gap-3">
@@ -126,7 +126,7 @@
           <p-calendar inputId="basic" formControlName="fecha" appendTo="body" placeholder="Fecha"></p-calendar>
         </div>
         <input pInputText type="text" formControlName="tipo" placeholder="Tipo" />
-        <input pInputText type="file" formControlName="archivo" placeholder="Ruta Archivo" />
+        <input pInputText accept=".pdf" type="file" formControlName="archivo" placeholder="Ruta Archivo" />
         <div d-flex>
           <button pButton type="submit" label="Añadir" pRipple class="boton mx-3"></button>
           <button pButton type="button" label="Cerrar" pRipple class="p-button-text"
@@ -137,4 +137,6 @@
   </ng-template>
 
 </p-dialog>
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>
 
