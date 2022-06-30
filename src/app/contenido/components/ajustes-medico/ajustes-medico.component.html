@@ -8,6 +8,10 @@
       </div>
       <div class="row">
         <div>
+          <p style="font-size:15px; margin-left: 5rem;font-weight:400" *ngIf="this.medico"><span style="font-weight: 600;">Nombre: </span>{{this.medico.nombre}}</p>
+          <p style="font-size:15px; margin-left: 5rem;font-weight:400" *ngIf="this.medico"><span style="font-weight: 600;">Email: </span>{{this.medico.email}}</p>
+        </div>
+        <div>
           <button class="boton mt-2" style="margin-left: 5rem;" styleClass="p-button-outlined" type="button" pButton
             pRipple label="Perfil usuario" (click)="abrirDialogo()"></button>
           <button class="boton-delete mt-2" style="margin-left: 1rem;" styleClass="p-button-outlined-danger"
