@@ -131,6 +131,8 @@ export class AjustesComponent implements OnInit {
 
       }
     });
+
+    this.cerrarDialogo();
   }
   public cerrarDialogo() {
     this.mostrarFormulario = false;
@@ -184,8 +186,6 @@ export class AjustesComponent implements OnInit {
     });
   }
   public obtenerMedico() {
-    console.log("hola");
-
     this._equipoService.getEquipoByIdPaciente(this.paciente.dni).subscribe({
       next: (data) => {
         if (data) {

@@ -2,7 +2,7 @@
 
 body{
   background-image: url(assets/images/background1.svg) ;
-background-size: cover;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   height: 100vh;
@@ -88,15 +88,22 @@ body{
 #logo {
   position: absolute;
   left: 1.5rem;
-  top: 0.5rem;
+  top: 0.75rem;
   width:3rem;
   height: 3rem;
-  border-radius: 50%;
-
-    
-    object-position: center;
+  border-radius: 50%;  
+  object-position: center;
 
 }
+
+#titulo-menu{
+  font-size: 2.5rem;
+  color: #1d736a;
+  margin-left: 20rem;
+  font-family: 'Yellowtail', cursive;
+  font-weight: 500;
+}
+
 
 
 

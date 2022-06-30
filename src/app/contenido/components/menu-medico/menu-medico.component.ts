@@ -36,6 +36,9 @@ export class MenuMedicoComponent implements OnInit {
       {
         label: 'Ajustes', icon: 'pi pi-cog', routerLink: ['/contenido/ajustes-medico']
       },
+      {
+        label: 'Logout', icon: 'pi pi-sign-out', command: () => this._authService.logOut()
+      },
     ];
 
   }

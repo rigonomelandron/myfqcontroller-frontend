@@ -8,7 +8,7 @@
                 <div class="col-2">
                     <p-avatar  styleClass="mr-2" size="xlarge" shape="circle"> <img *ngIf="usuario?.foto" src="http://localhost:8080/api/v1/uploads/img/{{usuario.foto}}" alt="{{usuario.foto}}"
                       class="img-thumbnail rounded-circle"></p-avatar>
-                    <p style="font-size:10px; margin-top: 0.2rem;">G552X / F508D</p>
+                    <p style="font-size:10px; margin-top: 0.2rem;"> {{this.paciente.mutacion1}} / {{this.paciente.mutacion2}}  </p>
                 </div>
                 <div class="col-10">
                     <h4 class="text-start" *ngIf="this.paciente">{{this.paciente.nombre}}</h4>
