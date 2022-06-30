@@ -33,6 +33,8 @@ import { BadgeModule } from 'primeng/badge';
 import { KnobModule } from 'primeng/knob';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 
 
@@ -82,7 +84,9 @@ import { ConfirmationService } from 'primeng/api';
     BadgeModule,
     KnobModule,
     ConfirmDialogModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    FileUploadModule,
+    ToggleButtonModule
 
   ]
 

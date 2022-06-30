@@ -58,7 +58,7 @@
           <tr>
             <ng-container *ngFor="let item of items | keyvalue">
               <th
-                *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'"
+                *ngIf="item.key != 'paciente' && item.key != 'fecha' && item.key != 'id'"
                 class="text-center">
                 {{item.key}}</th>
             </ng-container>
@@ -66,7 +66,7 @@
           <tr>
             <ng-container *ngFor="let item of items | keyvalue">
               <td
-                *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'"
+                *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'id'"
                 class="text-center">
                 {{item.value}}</td>
             </ng-container>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../interfaces/usuario.interface';
@@ -12,7 +12,7 @@ export class UsuariosService {
 
   public registroUsuarios(usuario : Usuario):Observable<Usuario>{
     console.log("registro usuario",usuario);
-    
+
     return this._http.post<Usuario>('api/v1/usuario/crear', usuario);
   }
   public deleteUsuario(id : string):Observable<Usuario>{
@@ -26,12 +26,20 @@ export class UsuariosService {
   }
   public getUsuarioById(id : string):Observable<Usuario>{
 
-    return this._http.get<Usuario>('api/v2/usuarios/'+id);
+    return this._http.get<Usuario>('api/v1/usuarios/user/'+id);
   }
-  public uploadFoto(id : string, file : File):Observable<Usuario>{
-     console.log(file);
+  public uploadFoto(archivo: File, id: string): Observable<HttpEvent<{}>>{
 
-    return this._http.post<Usuario>('api/v2/usuarios/'+ id, file);
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+    const req = new HttpRequest('POST', `api/v1/usuario/upload`, formData, {
+      reportProgress: true
+    });
+
+    return this._http.request(req);
+
+
   }
 
 

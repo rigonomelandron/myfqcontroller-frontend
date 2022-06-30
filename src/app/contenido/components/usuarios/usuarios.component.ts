@@ -20,7 +20,7 @@ export class UsuariosComponent implements OnInit {
   public onUpload() {
     let usuario= localStorage.getItem('usuario');
     if(usuario){
-     this._usuariosServices.uploadFoto(usuario, this.selectedFile).subscribe({
+     this._usuariosServices.uploadFoto( this.selectedFile, usuario).subscribe({
         next: (data) => {
           console.log(data);
         },
