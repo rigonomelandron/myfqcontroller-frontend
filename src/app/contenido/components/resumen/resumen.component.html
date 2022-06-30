@@ -32,12 +32,8 @@
         </p-tabPanel>
         <p-tabPanel header="Analíticas">
          <ul>
-<<<<<<< HEAD
-          <li *ngFor="let analitica of this.analiticas">{{analitica.fecha.toString().substring(0,10)}} : {{analitica.tipo}} <span style="">-<a target="_blank" href="{{analitica.archivo}}"> Ver infome</a> </span> </li>
-=======
           <li *ngFor="let analitica of this.analiticas">{{analitica.fecha.toString().substring(0,10)}} : {{analitica.tipo}} <a *ngIf="analitica.archivo"  href="http://localhost:8080/api/v1/uploads/img/{{analitica.archivo}}"
             target="_blank">Ver Analitica</a></li>
->>>>>>> b1c0cfa8bc3ee90f7065fc27b946c633dd1b4b36
          </ul>
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Añadir datos" (click)="mostrarFormAnalitica()"></button>
