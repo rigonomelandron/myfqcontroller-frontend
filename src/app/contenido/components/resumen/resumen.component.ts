@@ -41,6 +41,10 @@ export class ResumenComponent implements OnInit {
   public antecedentes!:Antecedente[];
   public analiticas!: Analitica[];
   public ciclos!: CicloAntibiotico[];
+  public archivoSeleccionado!: File;
+  public analitica: any;
+  public pdfSource:string;
+  public mostrarArchivo: boolean = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -57,7 +61,6 @@ export class ResumenComponent implements OnInit {
     this.formTratamientos = this._formBuilder.group({
       descripcion: ['', [Validators.required, Validators.minLength(3)]],
       fecha: ['', [Validators.required, Validators.minLength(3)]],
-      archivo: [''],
       oral: ['', [Validators.required]],
 
     });
@@ -75,7 +78,7 @@ export class ResumenComponent implements OnInit {
     this.formAnalitica = this._formBuilder.group({
       fecha: ['', [Validators.required, Validators.minLength(3)]],
       tipo: ['', [Validators.required, Validators.minLength(3)]],
-      archivo: [''],
+
     });
     this.formCiclos = this._formBuilder.group({
       antibiotico: ['', [Validators.required, Validators.minLength(3)]],
@@ -95,7 +98,7 @@ export class ResumenComponent implements OnInit {
     ]
     this.mostrarFormTratamientos = false;
     this.paciente = {} as Paciente;
-
+    this.pdfSource = "";
 
 
    }
@@ -194,11 +197,13 @@ export class ResumenComponent implements OnInit {
       paciente: this.paciente,
       fecha: this.formAnalitica.value.fecha,
       tipo: this.formAnalitica.value.tipo,
-      archivo: this.formAnalitica.value.archivo,
+
     }
 
    this._analiticaServices.postAnalitica(analitica).subscribe({
-      next: (data) => {
+      next: (data:Analitica) => {
+        this.analitica = data;
+
        this._mensajeService.add({
          severity: 'success', summary: 'Añadido', detail: ` Analitica añadida correctamente `, life: 2000
        });
@@ -209,6 +214,9 @@ export class ResumenComponent implements OnInit {
       complete: () => {
         this.mostrarFormAnaliticas = false;
         this.getAnaliticas();
+        if(this.analitica){
+         this.subirArchivo(this.analitica);
+        }
       }
 
    });
@@ -222,13 +230,13 @@ export class ResumenComponent implements OnInit {
       paciente: this.paciente,
       descripcion: this.formTratamientos.value.descripcion,
       fecha: this.formTratamientos.value.fecha,
-      archivo: this.formTratamientos.value.archivo,
       oral: this.formTratamientos.value.oral == 'oral'? true: false,
       inhalado: this.formTratamientos.value.oral == 'inhalado'? true: false,
 
     }
      this._tratamientoServices.postTratamiento(tratamiento).subscribe({
-      next: (data) => {
+      next: (data:Tratamiento) => {
+        this.subirArchivoT(data);
          this._mensajeService.add({
            severity: 'success', summary: 'Añadido', detail: `Tratamiento Añadido correctamente `, life: 2000
          });
@@ -337,5 +345,56 @@ export class ResumenComponent implements OnInit {
     }
 
   }
+  public seleccionarArchivo(event: any) {
+    console.log("event", event);
+    console.log("hola desde upload");
 
+    this.archivoSeleccionado = event.target.files[0];
+    console.log("archivo", this.archivoSeleccionado);
+
+    if (this.archivoSeleccionado && this.archivoSeleccionado.type.indexOf('file') < 0) {
+      console.log("no es pdf");
+
+      return;
+    }
+
+  }
+  public subirArchivo(analitica:Analitica) {
+    let usuario = localStorage.getItem('usuario');
+    if (this.archivoSeleccionado && usuario && analitica) {
+      console.log("subiendo archivo");
+      this._analiticaServices.subirArchivos(this.archivoSeleccionado,analitica.id!).subscribe({
+        next: (data) => {
+          console.log("archivo subido");
+          console.log(data);
+
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+
+    }
+
+  }
+  public subirArchivoT(tratamiento: Tratamiento) {
+    let usuario = localStorage.getItem('usuario');
+    if (this.archivoSeleccionado && usuario && tratamiento) {
+      console.log("subiendo archivo");
+      this._tratamientoServices.subirArchivos(this.archivoSeleccionado, tratamiento.id!).subscribe({
+        next: (data) => {
+          console.log("archivo subido");
+          console.log(data);
+
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+
+    }
+  }
+ 
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tratamiento } from '../interfaces/tratamiento.interface';
@@ -44,5 +44,16 @@ export class TratamientoService {
 
   public getTratamientoByFechas(fechaInicio: Date, fechaFin: Date): Observable<Tratamiento[]> {
     return this._http.get<Tratamiento[]>('/api/v1/tratamientos/fechas/' + fechaInicio + '/' + fechaFin);
+  }
+  public subirArchivos(file: File, id: any): Observable<HttpEvent<{}>> {
+    const formData = new FormData();
+    formData.append('archivo', file);
+    formData.append('id', id);
+    const req = new HttpRequest('POST', `api/v1/tratamiento/upload`, formData, {
+      reportProgress: true
+    });
+
+    return this._http.request(req);
+
   }
 }

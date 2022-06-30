@@ -3,7 +3,7 @@ export interface Tratamiento {
   paciente: Paciente;
   descripcion: string;
   fecha: Date;
-  archivo: string;
+  archivo?: string;
   oral: boolean;
   inhalado: boolean;
 }

@@ -11,7 +11,7 @@
       <p-tabView>
         <p-tabPanel header="Tratamiento">
           <ul>
-            <li *ngFor="let tratamiento of this.tratamientos"> {{tratamiento.fecha.toString().substring(0,10)}} : {{tratamiento.descripcion}}</li>
+            <li *ngFor="let tratamiento of this.tratamientos"> {{tratamiento.fecha.toString().substring(0,10)}} : {{tratamiento.descripcion}} <a *ngIf="tratamiento.archivo" href="http://localhost:8080/api/v1/uploads/img/{{tratamiento.archivo}}" target="_blank">Ver informe</a></li>
           </ul>
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Añadir nueva medicación" (click)="mostrarFormTratamiento()"></button>
@@ -32,7 +32,12 @@
         </p-tabPanel>
         <p-tabPanel header="Analíticas">
          <ul>
+<<<<<<< HEAD
           <li *ngFor="let analitica of this.analiticas">{{analitica.fecha.toString().substring(0,10)}} : {{analitica.tipo}} <span style="">-<a target="_blank" href="{{analitica.archivo}}"> Ver infome</a> </span> </li>
+=======
+          <li *ngFor="let analitica of this.analiticas">{{analitica.fecha.toString().substring(0,10)}} : {{analitica.tipo}} <a *ngIf="analitica.archivo"  href="http://localhost:8080/api/v1/uploads/img/{{analitica.archivo}}"
+            target="_blank">Ver Analitica</a></li>
+>>>>>>> b1c0cfa8bc3ee90f7065fc27b946c633dd1b4b36
          </ul>
           <button class="boton mt-2" styleClass="p-button-sm " type="button" pButton pRipple
             label="Añadir datos" (click)="mostrarFormAnalitica()"></button>
@@ -61,7 +66,11 @@
           <p-calendar inputId="basic" formControlName="fecha" appendTo="body" placeholder="Fecha"></p-calendar>
         </div>
         <textarea [rows]="5" [cols]="30" pInputTextarea formControlName="descripcion" placeholder="descripción"></textarea>
-        <input pInputText  type="file" formControlName="archivo" placeholder="Ruta Archivo" />
+        <div class="input-group">
+          <label class="input-group-text bg-warning" for="inputFoto">Archivo</label>
+          <input (change)="seleccionarArchivo($event)" type="file" class="form-control" id="inputFoto"
+            aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+        </div>
         <p-selectButton [options]="oralOption" formControlName="oral"  optionLabel="name"
           optionValue="value"></p-selectButton>
         <div d-flex>
@@ -134,8 +143,14 @@
           <p-calendar inputId="basic" formControlName="fecha" appendTo="body" placeholder="Fecha"></p-calendar>
         </div>
         <input pInputText type="text" formControlName="tipo" placeholder="Tipo" />
-        <input pInputText accept=".pdf" type="file" formControlName="archivo" placeholder="Ruta Archivo" />
+        <!-- <input pInputText type="file" formControlName="archivo" placeholder="Ruta Archivo" /> -->
         <div d-flex>
+          <div class="input-group">
+            <label class="input-group-text bg-warning" for="inputFoto">Archivo</label>
+            <input (change)="seleccionarArchivo($event)" type="file" class="form-control" id="inputFoto"
+              aria-describedby="inputGroupFileAddon04"  aria-label="Upload">
+
+          </div>
           <button pButton type="submit" label="Añadir" pRipple class="boton mx-3"></button>
           <button pButton type="button" label="Cerrar" pRipple class="p-button-text"
             (click)="cerrarDialogoAnaliticas()"></button>
@@ -168,6 +183,8 @@
   </ng-template>
 
 </p-dialog>
+
+
 <p-toast></p-toast>
 <p-confirmPopup></p-confirmPopup>
 
