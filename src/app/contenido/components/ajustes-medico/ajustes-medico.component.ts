@@ -56,8 +56,8 @@ export class AjustesMedicoComponent implements OnInit {
   public addMedico (){
     let medico = {
       numColegiado: this.medico.numColegiado,
-      nombre: this.medico.nombre,
-      email: this.medico.email,
+      nombre: this.formDoctor.value.nombre,
+      email: this.formDoctor.value.email,
       idUsuario: this.medico.idUsuario
     }
     console.log('Medico:', medico);
