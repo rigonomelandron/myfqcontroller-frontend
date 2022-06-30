@@ -21,6 +21,7 @@
     "@angular/router": "~13.3.0",
     "chart.js": "^3.8.0",
     "moment": "^2.29.3",
+    "ng2-pdf-viewer": "^9.0.0",
     "primeicons": "^5.0.0",
     "primeng": "^13.4.1",
     "rxjs": "~7.5.0",

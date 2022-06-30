@@ -1,8 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, Message } from 'primeng/api';
+import { Equipo } from 'src/app/shared/interfaces/equipo.interface';
 import { Paciente } from 'src/app/shared/interfaces/paciente.interface';
+import { Usuario } from 'src/app/shared/interfaces/usuario.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { DoctoresService } from 'src/app/shared/services/doctores.service';
 import { EquiposService } from 'src/app/shared/services/equipos.service';
@@ -16,16 +19,21 @@ import { UsuariosService } from 'src/app/shared/services/usuarios.service';
   providers: [ConfirmationService]
 })
 export class AjustesComponent implements OnInit {
-  public mostrarFormulario:boolean=false;
-  public formPaciente:FormGroup;
+  public mostrarFormulario: boolean = false;
+  public formPaciente: FormGroup;
   public generoOptions: any[];
-  public mutacion1:any[];
-  public mutacion2:any[];
-  public paciente! : Paciente;
+  public mutacion1: any[];
+  public mutacion2: any[];
+  public paciente!: Paciente;
   public doctor!: string;
+  public medicos: any[];
   msgs: Message[] = [];
+  public medico: string;
+  public fotoSeleccionada!: File;
+  public usuario!:Usuario;
+
   constructor(
-    private _formBuilder:FormBuilder,
+    private _formBuilder: FormBuilder,
     private _pacientesServices: PacientesService,
     private _usuariosServices: UsuariosService,
     private _confirmationService: ConfirmationService,
@@ -34,25 +42,25 @@ export class AjustesComponent implements OnInit {
     private _equipoService: EquiposService,
     private _doctoresService: DoctoresService
 
-    ) {
-    this.formPaciente=this._formBuilder.group({
+  ) {
+    this.formPaciente = this._formBuilder.group({
       dni: [''],
-      nombre:['',[]],
-      email:['',[]],
-      fechaNacimiento:['',[]],
-      genero:['',[]],
-      peso:['',[]],
-      altura:['',[]],
-      mutacion1:['',[]],
-      mutacion2:['',[]],
-      idUsuario:['',[]]
-   });
+      nombre: ['', []],
+      email: ['', []],
+      fechaNacimiento: ['', []],
+      genero: ['', []],
+      peso: ['', []],
+      altura: ['', []],
+      mutacion1: ['', []],
+      mutacion2: ['', []],
+      idUsuario: ['', []]
+    });
     this.generoOptions = [
       { nombre: 'Hombre', value: 'h' },
       { nombre: 'Mujer', value: 'm' },
       { nombre: 'Otro', value: 'o' }
     ];
-    this.mutacion1=[
+    this.mutacion1 = [
       { nombre: 'Mutación 1', value: '' },
       { nombre: 'F508del', value: 'F508del' },
       { nombre: 'G542X', value: 'G542X' },
@@ -92,43 +100,50 @@ export class AjustesComponent implements OnInit {
       { nombre: '712-1G>T', value: '712-1G>T' },
       { nombre: 'W1282X', value: 'W1282X' },
     ]
+    this.medicos = [{ nombre: 'Escoja médico', value: '' }];
+    this.medico = '';
+
 
   }
 
   ngOnInit(): void {
+    this.obtenerUsuario();
     this.obtenerPaciente();
+    this.obtenerMedicos();
   }
-  public addPaciente(){
+  public addPaciente() {
 
 
-    let paciente ={
-      dni:this.paciente.dni,
-      nombre:this.formPaciente.value.nombre,
-      email:this.formPaciente.value.email,
-      fechaNacimiento:this.formPaciente.value.fechaNacimiento,
-      genero:this.formPaciente.value.genero,
-      peso:this.formPaciente.value.peso,
-      altura:this.formPaciente.value.altura,
-      mutacion1:this.formPaciente.value.mutacion1.value,
-      mutacion2:this.formPaciente.value.mutacion2.value,
-      idUsuario:this.paciente.idUsuario
+    let paciente = {
+      dni: this.paciente.dni,
+      nombre: this.formPaciente.value.nombre,
+      email: this.formPaciente.value.email,
+      fechaNacimiento: this.formPaciente.value.fechaNacimiento,
+      genero: this.formPaciente.value.genero,
+      peso: this.formPaciente.value.peso,
+      altura: this.formPaciente.value.altura,
+      mutacion1: this.formPaciente.value.mutacion1.value,
+      mutacion2: this.formPaciente.value.mutacion2.value,
+      idUsuario: this.paciente.idUsuario
     }
     this._pacientesServices.modificarPaciente(paciente).subscribe({
       next: (data) => {
 
       }
     });
+
+    this.cerrarDialogo();
   }
-  public cerrarDialogo(){
-    this.mostrarFormulario=false;
+  public cerrarDialogo() {
+    this.mostrarFormulario = false;
   }
-  public abrirDialogo(){
-    this.mostrarFormulario=true;
+  public abrirDialogo() {
+    this.mostrarFormulario = true;
   }
-  public obtenerPaciente(){
+  public obtenerPaciente() {
     let usuario = localStorage.getItem('usuario');
-    if(usuario){
-       this._pacientesServices.getPacienteByUserName(usuario).subscribe({
+    if (usuario) {
+      this._pacientesServices.getPacienteByUserName(usuario).subscribe({
         next: (data) => {
           this.paciente = data;
           this.formPaciente.setValue(this.paciente);
@@ -138,7 +153,7 @@ export class AjustesComponent implements OnInit {
         error: (err) => {
           console.log(err);
         }
-    });
+      });
 
 
     }
@@ -148,6 +163,8 @@ export class AjustesComponent implements OnInit {
       message: '¿Quieres eliminar este usuario?',
       header: 'Confirmación de borrado',
       icon: 'pi pi-info-circle',
+      acceptLabel: 'Si',
+      rejectLabel: 'No',
       accept: () => {
         this.msgs = [{ severity: 'info', summary: 'Confirmar', detail: 'Usuario Borrado' }];
         this.eliminarUsuario();
@@ -158,7 +175,7 @@ export class AjustesComponent implements OnInit {
     });
   }
 
-  public eliminarUsuario(){
+  public eliminarUsuario() {
     this._usuariosServices.deleteUsuario(this.paciente.idUsuario).subscribe({
       next: (data) => {
         this._authService.logOut();
@@ -168,12 +185,10 @@ export class AjustesComponent implements OnInit {
       }
     });
   }
-  public obtenerMedico(){
-  console.log("hola");
-
+  public obtenerMedico() {
     this._equipoService.getEquipoByIdPaciente(this.paciente.dni).subscribe({
       next: (data) => {
-        if(data){
+        if (data) {
           this._doctoresService.getDoctor(data.idMedico).subscribe({
             next: (data) => {
               this.doctor = data.nombre;
@@ -191,7 +206,86 @@ export class AjustesComponent implements OnInit {
     });
 
   }
-  public obtenerEquipo(){}
+  public obtenerMedicos() {
+    this._doctoresService.getDoctores().subscribe({
+      next: (data) => {
+
+        for (let dato of data) {
+          this.medicos.push({ nombre: dato.nombre, value: dato.numColegiado });
+        }
+        console.log("medicos", this.medicos);
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+  public obtenerEquipo(medico: any) {
+    console.log("medico", medico);
+    let equipo: Equipo = {
+      idMedico: medico.value,
+      idPaciente: this.paciente.dni
+    }
+    this._equipoService.registroEquipos(equipo).subscribe({
+      next: (data) => {
+        console.log("equipo", data);
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+
+  }
+  public seleccionarFoto(event: any) {
+    console.log("event", event);
+    console.log("hola desde upload");
+
+    this.fotoSeleccionada = event.target.files[0];
+  console.log("foto", this.fotoSeleccionada);
+
+    if (this.fotoSeleccionada && this.fotoSeleccionada.type.indexOf('image') < 0) {
+      console.log("no es imagen");
+
+      return;
+    }
+
+  }
+  public subirFoto() {
+    let usuario = localStorage.getItem('usuario');
+    if (this.fotoSeleccionada && usuario) {
+      console.log("subiendo foto");
+      this._usuariosServices.uploadFoto(this.fotoSeleccionada, usuario).subscribe({
+        next: (data) => {
+          console.log("foto subida");
+          console.log(data);
+
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
 
 
+  }
+
+
+public obtenerUsuario(){
+    let usuario = localStorage.getItem('usuario');
+    if (usuario) {
+      this._usuariosServices.getUsuarioById(usuario).subscribe({
+        next: (data: Usuario) => {
+          this.usuario= data;
+          console.log(this.usuario.foto);
+
+        },
+        error: (err:HttpErrorResponse) => {
+          console.log(err);
+        }
+      });
+  }
+}
 }

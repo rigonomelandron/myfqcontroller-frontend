@@ -1,5 +1,5 @@
 export interface CicloAntibiotico {
-  id: number;
+  id?: number;
   paciente: Paciente;
   antibiotico: string;
   esIntravenoso: boolean;
@@ -11,11 +11,11 @@ export interface Paciente {
   dni: string;
   nombre: string;
   email: string;
-  fechaNacimiento: Date;
-  genero: string;
-  peso: number;
-  altura: number;
-  mutacion1: string;
-  mutacion2: string;
+  fechaNacimiento?: Date;
+  genero?: string;
+  peso?: number;
+  altura?: number;
+  mutacion1?: string;
+  mutacion2?: string;
   idUsuario: string;
 }

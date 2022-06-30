@@ -13,6 +13,8 @@ import { EventoService } from 'src/app/shared/services/evento.service';
 import { PacientesService } from 'src/app/shared/services/pacientes.service';
 import { TratamientoService } from 'src/app/shared/services/tratamiento.service';
 import { ConfirmationService, MessageService, PrimeIcons } from "primeng/api";
+import { CiclosAntibioticosService } from 'src/app/shared/services/ciclos-antibioticos.service';
+import { CicloAntibiotico } from 'src/app/shared/interfaces/cicloantibiotico.interface';
 
 @Component({
   selector: 'app-resumen',
@@ -29,12 +31,20 @@ export class ResumenComponent implements OnInit {
   public mostrarFormHistorias:boolean=false;
   public formAnalitica: FormGroup;
   public mostrarFormAnaliticas:boolean=false;
+  public formCiclos: FormGroup;
+  public mostrarCiclos: boolean=false;
   public oralOption: any[];
+  public intravenosoOptions:any[];
   public paciente: Paciente;
   public tratamientos!: Tratamiento[];
   public eventos!: Evento[];
   public antecedentes!:Antecedente[];
   public analiticas!: Analitica[];
+  public ciclos!: CicloAntibiotico[];
+  public archivoSeleccionado!: File;
+  public analitica: any;
+  public pdfSource:string;
+  public mostrarArchivo: boolean = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -44,13 +54,13 @@ export class ResumenComponent implements OnInit {
     private _antecedenteServices: AntecedentesService,
     private _analiticaServices: AnaliticaService,
     private _mensajeService: MessageService,
+    private _ciclosAntibioticosService: CiclosAntibioticosService,
     private _confirmarService: ConfirmationService
     ) {
 
     this.formTratamientos = this._formBuilder.group({
       descripcion: ['', [Validators.required, Validators.minLength(3)]],
       fecha: ['', [Validators.required, Validators.minLength(3)]],
-      archivo: [''],
       oral: ['', [Validators.required]],
 
     });
@@ -68,16 +78,27 @@ export class ResumenComponent implements OnInit {
     this.formAnalitica = this._formBuilder.group({
       fecha: ['', [Validators.required, Validators.minLength(3)]],
       tipo: ['', [Validators.required, Validators.minLength(3)]],
-      archivo: [''],
+
     });
+    this.formCiclos = this._formBuilder.group({
+      antibiotico: ['', [Validators.required, Validators.minLength(3)]],
+      intravenoso: ['', [Validators.required]],
+      fechaInicio: ['', [Validators.required, Validators.minLength(3)]],
+      fechaFin: ['', [Validators.required, Validators.minLength(3)]],
+    });
+
     this.oralOption = [
       {name: 'Oral', value: 'oral'},
       {name: 'Inhalado', value: 'inhalado'},
 
     ];
+    this.intravenosoOptions = [
+      {name: 'SI', value: 'si'},
+      {name: 'NO', value: "no"},
+    ]
     this.mostrarFormTratamientos = false;
     this.paciente = {} as Paciente;
-
+    this.pdfSource = "";
 
 
    }
@@ -101,6 +122,10 @@ export class ResumenComponent implements OnInit {
     this.formAnalitica.reset();
     this.mostrarFormAnaliticas = true;
   }
+  public mostrarFormCiclos() {
+    this.formCiclos.reset();
+    this.mostrarCiclos = true;
+  }
   public cerrarDialogoTratamientos() {
     this.mostrarFormTratamientos = false;
   }
@@ -112,6 +137,9 @@ export class ResumenComponent implements OnInit {
   }
   public cerrarDialogoAnaliticas(){
     this.mostrarFormAnaliticas = false;
+  }
+  public cerrarDialogoCiclos(){
+    this.mostrarCiclos = false;
   }
   public addRegistroEventos() {
     if (this.formEventos.valid && this.paciente) {
@@ -169,11 +197,13 @@ export class ResumenComponent implements OnInit {
       paciente: this.paciente,
       fecha: this.formAnalitica.value.fecha,
       tipo: this.formAnalitica.value.tipo,
-      archivo: this.formAnalitica.value.archivo,
+
     }
 
    this._analiticaServices.postAnalitica(analitica).subscribe({
-      next: (data) => {
+      next: (data:Analitica) => {
+        this.analitica = data;
+
        this._mensajeService.add({
          severity: 'success', summary: 'Añadido', detail: ` Analitica añadida correctamente `, life: 2000
        });
@@ -184,6 +214,9 @@ export class ResumenComponent implements OnInit {
       complete: () => {
         this.mostrarFormAnaliticas = false;
         this.getAnaliticas();
+        if(this.analitica){
+         this.subirArchivo(this.analitica);
+        }
       }
 
    });
@@ -197,13 +230,13 @@ export class ResumenComponent implements OnInit {
       paciente: this.paciente,
       descripcion: this.formTratamientos.value.descripcion,
       fecha: this.formTratamientos.value.fecha,
-      archivo: this.formTratamientos.value.archivo,
       oral: this.formTratamientos.value.oral == 'oral'? true: false,
       inhalado: this.formTratamientos.value.oral == 'inhalado'? true: false,
 
     }
      this._tratamientoServices.postTratamiento(tratamiento).subscribe({
-      next: (data) => {
+      next: (data:Tratamiento) => {
+        this.subirArchivoT(data);
          this._mensajeService.add({
            severity: 'success', summary: 'Añadido', detail: `Tratamiento Añadido correctamente `, life: 2000
          });
@@ -217,6 +250,46 @@ export class ResumenComponent implements OnInit {
       }
     });
   }
+  }
+  public addRegistroCiclo(){
+    console.log("hola");
+   console.log(this.formCiclos.value.intravenoso);
+
+
+    if(this.formCiclos.valid && this.paciente){
+    let ciclo = {
+      paciente: this.paciente,
+      antibiotico: this.formCiclos.value.antibiotico,
+      esIntravenoso: this.formCiclos.value.intravenoso == 'si'? true: false,
+      fechaInicio: this.formCiclos.value.fechaInicio,
+      fechaFin: this.formCiclos.value.fechaFin
+    }
+    console.log("ciclo",ciclo);
+
+      this._ciclosAntibioticosService.addCicloAntibioticos(ciclo).subscribe({
+      next: (data) => {
+        this._mensajeService.add({
+          severity: 'success', summary: 'Añadido', detail: `Ciclo Añadido correctamente `, life: 2000
+        });
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+
+        this._mensajeService.add({ severity: 'error', summary: 'Error', detail: err.message, life: 2000 });
+      },
+      complete: () => {
+        this.mostrarCiclos = false;
+        this.getCiclos();
+      }
+    });
+  }
+  }
+  public getCiclos(){
+    this._ciclosAntibioticosService.getCicloAntibioticosByDni(this.paciente.dni).subscribe({
+      next: (data) => {
+        this.ciclos = data.sort((d1, d2) => new Date(d2.fechaInicio).getTime() - new Date(d1.fechaInicio).getTime());;
+      }
+    });
   }
 
   public getTratamientos(){
@@ -264,6 +337,7 @@ export class ResumenComponent implements OnInit {
         this.getEventos();
         this.getHistorias();
         this.getAnaliticas();
+        this.getCiclos();
 
       }
     });
@@ -271,5 +345,56 @@ export class ResumenComponent implements OnInit {
     }
 
   }
+  public seleccionarArchivo(event: any) {
+    console.log("event", event);
+    console.log("hola desde upload");
 
+    this.archivoSeleccionado = event.target.files[0];
+    console.log("archivo", this.archivoSeleccionado);
+
+    if (this.archivoSeleccionado && this.archivoSeleccionado.type.indexOf('file') < 0) {
+      console.log("no es pdf");
+
+      return;
+    }
+
+  }
+  public subirArchivo(analitica:Analitica) {
+    let usuario = localStorage.getItem('usuario');
+    if (this.archivoSeleccionado && usuario && analitica) {
+      console.log("subiendo archivo");
+      this._analiticaServices.subirArchivos(this.archivoSeleccionado,analitica.id!).subscribe({
+        next: (data) => {
+          console.log("archivo subido");
+          console.log(data);
+
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+
+    }
+
+  }
+  public subirArchivoT(tratamiento: Tratamiento) {
+    let usuario = localStorage.getItem('usuario');
+    if (this.archivoSeleccionado && usuario && tratamiento) {
+      console.log("subiendo archivo");
+      this._tratamientoServices.subirArchivos(this.archivoSeleccionado, tratamiento.id!).subscribe({
+        next: (data) => {
+          console.log("archivo subido");
+          console.log(data);
+
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+
+    }
+  }
+ 
 }

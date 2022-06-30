@@ -17,10 +17,11 @@ export class DoctoresService {
       return this._http.delete<Doctor>('api/v2/doctores/'+id);
   }
   public getDoctores():Observable<Doctor[]>{
-      return this._http.get<Doctor[]>('api/v2/doctores');
+      return this._http.get<Doctor[]>('api/v1/doctores/listado');
   }
   public modificarDoctor(doctor : Doctor):Observable<Doctor>{
-      return this._http.patch<Doctor>('api/v2/doctores/'+doctor.numColegiado, doctor);
+    
+      return this._http.patch<Doctor>('api/v1/doctores/', doctor);
   }
   public getDoctor(id : string):Observable<Doctor>{
       return this._http.get<Doctor>('api/v2/doctores/'+id);

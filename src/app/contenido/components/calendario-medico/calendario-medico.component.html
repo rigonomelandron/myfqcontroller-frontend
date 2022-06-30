@@ -29,7 +29,7 @@
             <ng-container *ngFor="let dia of this.dias">
 
               <p *ngIf="(( dia | date : 'MMM, yyyy') == (dateSelect | date: 'MMM, yyyy')) && dia._i.substring(7,10) == day.value"> <i
-                  class="bi bi-asterisk"></i><span>{{dia._i.substring(7,10)}}</span><span>{{dia | date : 'MMM, yyyy'}}</span></p>
+                  class="bi bi-asterisk"></i></p>
 
             </ng-container>
           </div>
@@ -58,7 +58,7 @@
           <tr>
             <ng-container *ngFor="let item of items | keyvalue">
               <th
-                *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'"
+                *ngIf="item.key != 'paciente' && item.key != 'fecha' && item.key != 'id'"
                 class="text-center">
                 {{item.key}}</th>
             </ng-container>
@@ -66,7 +66,7 @@
           <tr>
             <ng-container *ngFor="let item of items | keyvalue">
               <td
-                *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'"
+                *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'id'"
                 class="text-center">
                 {{item.value}}</td>
             </ng-container>

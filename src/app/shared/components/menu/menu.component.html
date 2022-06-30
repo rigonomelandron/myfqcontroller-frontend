@@ -1,9 +1,11 @@
 <header style="background-color: #fe9f4172;" class="hide menu fixed-top" >
     <p-megaMenu  class="hide" [model]="items">
-          <button class="p-button-raised p-button-text mx-5" pButton pRipple routerLink="/auth/login"label="Logout" icon="pi pi-sign-out"></button>
+        <img id="logo" *ngIf="user?.foto" src="http://localhost:8080/api/v1/uploads/img/{{user.foto}}"  class="rounded-circle " />
+        <p-avatar id="logo" image="assets/images/avatar.png" size="large" shape="circle" *ngIf="!user?.foto"></p-avatar>
+        <h1 id=titulo-menu>MyFQController</h1>
     </p-megaMenu>
 </header>
- 
+
 
 
 <!--Pop Up-->

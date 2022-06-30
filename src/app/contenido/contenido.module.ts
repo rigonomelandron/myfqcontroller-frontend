@@ -28,6 +28,9 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { MenuMedicoComponent } from './components/menu-medico/menu-medico.component';
 import { HomeMedicoComponent } from './components/home-medico/home-medico.component';
 import { CalendarioMedicoComponent } from './components/calendario-medico/calendario-medico.component';
+import { FotoComponent } from './components/foto/foto.component';
+import { AjustesMedicoComponent } from './components/ajustes-medico/ajustes-medico.component';
+
 
 
 
@@ -55,6 +58,9 @@ import { CalendarioMedicoComponent } from './components/calendario-medico/calend
     MenuMedicoComponent,
     HomeMedicoComponent,
     CalendarioMedicoComponent,
+    FotoComponent,
+    AjustesMedicoComponent,
+
 
 
   ],
@@ -63,8 +69,9 @@ import { CalendarioMedicoComponent } from './components/calendario-medico/calend
     PrimengModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule
-    //CardModule,
+    ReactiveFormsModule,
+
+    // CardModule,
     //ListboxModule,
     //ButtonModule,
     //RippleModule
