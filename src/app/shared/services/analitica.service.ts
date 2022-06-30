@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Analitica } from '../interfaces/analitica.interface';
@@ -41,5 +41,16 @@ export class AnaliticaService {
 
   public getAnaliticasByFecha(fechaInicio: Date, fechaFin: Date): Observable<Analitica[]> {
     return this._http.get<Analitica[]>('/api/v1/analitica/fechas/' + fechaInicio + "/" + fechaFin);
+  }
+  public subirArchivos(file: File, id:any): Observable<HttpEvent<{}>> {
+    const formData = new FormData();
+    formData.append('archivo', file);
+    formData.append('id', id);
+    const req = new HttpRequest('POST', `api/v1/analitica/upload`, formData, {
+      reportProgress: true
+    });
+
+    return this._http.request(req);
+
   }
 }

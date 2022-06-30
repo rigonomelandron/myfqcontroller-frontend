@@ -3,7 +3,7 @@ export interface Analitica {
   fecha: Date;
   paciente: Paciente;
   tipo: string;
-  archivo: string;
+  archivo?: string;
 }
 
 export interface Paciente {

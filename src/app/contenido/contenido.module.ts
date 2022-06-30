@@ -35,6 +35,7 @@ import { AjustesMedicoComponent } from './components/ajustes-medico/ajustes-medi
 
 
 
+
 @NgModule({
   declarations: [
     TarjetaRespiratorioComponent,
@@ -61,14 +62,16 @@ import { AjustesMedicoComponent } from './components/ajustes-medico/ajustes-medi
     AjustesMedicoComponent,
 
 
+
   ],
   imports: [
     CommonModule,
     PrimengModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule
-    //CardModule,
+    ReactiveFormsModule,
+
+    // CardModule,
     //ListboxModule,
     //ButtonModule,
     //RippleModule
