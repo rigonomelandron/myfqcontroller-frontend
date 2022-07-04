@@ -1,7 +1,10 @@
 <app-menu></app-menu>
 <div class="container principal">
   <div class="row">
-
+        <div *ngIf="this.mensajes.length > 0">
+          <p-button  label="Mensajes" icon="pi pi-users" styleClass="p-button-warning" badge="{{this.mensajes.length}}" badgeClass="p-badge-danger" (click)="mostrarMensajes()">
+          </p-button>
+        </div>
         <div class="col">
             <app-tarjeta-respiratorio></app-tarjeta-respiratorio>
         </div>
@@ -15,12 +18,13 @@
   </div>
 </div>
 
-<!--
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col"><app-tarjeta-respiratorio></app-tarjeta-respiratorio></div>
-            <div class="col"><app-tarjeta-actividad></app-tarjeta-actividad></div>
-            <div class="col"><app-tarjeta-resumen></app-tarjeta-resumen></div>
-        </div>
-    </div>
--->
+<p-dialog header="Mensaje" [visible]="mostrarMensaje" [style]="{width: '50vw'}">
+  <ng-container *ngFor="let mensaje of mensajes">
+  <span>{{mensaje.fecha}}</span>: <span>{{mensaje.mensaje}}</span>
+  </ng-container>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="mostrarMensaje=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+

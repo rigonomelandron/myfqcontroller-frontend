@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService, Message, MessageService } from 'primeng/api';
 import { Doctor } from 'src/app/shared/interfaces/doctor.interface';
 import { Equipo } from 'src/app/shared/interfaces/equipo.interface';
+import { Mensaje } from 'src/app/shared/interfaces/mensaje.interface';
 import { Paciente } from 'src/app/shared/interfaces/paciente.interface';
 import { DoctoresService } from 'src/app/shared/services/doctores.service';
 import { EquiposService } from 'src/app/shared/services/equipos.service';
+import { MensajesService } from 'src/app/shared/services/mensajes.service';
 import { PacientesService } from 'src/app/shared/services/pacientes.service';
 
 @Component({
@@ -16,23 +19,34 @@ import { PacientesService } from 'src/app/shared/services/pacientes.service';
 })
 export class HomeMedicoComponent implements OnInit {
   public pacientes: Paciente[];
-  public doctor?: Doctor;
+  public doctor!: Doctor;
   public dniPacientes: string[];
   public equipos: Equipo[];
   public paciente: string;
+  public mensaje:string;
+  public pacienteEnvioMensaje!:Paciente;
+  public formMensaje: FormGroup;
   msgs: Message[] = [];
+  public abrirMensaje: boolean = false;
   constructor(
     private _doctorServices: DoctoresService,
     private _pacienteServices: PacientesService,
     private _equiposServices: EquiposService,
     private _confirmationService: ConfirmationService,
-    private _router: Router
+    private _mensajeService: MensajesService,
+    private _router: Router,
+    private _formBuilder: FormBuilder,
   ) {
     this.pacientes = [];
     this.dniPacientes = [];
     this.equipos = [];
     this.paciente = '';
+    this.mensaje = '';
+    this.formMensaje= this._formBuilder.group({
 
+      mensaje: ['', Validators.required]
+
+    });
 
   }
 
@@ -139,6 +153,39 @@ export class HomeMedicoComponent implements OnInit {
 
       }
     });
+  }
+
+  public crearMensaje(){
+
+         let mensaje = {
+
+            idPaciente: this.pacienteEnvioMensaje.dni,
+            idMedico: this.doctor.numColegiado,
+            fecha: new Date(),
+            mensaje: this.formMensaje.value.mensaje,
+            isVisto: false
+         }
+
+          this._mensajeService.addMensaje(mensaje).subscribe({
+
+            next: (mensaje: Mensaje) => {
+              this.abrirMensaje = false;
+              this.formMensaje.reset();
+
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+
+  }
+
+  public abrirDialogMensaje(paciente:Paciente){
+    this.abrirMensaje = true;
+    this.pacienteEnvioMensaje = paciente;
+  }
+  public cerrarDialogMensaje(){
+    this.abrirMensaje = false;
   }
 
 

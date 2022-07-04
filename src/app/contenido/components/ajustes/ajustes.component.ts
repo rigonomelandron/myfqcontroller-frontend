@@ -258,8 +258,6 @@ export class AjustesComponent implements OnInit {
       console.log("subiendo foto");
       this._usuariosServices.uploadFoto(this.fotoSeleccionada, usuario).subscribe({
         next: (data) => {
-          console.log("foto subida");
-          console.log(data);
 
           this.ngOnInit();
         },

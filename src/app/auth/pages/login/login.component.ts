@@ -36,17 +36,18 @@ export class LoginComponent implements OnInit {
   public login() {
     this.logueo = true;
     this.credenciales = false;
-    console.log("login");
-
 
     this._authService.autorizar(this.usuario_username, this.usuario_password).subscribe({
 
       next: (usuario) => {
-        console.log("componentes", usuario);
+
         this.logueo = false;
         if (usuario) {
           this.usuario = usuario;
+           console.log(usuario.rol.rol);
           if (usuario.rol.rol == 'medico') {
+
+
             this._router.navigate(['/contenido/home-medico']);
           } else {
             this._router.navigate(['/contenido/home']);
