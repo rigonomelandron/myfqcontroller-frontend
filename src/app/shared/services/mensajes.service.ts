@@ -28,4 +28,10 @@ export class MensajesService {
   public addMensaje(mensaje: Mensaje): Observable<Mensaje> {
     return this._http.post<Mensaje>('api/v1/mensaje/crear', mensaje);
   }
+  public modificarVisto(mensaje: Mensaje): Observable<Mensaje> {
+    return this._http.patch<Mensaje>('api/v1/mensaje/modificar', mensaje);
+  }
+  public mensajeNoVisto(idPaciente:string,visto:boolean): Observable<Mensaje[]> {
+    return this._http.get<Mensaje[]>(`api/v1/mensaje/noVisto/${idPaciente}/${visto}` );
+  }
 }

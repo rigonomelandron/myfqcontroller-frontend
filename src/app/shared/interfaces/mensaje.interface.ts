@@ -7,6 +7,6 @@ export interface Mensaje{
   idPaciente:string;
   fecha: Date;
   mensaje: string;
-  isVisto?: boolean;
+  visto?: boolean;
 
 }

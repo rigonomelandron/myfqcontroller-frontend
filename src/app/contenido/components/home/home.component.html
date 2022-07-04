@@ -18,12 +18,24 @@
   </div>
 </div>
 
-<p-dialog header="Mensaje" [visible]="mostrarMensaje" [style]="{width: '50vw'}">
+<p-dialog header="Mensaje"  [visible]="mostrarMensaje" [style]="{width: '30vw'}">
   <ng-container *ngFor="let mensaje of mensajes">
-  <span>{{mensaje.fecha}}</span>: <span>{{mensaje.mensaje}}</span>
+
+<div class="form-check d-flex">
+  <div class="mx-5">
+    <p><span>{{mensaje.fecha}}</span>: <span>{{mensaje.mensaje}}</span> </p>
+  </div>
+  <div>
+    <input class="form-check-input" type="checkbox" value="" (change)="modificarVisto(mensaje)" id="flexCheckDefault">
+    <label class="form-check-label" for="flexCheckDefault">
+
+   Visto
+  </label>
+   </div>
+</div>
   </ng-container>
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-check" (click)="mostrarMensaje=false" label="Ok" styleClass="p-button-text"></p-button>
+    <p-button icon="pi pi-check" (click)="cerrarDialog()" label="Ok" styleClass="p-button-text"></p-button>
   </ng-template>
 </p-dialog>
 

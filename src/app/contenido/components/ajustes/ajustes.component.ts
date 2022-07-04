@@ -128,7 +128,9 @@ export class AjustesComponent implements OnInit {
     }
     this._pacientesServices.modificarPaciente(paciente).subscribe({
       next: (data) => {
-
+        this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this._router.onSameUrlNavigation = 'reload';
+        this._router.navigate(['/contenido/ajustes']);
       }
     });
 

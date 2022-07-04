@@ -35,6 +35,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 
@@ -86,7 +87,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     ConfirmDialogModule,
     ConfirmPopupModule,
     FileUploadModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    InputSwitchModule
 
   ]
 
