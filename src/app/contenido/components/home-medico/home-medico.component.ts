@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,11 +24,14 @@ export class HomeMedicoComponent implements OnInit {
   public dniPacientes: string[];
   public equipos: Equipo[];
   public paciente: string;
-  public mensaje:string;
-  public pacienteEnvioMensaje!:Paciente;
+  public mensaje: string;
+  public pacienteEnvioMensaje!: Paciente;
   public formMensaje: FormGroup;
+  public mensajes : Mensaje[];
+  public mostrarMensaje: boolean = false;
   msgs: Message[] = [];
   public abrirMensaje: boolean = false;
+  public mensajeModificado!: Mensaje;
   constructor(
     private _doctorServices: DoctoresService,
     private _pacienteServices: PacientesService,
@@ -42,11 +46,12 @@ export class HomeMedicoComponent implements OnInit {
     this.equipos = [];
     this.paciente = '';
     this.mensaje = '';
-    this.formMensaje= this._formBuilder.group({
+    this.formMensaje = this._formBuilder.group({
 
       mensaje: ['', Validators.required]
 
     });
+    this.mensajes = [] as Mensaje[];
 
   }
 
@@ -65,6 +70,7 @@ export class HomeMedicoComponent implements OnInit {
 
           this.doctor = doctor;
           this.obtenerEquipos();
+          this.obtenerMensajes();
         },
         error: (err) => {
           console.log(err);
@@ -74,8 +80,8 @@ export class HomeMedicoComponent implements OnInit {
 
   }
   public obtenerEquipos() {
-    this.pacientes=[];
-    this.dniPacientes=[];
+    this.pacientes = [];
+    this.dniPacientes = [];
     if (this.doctor) {
       this._equiposServices.getEquipoByIdMedico(this.doctor.numColegiado).subscribe({
         next: (equipos) => {
@@ -117,13 +123,13 @@ export class HomeMedicoComponent implements OnInit {
     localStorage.setItem('paciente', this.paciente);
     ;
   }
-  confirmarEliminar(paciente:Paciente) {
+  confirmarEliminar(paciente: Paciente) {
     this._confirmationService.confirm({
       message: '¿Quieres eliminar este usuario?',
       header: 'Confirmación de borrado',
       icon: 'pi pi-info-circle',
-      acceptLabel:'Si',
-      rejectLabel:'No',
+      acceptLabel: 'Si',
+      rejectLabel: 'No',
       accept: () => {
         this.msgs = [{ severity: 'info', summary: 'Confirmar', detail: 'Usuario Borrado' }];
         this.eliminarPaciente(paciente);
@@ -138,54 +144,100 @@ export class HomeMedicoComponent implements OnInit {
     this._equiposServices.getEquipoByIdPaciente(this.paciente).subscribe({
       next: (equipo: Equipo) => {
         console.log(equipo);
-       let id = equipo.id;
-       if(id){
-        this._equiposServices.deleteEquipo(id).subscribe({
-          next: (equipo: Equipo) => {
-            console.log(equipo);
-            this.obtenerEquipos();
-          },
-          error: (err) => {
-            console.log(err);
-          }
-        });
-       }
-
-      }
-    });
-  }
-
-  public crearMensaje(){
-
-         let mensaje = {
-
-            idPaciente: this.pacienteEnvioMensaje.dni,
-            idMedico: this.doctor.numColegiado,
-            fecha: new Date(),
-            mensaje: this.formMensaje.value.mensaje,
-            isVisto: false
-         }
-
-          this._mensajeService.addMensaje(mensaje).subscribe({
-
-            next: (mensaje: Mensaje) => {
-              this.abrirMensaje = false;
-              this.formMensaje.reset();
-
+        let id = equipo.id;
+        if (id) {
+          this._equiposServices.deleteEquipo(id).subscribe({
+            next: (equipo: Equipo) => {
+              console.log(equipo);
+              this.obtenerEquipos();
             },
             error: (err) => {
               console.log(err);
             }
           });
+        }
+
+      }
+    });
+  }
+
+  public crearMensaje() {
+
+    let mensaje = {
+
+      idPaciente: this.pacienteEnvioMensaje.dni,
+      idMedico: this.doctor.numColegiado,
+      fecha: new Date(),
+      mensaje: this.formMensaje.value.mensaje,
+      isVisto: false,
+      rol: 'medico'
+    }
+
+    this._mensajeService.addMensaje(mensaje).subscribe({
+
+      next: (mensaje: Mensaje) => {
+        this.abrirMensaje = false;
+        this.formMensaje.reset();
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
 
   }
 
-  public abrirDialogMensaje(paciente:Paciente){
+  public abrirDialogMensaje(paciente: Paciente) {
     this.abrirMensaje = true;
     this.pacienteEnvioMensaje = paciente;
   }
-  public cerrarDialogMensaje(){
+  public cerrarDialogMensaje() {
     this.abrirMensaje = false;
+  }
+  public obtenerMensajes(){
+    this._mensajeService.getMensajesByIdMedico(this.doctor.numColegiado).subscribe({
+      next: (mensajes: Mensaje[]) => {
+
+        for(let mensaje of mensajes){
+          if(mensaje.visto == false && mensaje.rol == 'paciente'){
+            this.mensajes.push(mensaje);
+          }
+        }
+
+
+      }
+    });
+  }
+  public mostrarMensajes(){
+    this.mostrarMensaje = true;
+  }
+  public cerrarMensajes(){
+    this.mostrarMensaje = false;
+    this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this._router.onSameUrlNavigation = 'reload';
+    this._router.navigate(['/contenido/home']);
+  }
+  public modificarVisto(mensaje: Mensaje) {
+
+    this.mensajeModificado = {
+      id: mensaje.id,
+      idPaciente: mensaje.idPaciente,
+      idMedico: mensaje.idMedico,
+      mensaje: mensaje.mensaje,
+      fecha: mensaje.fecha,
+      visto: true,
+    }
+
+    this._mensajeService.modificarVisto(this.mensajeModificado).subscribe({
+      next: (data: Mensaje) => {
+        console.log("modificado", data);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+
+    });
+
   }
 
 

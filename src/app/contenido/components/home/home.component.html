@@ -2,7 +2,7 @@
 <div class="container principal">
   <div class="row">
         <div *ngIf="this.mensajes.length > 0">
-          <p-button  label="Mensajes" icon="pi pi-users" styleClass="p-button-warning" badge="{{this.mensajes.length}}" badgeClass="p-badge-danger" (click)="mostrarMensajes()">
+          <p-button  label="Mensajes" icon="pi pi-users" styleClass="p-button-warning" badge="🔔" badgeClass="p-badge-info" (click)="mostrarMensajes()">
           </p-button>
         </div>
         <div class="col">
@@ -21,7 +21,7 @@
 <p-dialog header="Mensaje"  [visible]="mostrarMensaje" [style]="{width: '30vw'}">
   <ng-container *ngFor="let mensaje of mensajes">
 
-<div class="form-check d-flex">
+<div class="form-check d-flex" *ngIf="mensaje.rol == 'medico'">
   <div class="mx-5">
     <p><span>{{mensaje.fecha}}</span>: <span>{{mensaje.mensaje}}</span> </p>
   </div>
@@ -35,8 +35,25 @@
 </div>
   </ng-container>
   <ng-template pTemplate="footer">
+    <p-button icon="pi pi-envelope" (click)="abrirDialogMensaje()" label="Responder" styleClass="p-button-text"></p-button>
     <p-button icon="pi pi-check" (click)="cerrarDialog()" label="Ok" styleClass="p-button-text"></p-button>
   </ng-template>
+</p-dialog>
+<p-dialog [visible]="abrirMensaje" [closable]="false" [maximizable]="true" header="Mensajes"
+  [style]="{width: '30vw', height:'auto'}">
+  <ng-template pTemplate="body">
+    <form autocomplete="off" (ngSubmit)="responderMensaje()" [formGroup]="formMensaje">
+      <div class="d-grid gap-3">
+        <textarea [rows]="5" [cols]="30" pInputTextarea formControlName="mensaje" placeholder="Mensaje"></textarea>
+        <div d-flex>
+          <button pButton type="submit" label="enviar" pRipple class="boton mx-3"></button>
+          <button pButton type="button" label="Cerrar" pRipple class="p-button-text"
+            (click)="cerrarDialogMensaje()"></button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
 </p-dialog>
 
 

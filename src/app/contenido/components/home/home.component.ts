@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Mensaje } from 'src/app/shared/interfaces/mensaje.interface';
 import { Paciente } from 'src/app/shared/interfaces/paciente.interface';
@@ -17,11 +18,20 @@ export class HomeComponent implements OnInit {
   public mostrarMensaje:boolean = false;
   public checked:boolean = false;
   public mensajeModificado!:Mensaje;
+  public abrirMensaje:boolean = false;
+  public formMensaje: FormGroup;
   constructor(
     private _mensajeServices: MensajesService,
      private _pacienteServices: PacientesService,
-     private _router: Router) {
+     private _router: Router,
+    private _formBuilder: FormBuilder
+     ) {
     this.mensajes = [] as Mensaje[];
+    this.formMensaje = this._formBuilder.group({
+
+      mensaje: ['', Validators.required]
+
+    });
   }
 
   ngOnInit(): void {
@@ -95,6 +105,38 @@ public recargarPagina(){
   this._router.navigate(['/contenido/home']);
 }
 
+public responderMensaje(){
+  console.log("responderMensaje",this.mensajes[0]);
+  let mensaje = {
 
+    idPaciente: this.mensajes[0].idPaciente,
+    idMedico: this.mensajes[0].idMedico,
+    fecha: new Date(),
+    mensaje: this.formMensaje.value.mensaje,
+    isVisto: false,
+    rol: "paciente"
+  }
+
+  this._mensajeServices.addMensaje(mensaje).subscribe({
+
+    next: (mensaje: Mensaje) => {
+      this.abrirMensaje = false;
+      this.formMensaje.reset();
+
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
+}
+//abrir el dialogo para enviar mensaje
+public abrirDialogMensaje(){
+  this.abrirMensaje = true;
+}
+//cerrar el dialogo para enviar mensaje
+public cerrarDialogMensaje(){
+  this.abrirMensaje = false;
+  this.formMensaje.reset();
+}
 
 }

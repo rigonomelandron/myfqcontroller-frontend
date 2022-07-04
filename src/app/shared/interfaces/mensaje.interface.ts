@@ -8,5 +8,6 @@ export interface Mensaje{
   fecha: Date;
   mensaje: string;
   visto?: boolean;
+  rol?: string;
 
 }
