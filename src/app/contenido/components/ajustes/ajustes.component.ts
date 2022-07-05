@@ -128,7 +128,9 @@ export class AjustesComponent implements OnInit {
     }
     this._pacientesServices.modificarPaciente(paciente).subscribe({
       next: (data) => {
-
+        this._router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this._router.onSameUrlNavigation = 'reload';
+        this._router.navigate(['/contenido/ajustes']);
       }
     });
 
@@ -258,8 +260,6 @@ export class AjustesComponent implements OnInit {
       console.log("subiendo foto");
       this._usuariosServices.uploadFoto(this.fotoSeleccionada, usuario).subscribe({
         next: (data) => {
-          console.log("foto subida");
-          console.log(data);
 
           this.ngOnInit();
         },

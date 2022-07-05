@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {MegaMenuItem,MenuItem} from 'primeng/api';
 import { Avatar } from 'primeng/avatar';
 import { Usuario } from '../../interfaces/usuario.interface';
@@ -11,7 +11,7 @@ import { UsuariosService } from '../../services/usuarios.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-
+  
   public items: MegaMenuItem[] = [];
   public popItems: MenuItem[] = [];
   public usuario:any;
