@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<p-dialog header="Mensaje"  [visible]="mostrarMensaje" [style]="{width: '30vw'}">
+<p-dialog header="Mensaje" [closable]="false" [visible]="mostrarMensaje" [style]="{width: '30vw'}">
   <ng-container *ngFor="let mensaje of mensajes">
 
 <div class="form-check d-flex" *ngIf="mensaje.rol == 'medico'">
