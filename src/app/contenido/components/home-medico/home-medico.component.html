@@ -2,7 +2,7 @@
 
 <main class="row p-5" style="margin: 100px;">
   <div *ngIf="this.mensajes.length > 0">
-  <p-button label="Mensajes" icon="pi pi-users" styleClass="p-button-warning" badge="🔔" badgeClass="p-badge-info"
+  <p-button label="Mensajes" icon="pi pi-users" styleClass="p-button-warning" badge="🔔" badgeClass="p-badge-warning"
     (click)="mostrarMensajes()">
   </p-button>
 </div>
@@ -59,7 +59,7 @@
 
 </p-dialog>
 <!--Dialogo para mostrar los mensajes-->
-<p-dialog header="Mensaje" [visible]="mostrarMensaje" [style]="{width: '30vw'}">
+<p-dialog header="Mensaje" [closable]="false" [visible]="mostrarMensaje" [style]="{width: '30vw'}">
   <ng-container *ngFor="let mensaje of mensajes">
 
     <div class="form-check d-flex" *ngIf="mensaje.rol == 'paciente' && !mensaje.visto">

@@ -254,6 +254,10 @@ export class CalendarioComponent implements OnInit {
                                               ) => {
                                                 console.log(err);
                                               },
+                                              complete: () => {
+                                                console.log("this datos",this.datos);
+
+                                              }
                                             });
                                         },
                                       });
