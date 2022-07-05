@@ -77,7 +77,7 @@
               <th *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" class="">{{item.key}}</th>
             </ng-container>
           </tr>
-        
+
           <tr p-datatable-tbody>
             <ng-container *ngFor="let item of items | keyvalue">
           <td p-datatable-column *ngIf="item.key != 'paciente' && item.key != 'fecha'  && item.key != 'fechaInicio'  && item.key != 'id'" >{{item.value}}</td>

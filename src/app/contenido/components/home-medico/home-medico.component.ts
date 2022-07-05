@@ -215,7 +215,7 @@ export class HomeMedicoComponent implements OnInit {
     this.mostrarMensaje = false;
     this._router.routeReuseStrategy.shouldReuseRoute = () => false;
     this._router.onSameUrlNavigation = 'reload';
-    this._router.navigate(['/contenido/home']);
+    this._router.navigate(['/contenido/home-medico']);
   }
   public modificarVisto(mensaje: Mensaje) {
 
