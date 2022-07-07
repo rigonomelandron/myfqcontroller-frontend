@@ -1,41 +1,48 @@
 <app-menu></app-menu>
-<div class="container principal">
-  <div class="row">
-        <div *ngIf="this.mensajes.length > 0">
-          <p-button  label="Mensajes" icon="pi pi-users" styleClass="p-button-warning" badge="🔔" badgeClass="p-badge-warning" (click)="mostrarMensajes()">
-          </p-button>
-        </div>
-        <div class="col">
-            <app-tarjeta-respiratorio></app-tarjeta-respiratorio>
-        </div>
-        <div class="col">
-            <app-tarjeta-actividad></app-tarjeta-actividad>
-        </div>
-        <div class="col">
-            <app-tarjeta-resumen></app-tarjeta-resumen>
-        </div>
+<div class="container principal overflow-auto">
+
+
+  <div class="row home-principal">
+    <div *ngIf="this.mensajes.length > 0" class="col-12">
+      <p-button label="Mensajes" icon="pi pi-users" styleClass="p-button-warning" badge="🔔"
+        badgeClass="p-badge-warning" (click)="mostrarMensajes()">
+      </p-button>
+    </div>
+
+    <div class="col-12 col-lg-4">
+
+      <app-tarjeta-respiratorio></app-tarjeta-respiratorio>
+    </div>
+    <div class="col-12 col-lg-4">
+      <app-tarjeta-actividad></app-tarjeta-actividad>
+    </div>
+    <div class="col-12 col-lg-4">
+      <app-tarjeta-resumen></app-tarjeta-resumen>
+    </div>
 
   </div>
 </div>
 
-<p-dialog header="Mensaje" [closable]="false" [visible]="mostrarMensaje" [style]="{width: '30vw'}">
+<p-dialog header="Mensaje" [closable]="false" [visible]="mostrarMensaje">
   <ng-container *ngFor="let mensaje of mensajes">
 
-<div class="form-check d-flex" *ngIf="mensaje.rol == 'medico'">
-  <div class="mx-5">
-    <p><span>{{mensaje.fecha}}</span>: <span>{{mensaje.mensaje}}</span> </p>
-  </div>
-  <div>
-    <input class="form-check-input" type="checkbox" value="" (change)="modificarVisto(mensaje)" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
+    <div class="form-check d-flex" *ngIf="mensaje.rol == 'medico'">
+      <div class="mx-5">
+        <p><span>{{mensaje.fecha}}</span>: <span>{{mensaje.mensaje}}</span> </p>
+      </div>
+      <div>
+        <input class="form-check-input" type="checkbox" value="" (change)="modificarVisto(mensaje)"
+          id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
 
-   Visto
-  </label>
-   </div>
-</div>
+          Visto
+        </label>
+      </div>
+    </div>
   </ng-container>
   <ng-template pTemplate="footer">
-    <p-button icon="pi pi-envelope" (click)="abrirDialogMensaje()" label="Responder" styleClass="p-button-text"></p-button>
+    <p-button icon="pi pi-envelope" (click)="abrirDialogMensaje()" label="Responder" styleClass="p-button-text">
+    </p-button>
     <p-button icon="pi pi-check" (click)="cerrarDialog()" label="Ok" styleClass="p-button-text"></p-button>
   </ng-template>
 </p-dialog>
@@ -55,5 +62,3 @@
   </ng-template>
 
 </p-dialog>
-
-

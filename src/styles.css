@@ -7,6 +7,7 @@ body{
   background-position: center center;
   height: 100vh;
   overflow: hidden;
+  font-size: large;
 }
 .p-megamenu{
     background: transparent;
@@ -69,17 +70,20 @@ body{
 }
 
 .container{
-  height: 100vh;
+  height: 90vh;
   display:flex;
   justify-content: center;
-  align-items: center;
+
 }
 .texto-principal{
   font-family: 'Yellowtail', cursive;
-  font-size: 6rem;
+  font-size: 3rem;
   color:rgb(9, 117, 190);
   margin:2rem;
-  margin-left: 6rem;
+  margin-left: 1rem;
+}
+.home-principal{
+  margin: auto;
 }
 .p-megamenu-horizontal {
   padding-left: 5rem;
@@ -91,7 +95,7 @@ body{
   top: 0.75rem;
   width:3rem;
   height: 3rem;
-  border-radius: 50%;  
+  border-radius: 50%;
   object-position: center;
 
 }
@@ -104,7 +108,26 @@ body{
   font-weight: 500;
 }
 
+@media (min-width: 768px) {
+  .texto-principal {
 
+      font-size: 6rem;
+      color: rgb(9, 117, 190);
+      margin: 2rem;
+      margin-left: 6rem;
+    }
+   .container {
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+    .p-component{
+      font-size:1.2rem!important;
+    }
+
+
+}
 
 
 

@@ -1,9 +1,9 @@
 <p-toast></p-toast>
 <p-confirmPopup></p-confirmPopup>
-<div class="mb-5">
+<div >
     <app-menu></app-menu>
 </div>
-<main class="row p-5" style="margin: 100px;">
+<main class="px-5 pb-5 container overflow-auto">
     <p-card>
         <header>
             <h4 style="color:#1d736a !important;">Actividad</h4>
@@ -11,11 +11,11 @@
         <ng-template pTemplate="content">
             <hr>
             <div class="row">
-                <div class="col-7">
+                <div class="col-12 col-lg-7">
                     <app-grafico-barras></app-grafico-barras>
                 </div>
                 <div class="col-1"></div>
-                <div class="col-4 align-self-center">
+                <div class="col-12 col-lg-4 align-self-center">
                     <app-donut></app-donut>
                 </div>
             </div>
@@ -28,7 +28,7 @@
     </p-card>
 </main>
 <p-dialog [visible]=" mostrarFormActividad" [closable]="false" [maximizable]="true" header="Registro Actividad"
-  [style]="{width: '30vw', height:'auto'}">
+  [style]="{width: 'auto', height:'auto'}">
   <ng-template pTemplate="body">
     <form autocomplete="off" (ngSubmit)="addRegistroActividades()" [formGroup]="formActividad">
       <div class="d-grid gap-3">
@@ -46,8 +46,8 @@
               <input type="text" pInputText formControlName="calorias">
             </div>
           </div>
-          
-          
+
+
           <div class="col-4">
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon" >ppmMed</span>
@@ -71,7 +71,7 @@
         </div>
       </div>
 
-    </form>    
+    </form>
   </ng-template>
   <!--Formulario eventos-->
 </p-dialog>

@@ -8,7 +8,7 @@
   border: solid 1px #eaeaea;
   box-shadow: 0 0 10px #e4e4e4;
   background-color: rgba(255, 255, 255, 0.8);
-  width: 50vw;
+
   color:#1d736a;
   padding: 2rem;
 }
@@ -21,7 +21,7 @@ div {
 }
 
 ol {
-  height: 55vh;
+
   list-style: none;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -69,6 +69,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  width: 100%;
 }
 
 .header-calendar h1 {
@@ -102,8 +103,30 @@ h2 {
   justify-content: center;
 }
 li{
-  height:5rem;
+  height: 2.5rem;
 }
+
 .dialogo{
   background-color: #1d736a;
+}
+#datos{
+  width:80vw;
+
+}
+@media (min-width: 768px) {
+.wrapper-calendar {
+
+  width: 50vw;
+
+
+
+}
+
+li{
+  height:5rem;
+}
+#datos{
+  width:50vw;
+  height: auto;
+}
 }

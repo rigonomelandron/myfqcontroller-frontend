@@ -11,7 +11,7 @@ import { UsuariosService } from '../../services/usuarios.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  
+
   public items: MegaMenuItem[] = [];
   public popItems: MenuItem[] = [];
   public usuario:any;
@@ -59,22 +59,22 @@ export class MenuComponent implements OnInit {
 
     this.popItems = [
       {
-        label: 'Nombre usuario', icon: 'pi pi-user'
+        label: this.usuario, routerLink: ['/home']
       },
       {
-        label: 'Calendario', icon: 'pi pi-calendar'
+        label: 'Calendario', icon: 'pi pi-calendar', routerLink: ['/contenido/calendario']
       },
       {
-        label: 'Datos Respiratorios', icon: 'pi pi-sliders-h'
+        label: 'Datos Respiratorios', icon: 'pi pi-sliders-h', routerLink: ['/contenido/datos-respiratorios']
       },
       {
-        label: 'Actividad', icon: 'pi pi-heart-fill'
+        label: 'Actividad', icon: 'pi pi-heart-fill', routerLink: ['/contenido/actividad']
       },
       {
-        label: 'Resumen', icon: 'pi pi-book'
+        label: 'Resumen', icon: 'pi pi-book', routerLink: ['/contenido/resumen']
       },
       {
-        label: 'Ajustes', icon: 'pi pi-cog'
+        label: 'Ajustes', icon: 'pi pi-cog', routerLink: ['/contenido/ajustes']
       },
       {
         label: 'Logout', icon: 'pi pi-sign-out', command: () => this._authService.logOut()
