@@ -1,7 +1,7 @@
-<div class="mb-5">
+<div>
   <app-menu></app-menu>
 </div>
-<div class="row d-flex align-items-center justify-content-center p-5" style="margin: 100px">
+<div class="container">
   <div class="wrapper-calendar">
     <div class="header-calendar">
       <div>
@@ -44,10 +44,10 @@
 
 
 </div>
-<p-dialog header="Datos recogidos" [(visible)]="mostrarDatos" [modal]="true" [maximizable]="true" [style]="{width: '50vw', height:'100vh'}" >
+<p-dialog header="Datos recogidos" [(visible)]="mostrarDatos" [modal]="true" [maximizable]="true"  >
 
 
-  <div>
+  <div id="datos" >
 
     <ng-container *ngFor="let items of datos" class="my-3">
       <p-table responsiveLayout="scroll">
